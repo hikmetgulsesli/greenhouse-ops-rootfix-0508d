@@ -89,10 +89,10 @@ export function FilteredOverview(props: FilteredOverviewProps = {}) {
           </div>
         </div>
         <div className="flex items-center gap-md">
-          <button aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
+          <button disabled aria-label="Notifications" title="Notifications not available" className="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
             <span className="material-symbols-outlined">notifications</span>
           </button>
-          <button aria-label="Help" className="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
+          <button disabled aria-label="Help" title="Help not available" className="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
             <span className="material-symbols-outlined">help</span>
           </button>
           <button

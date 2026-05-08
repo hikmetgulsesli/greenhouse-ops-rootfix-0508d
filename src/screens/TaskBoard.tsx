@@ -129,10 +129,10 @@ export function TaskBoard(props: TaskBoardProps = {}) {
       </div>
       </div>
       <div className="flex items-center gap-md">
-      <button aria-label="notifications" className="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+      <button disabled aria-label="Notifications" title="Notifications not available" className="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined text-[20px]">notifications</span>
       </button>
-      <button aria-label="help" className="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+      <button disabled aria-label="Help" title="Help not available" className="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined text-[20px]">help</span>
       </button>
       <button onClick={() => onAction?.("emergency-stop")} className="h-8 px-md rounded bg-error-container text-on-error-container font-body-sm text-body-sm border border-error/20 hover:bg-error/20 transition-colors flex items-center gap-xs ml-sm">

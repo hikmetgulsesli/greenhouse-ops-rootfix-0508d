@@ -87,10 +87,10 @@ export function MaintenanceLog(props: MaintenanceLogProps = {}) {
           </div>
         </div>
         <div className="flex items-center gap-md text-primary">
-          <button aria-label="Notifications" className="hover:bg-surface-variant p-2 rounded-full transition-colors flex items-center justify-center opacity-80 hover:opacity-100 hover:scale-95">
+          <button disabled aria-label="Notifications" title="Notifications not available" className="hover:bg-surface-variant p-2 rounded-full transition-colors flex items-center justify-center opacity-80 hover:opacity-100 hover:scale-95">
             <span className="material-symbols-outlined">notifications</span>
           </button>
-          <button aria-label="Help" className="hover:bg-surface-variant p-2 rounded-full transition-colors flex items-center justify-center opacity-80 hover:opacity-100 hover:scale-95">
+          <button disabled aria-label="Help" title="Help not available" className="hover:bg-surface-variant p-2 rounded-full transition-colors flex items-center justify-center opacity-80 hover:opacity-100 hover:scale-95">
             <span className="material-symbols-outlined">help</span>
           </button>
           <button
@@ -275,7 +275,7 @@ export function MaintenanceLog(props: MaintenanceLogProps = {}) {
                   <button className="w-8 h-8 rounded flex items-center justify-center hover:bg-surface-variant disabled:opacity-50" disabled={true} aria-label="Previous page">
                     <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>chevron_left</span>
                   </button>
-                  <button className="w-8 h-8 rounded flex items-center justify-center bg-surface-variant text-primary font-semibold" aria-label="Page 1" aria-current="page">1</button>
+                  <button disabled className="w-8 h-8 rounded flex items-center justify-center bg-surface-variant text-primary font-semibold" aria-label="Page 1" aria-current="page">1</button>
                   <button className="w-8 h-8 rounded flex items-center justify-center hover:bg-surface-variant" disabled={true} aria-label="Page 2">2</button>
                   <button className="w-8 h-8 rounded flex items-center justify-center hover:bg-surface-variant" disabled={true} aria-label="Page 3">3</button>
                   <span className="w-8 h-8 flex items-center justify-center">...</span>

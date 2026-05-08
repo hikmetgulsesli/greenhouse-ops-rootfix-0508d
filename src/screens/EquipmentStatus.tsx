@@ -52,10 +52,10 @@ export function EquipmentStatus(props: EquipmentStatusProps = {}) {
       </div>
       </div>
       <div className="flex items-center gap-sm md:gap-md">
-      <button className="text-on-surface-variant hover:bg-surface-variant p-sm rounded-full transition-colors flex items-center justify-center">
+      <button disabled aria-label="Notifications" title="Notifications not available" className="text-on-surface-variant hover:bg-surface-variant p-sm rounded-full transition-colors flex items-center justify-center">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-variant p-sm rounded-full transition-colors flex items-center justify-center">
+      <button disabled aria-label="Help" title="Help not available" className="text-on-surface-variant hover:bg-surface-variant p-sm rounded-full transition-colors flex items-center justify-center">
       <span className="material-symbols-outlined">help</span>
       </button>
       <div className="w-[1px] h-8 bg-outline-variant mx-xs hidden md:block"></div>

@@ -48,10 +48,10 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
       <input value={search} onChange={(e) => onAction?.("set-search", e.target.value)} className="bg-surface border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary text-on-surface pl-[36px] py-2 text-body-sm w-64 placeholder:text-on-surface-variant" placeholder="Search..." type="text" />
       </div>
       <div className="flex items-center gap-sm">
-      <button className="p-2 text-on-surface-variant hover:bg-surface-variant transition-colors rounded">
+      <button disabled aria-label="Notifications" title="Notifications not available" className="p-2 text-on-surface-variant hover:bg-surface-variant transition-colors rounded">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="p-2 text-on-surface-variant hover:bg-surface-variant transition-colors rounded">
+      <button disabled aria-label="Help" title="Help not available" className="p-2 text-on-surface-variant hover:bg-surface-variant transition-colors rounded">
       <span className="material-symbols-outlined">help</span>
       </button>
       </div>

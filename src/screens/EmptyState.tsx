@@ -35,10 +35,10 @@ export function EmptyState(props: EmptyStateProps = {}) {
                       Emergency Stop
                   </button>
       <div className="flex items-center gap-xs">
-      <button className="p-xs rounded-full hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant">
+      <button disabled aria-label="Notifications" title="Notifications not available" className="p-xs rounded-full hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="p-xs rounded-full hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant">
+      <button disabled aria-label="Help" title="Help not available" className="p-xs rounded-full hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant">
       <span className="material-symbols-outlined">help</span>
       </button>
       </div>
