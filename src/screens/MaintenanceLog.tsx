@@ -8,16 +8,29 @@
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
 import { useState } from "react";
+import type { AppState } from "../types/domain";
 
 export interface MaintenanceLogProps {
   onClose?: () => void;
   onBack?: () => void;
   onNavigate?: (...args: unknown[]) => void;
   onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+  state?: AppState;
 }
 
 export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
+  const { onNavigate, onAction, state } = _props;
+  const [search, setSearch] = useState(state?.searchQuery ?? "");
+  const [filterType, setFilterType] = useState("All Equipment");
+  const logs = state?.logs?.length ? state.logs : [];
+  const filtered = search
+    ? logs.filter((l) =>
+        l.action.toLowerCase().includes(search.toLowerCase()) ||
+        l.operator.toLowerCase().includes(search.toLowerCase()) ||
+        l.id.toLowerCase().includes(search.toLowerCase())
+      )
+    : logs;
+
   return (
     <>
       {/* TopNavBar */}
@@ -26,7 +39,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <span className="font-h2 text-h2 text-on-surface font-extrabold tracking-tight">Greenhouse Ops</span>
       <div className="relative hidden md:block">
       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style={{fontSize: "18px"}}>search</span>
-      <input className="bg-surface-container border border-outline-variant rounded-full py-1.5 pl-10 pr-4 text-body-sm text-on-surface focus:outline-none focus:border-primary w-64 transition-colors" placeholder="Search operations..." type="text" />
+      <input value={search} onChange={(e) => setSearch(e.target.value)} className="bg-surface-container border border-outline-variant rounded-full py-1.5 pl-10 pr-4 text-body-sm text-on-surface focus:outline-none focus:border-primary w-64 transition-colors" placeholder="Search operations..." type="text" />
       </div>
       </div>
       <div className="flex items-center gap-md text-primary">
@@ -40,7 +53,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <span className="material-symbols-outlined" style={{fontSize: "18px"}}>warning</span>
                       Emergency Stop
                   </button>
-      <div className="ml-sm w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden">
+      <div onClick={() => onAction?.("toggle-profile")} className="ml-sm w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden cursor-pointer">
       <img alt="Operator Profile" className="w-full h-full object-cover" data-alt="A tightly cropped professional headshot of an industrial operator in a modern, subtly lit control room. The lighting is cool and technical, reflecting off unseen monitors, casting soft blue and gray tones across the subject's face. The mood is focused and serious, fitting a high-stakes operational environment. The background is completely blurred out in deep shadows, isolating the subject perfectly within the dark-themed UI context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtl1lyeiVpd3Udb0v7xCHfEEKgsS9CpNyJ1Atx6IC6ml_ikX-r2cmW2U44Yum48MILHvfWDHDRg4AT17b3RzHXofy9tZ5sQWXP8KG2m-ReJIPsppFWUYWWcT6JX4IbTYwAZHDwfiZiPXZjFiW9bPhujPiXECq0x8r_Gv7vToe-nin_xl_zGA-3P2qBCXyiw-3VPH8Yz-OBi27KDXMovzL43-dX8gNy-6flSOxRgK6o_oRhokbS69vXp9tcl_OdtaoWuRqqmSxS1ow" />
       </div>
       </div>
@@ -58,32 +71,32 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       </div>
       </div>
       <div className="flex-1 px-sm flex flex-col gap-xs">
-      <a className="flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      <button onClick={() => onNavigate?.("dashboard")} className="w-full text-left flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined" data-icon="dashboard">dashboard</span>
       <span className="font-body-sm text-body-sm">Dashboard</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      </button>
+      <button onClick={() => onNavigate?.("task-board")} className="w-full text-left flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined" data-icon="assignment">assignment</span>
       <span className="font-body-sm text-body-sm">Task Board</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      </button>
+      <button onClick={() => onNavigate?.("equipment")} className="w-full text-left flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
       <span className="font-body-sm text-body-sm">Equipment</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-2.5 rounded-lg bg-secondary-container text-on-secondary-container font-semibold translate-x-1 transition-transform" href="#">
+      </button>
+      <button onClick={() => onNavigate?.("logs")} className="w-full text-left flex items-center gap-md px-md py-2.5 rounded-lg bg-secondary-container text-on-secondary-container font-semibold translate-x-1 transition-transform">
       <span className="material-symbols-outlined" data-icon="history" data-weight="fill" style={{fontVariationSettings: "'FILL' 1"}}>history</span>
       <span className="font-body-sm text-body-sm">Logs</span>
-      </a>
+      </button>
       </div>
       <div className="px-sm flex flex-col gap-xs mt-auto pt-md border-t border-outline-variant">
-      <a className="flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      <button onClick={() => onNavigate?.("settings")} className="w-full text-left flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined" data-icon="settings">settings</span>
       <span className="font-body-sm text-body-sm">Settings</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      </button>
+      <button onClick={() => onAction?.("toggle-profile")} className="w-full text-left flex items-center gap-md px-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined" data-icon="person">person</span>
       <span className="font-body-sm text-body-sm">Account</span>
-      </a>
+      </button>
       </div>
       </nav>
       {/* Main Content Area */}
@@ -96,7 +109,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <p className="font-body-md text-body-md text-on-surface-variant mt-1">Chronological record of system maintenance and diagnostic events.</p>
       </div>
       <div className="flex gap-sm">
-      <button className="bg-surface-container border border-outline-variant text-on-surface px-4 py-2 rounded-xl hover:bg-surface-variant transition-colors flex items-center gap-xs font-body-sm text-body-sm">
+      <button onClick={() => onAction?.("export-csv")} className="bg-surface-container border border-outline-variant text-on-surface px-4 py-2 rounded-xl hover:bg-surface-variant transition-colors flex items-center gap-xs font-body-sm text-body-sm">
       <span className="material-symbols-outlined" style={{fontSize: "18px"}}>download</span>
                                   Export
                               </button>
@@ -114,7 +127,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <div className="flex-1 min-w-[200px]">
       <label className="block font-body-sm text-body-sm text-on-surface-variant mb-1">Equipment Type</label>
       <div className="relative">
-      <select className="w-full bg-surface-container border border-outline-variant rounded-lg py-2 pl-4 pr-10 text-body-sm text-on-surface appearance-none focus:outline-none focus:border-primary hover:bg-surface-variant transition-colors">
+      <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg py-2 pl-4 pr-10 text-body-sm text-on-surface appearance-none focus:outline-none focus:border-primary hover:bg-surface-variant transition-colors">
       <option>All Equipment</option>
       <option>Pumps</option>
       <option>Sensors</option>
@@ -127,7 +140,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <label className="block font-body-sm text-body-sm text-on-surface-variant mb-1">Search Keywords</label>
       <div className="relative">
       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style={{fontSize: "18px"}}>search</span>
-      <input className="w-full bg-surface-container border border-outline-variant rounded-lg py-2 pl-10 pr-4 text-body-sm text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Search by ID, action, or personnel..." type="text" />
+      <input value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg py-2 pl-10 pr-4 text-body-sm text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Search by ID, action, or personnel..." type="text" />
       </div>
       </div>
       <button className="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-body-sm text-body-sm hover:opacity-90 transition-opacity h-[38px]">
@@ -149,102 +162,37 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       </tr>
       </thead>
       <tbody className="divide-y divide-outline-variant font-body-sm text-body-sm">
-      {/* Row 1 */}
-      <tr className="hover:bg-surface-variant transition-colors group">
-      <td className="py-3 px-md font-mono-data text-mono-data text-on-surface">2023-10-27 08:15:00</td>
-      <td className="py-3 px-md font-mono-data text-mono-data text-secondary">EQ-VLV-042</td>
-      <td className="py-3 px-md text-on-surface">Recalibrated main flow sensor and cleared line debris.</td>
-      <td className="py-3 px-md text-on-surface-variant">J. Doe (Operator)</td>
-      <td className="py-3 px-md">
-      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 text-secondary border border-secondary/20">
-      <div className="w-1.5 h-1.5 rounded-full bg-secondary"></div>
-                                                  Success
+      {filtered.length === 0 ? (
+        <tr>
+        <td colSpan={6} className="py-8 px-md text-center text-on-surface-variant font-body-sm">No matching records found</td>
+        </tr>
+      ) : (
+        filtered.map((log) => (
+          <tr key={log.id} className="hover:bg-surface-variant transition-colors group">
+          <td className="py-3 px-md font-mono-data text-mono-data text-on-surface">2023-10-27 {log.timestamp}</td>
+          <td className="py-3 px-md font-mono-data text-mono-data text-secondary">{log.id}</td>
+          <td className="py-3 px-md text-on-surface">{log.action}</td>
+          <td className="py-3 px-md text-on-surface-variant">{log.operator}</td>
+          <td className="py-3 px-md">
+          <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${log.status === "success" ? "bg-secondary-container/20 text-secondary border-secondary/20" : log.status === "failed" ? "bg-error-container/20 text-error border-error/20" : "bg-tertiary-container/20 text-tertiary border-tertiary/20"}`}>
+          <div className={`w-1.5 h-1.5 rounded-full ${log.status === "success" ? "bg-secondary" : log.status === "failed" ? "bg-error" : "bg-tertiary"}`}></div>
+                                                  {log.status === "success" ? "Success" : log.status === "failed" ? "Critical" : "Warning"}
                                               </div>
-      </td>
-      <td className="py-3 px-md text-right">
-      <button className="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-      <span className="material-symbols-outlined" style={{fontSize: "20px"}}>more_vert</span>
-      </button>
-      </td>
-      </tr>
-      {/* Row 2 */}
-      <tr className="hover:bg-surface-variant transition-colors group">
-      <td className="py-3 px-md font-mono-data text-mono-data text-on-surface">2023-10-26 14:30:22</td>
-      <td className="py-3 px-md font-mono-data text-mono-data text-secondary">PMP-MAIN-01</td>
-      <td className="py-3 px-md text-on-surface">Replaced worn seals; pressure slightly below nominal.</td>
-      <td className="py-3 px-md text-on-surface-variant">A. Smith (Tech)</td>
-      <td className="py-3 px-md">
-      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary-container/20 text-tertiary border border-tertiary/20">
-      <div className="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
-                                                  Warning
-                                              </div>
-      </td>
-      <td className="py-3 px-md text-right">
-      <button className="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-      <span className="material-symbols-outlined" style={{fontSize: "20px"}}>more_vert</span>
-      </button>
-      </td>
-      </tr>
-      {/* Row 3 */}
-      <tr className="hover:bg-surface-variant transition-colors group">
-      <td className="py-3 px-md font-mono-data text-mono-data text-on-surface">2023-10-26 09:15:00</td>
-      <td className="py-3 px-md font-mono-data text-mono-data text-secondary">SENS-TEMP-B</td>
-      <td className="py-3 px-md text-on-surface">Automated firmware over-the-air update (v2.4.1).</td>
-      <td className="py-3 px-md text-on-surface-variant">System Auto</td>
-      <td className="py-3 px-md">
-      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 text-secondary border border-secondary/20">
-      <div className="w-1.5 h-1.5 rounded-full bg-secondary"></div>
-                                                  Success
-                                              </div>
-      </td>
-      <td className="py-3 px-md text-right">
-      <button className="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-      <span className="material-symbols-outlined" style={{fontSize: "20px"}}>more_vert</span>
-      </button>
-      </td>
-      </tr>
-      {/* Row 4 */}
-      <tr className="hover:bg-surface-variant transition-colors group">
-      <td className="py-3 px-md font-mono-data text-mono-data text-on-surface">2023-10-25 18:45:10</td>
-      <td className="py-3 px-md font-mono-data text-mono-data text-secondary">EQ-VLV-018</td>
-      <td className="py-3 px-md text-on-surface">Cleared organic debris blockage from intake mesh.</td>
-      <td className="py-3 px-md text-on-surface-variant">M. Chen (Operator)</td>
-      <td className="py-3 px-md">
-      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/20 text-secondary border border-secondary/20">
-      <div className="w-1.5 h-1.5 rounded-full bg-secondary"></div>
-                                                  Success
-                                              </div>
-      </td>
-      <td className="py-3 px-md text-right">
-      <button className="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-      <span className="material-symbols-outlined" style={{fontSize: "20px"}}>more_vert</span>
-      </button>
-      </td>
-      </tr>
-      {/* Row 5 */}
-      <tr className="hover:bg-surface-variant transition-colors group">
-      <td className="py-3 px-md font-mono-data text-mono-data text-on-surface">2023-10-24 11:20:05</td>
-      <td className="py-3 px-md font-mono-data text-mono-data text-secondary">CTRL-ZONE-4</td>
-      <td className="py-3 px-md text-on-surface">Emergency power cycle initiated due to logic stall.</td>
-      <td className="py-3 px-md text-on-surface-variant">J. Doe (Operator)</td>
-      <td className="py-3 px-md">
-      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container/20 text-error border border-error/20">
-      <div className="w-1.5 h-1.5 rounded-full bg-error"></div>
-                                                  Critical
-                                              </div>
-      </td>
-      <td className="py-3 px-md text-right">
-      <button className="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-      <span className="material-symbols-outlined" style={{fontSize: "20px"}}>more_vert</span>
-      </button>
-      </td>
-      </tr>
+          </td>
+          <td className="py-3 px-md text-right">
+          <button className="text-outline hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="material-symbols-outlined" style={{fontSize: "20px"}}>more_vert</span>
+          </button>
+          </td>
+          </tr>
+        ))
+      )}
       </tbody>
       </table>
       </div>
       {/* Pagination Footer */}
       <div className="border-t border-outline-variant bg-surface p-sm px-md flex items-center justify-between text-body-sm text-on-surface-variant">
-      <span>Showing 1 to 5 of 128 entries</span>
+      <span>Showing 1 to {filtered.length} of {filtered.length} entries</span>
       <div className="flex gap-1">
       <button className="w-8 h-8 rounded flex items-center justify-center hover:bg-surface-variant disabled:opacity-50" disabled={true}>
       <span className="material-symbols-outlined" style={{fontSize: "18px"}}>chevron_left</span>
