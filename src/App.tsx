@@ -111,6 +111,17 @@ export default function App() {
     if (action === 'quick-fix' && typeof args[0] === 'string') {
       updateTaskStatus(args[0], 'complete');
     }
+    if (action === 'emergency-stop') {
+      // Add a system alert for the emergency stop
+      addTask({
+        title: 'EMERGENCY STOP triggered',
+        status: 'pending',
+        priority: 'critical',
+        zone: 'All Zones',
+        assignee: 'System',
+        dueDate: new Date().toISOString().split('T')[0],
+      });
+    }
     if (action === 'export-csv') {
       const rows = state.logs.map(l => {
         const escape = (s: string) => `"${s.replace(/"/g, '""')}"`;
