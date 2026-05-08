@@ -20,7 +20,7 @@ export interface TaskBoardProps {
 
 export function TaskBoard(_props: TaskBoardProps = {}) {
   const { onNavigate, onAction, state } = _props;
-  const [search, setSearch] = useState(state?.searchQuery ?? "");
+  const search = state?.searchQuery ?? "";
 
   const todoCount = state?.tasks?.filter((t) => t.status === "pending").length ?? 3;
   const inProgressCount = state?.tasks?.filter((t) => t.status === "in-progress").length ?? 2;
@@ -36,7 +36,7 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <div className="flex-1 max-w-md mx-xl hidden md:block">
       <div className="relative flex items-center">
       <span className="material-symbols-outlined absolute left-sm text-outline">search</span>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary pl-xl pr-sm py-[6px] text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant transition-colors outline-none h-8" placeholder="Search tasks..." type="text" />
+      <input value={search} onChange={(e) => onAction?.("set-search", e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary pl-xl pr-sm py-[6px] text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant transition-colors outline-none h-8" placeholder="Search tasks..." type="text" />
       </div>
       </div>
       <div className="flex items-center gap-md">

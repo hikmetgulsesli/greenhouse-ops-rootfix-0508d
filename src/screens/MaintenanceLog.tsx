@@ -20,7 +20,7 @@ export interface MaintenanceLogProps {
 
 export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
   const { onNavigate, onAction, state } = _props;
-  const [search, setSearch] = useState(state?.searchQuery ?? "");
+  const search = state?.searchQuery ?? "";
   const [filterType, setFilterType] = useState("All Equipment");
   const logs = state?.logs?.length ? state.logs : [];
   const filtered = search
@@ -31,6 +31,8 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       )
     : logs;
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <>
       {/* TopNavBar */}
@@ -39,7 +41,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <span className="font-h2 text-h2 text-on-surface font-extrabold tracking-tight">Greenhouse Ops</span>
       <div className="relative hidden md:block">
       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style={{fontSize: "18px"}}>search</span>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} className="bg-surface-container border border-outline-variant rounded-full py-1.5 pl-10 pr-4 text-body-sm text-on-surface focus:outline-none focus:border-primary w-64 transition-colors" placeholder="Search operations..." type="text" />
+      <input value={search} onChange={(e) => onAction?.('set-search', e.target.value)} className="bg-surface-container border border-outline-variant rounded-full py-1.5 pl-10 pr-4 text-body-sm text-on-surface focus:outline-none focus:border-primary w-64 transition-colors" placeholder="Search operations..." type="text" />
       </div>
       </div>
       <div className="flex items-center gap-md text-primary">
@@ -140,7 +142,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <label className="block font-body-sm text-body-sm text-on-surface-variant mb-1">Search Keywords</label>
       <div className="relative">
       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style={{fontSize: "18px"}}>search</span>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg py-2 pl-10 pr-4 text-body-sm text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Search by ID, action, or personnel..." type="text" />
+      <input value={search} onChange={(e) => onAction?.('set-search', e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg py-2 pl-10 pr-4 text-body-sm text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Search by ID, action, or personnel..." type="text" />
       </div>
       </div>
       <button className="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-body-sm text-body-sm hover:opacity-90 transition-opacity h-[38px]">
@@ -169,14 +171,14 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       ) : (
         filtered.map((log) => (
           <tr key={log.id} className="hover:bg-surface-variant transition-colors group">
-          <td className="py-3 px-md font-mono-data text-mono-data text-on-surface">2023-10-27 {log.timestamp}</td>
+          <td className="py-3 px-md font-mono-data text-mono-data text-on-surface">{today} {log.timestamp}</td>
           <td className="py-3 px-md font-mono-data text-mono-data text-secondary">{log.id}</td>
           <td className="py-3 px-md text-on-surface">{log.action}</td>
           <td className="py-3 px-md text-on-surface-variant">{log.operator}</td>
           <td className="py-3 px-md">
-          <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${log.status === "success" ? "bg-secondary-container/20 text-secondary border-secondary/20" : log.status === "failed" ? "bg-error-container/20 text-error border-error/20" : "bg-tertiary-container/20 text-tertiary border-tertiary/20"}`}>
-          <div className={`w-1.5 h-1.5 rounded-full ${log.status === "success" ? "bg-secondary" : log.status === "failed" ? "bg-error" : "bg-tertiary"}`}></div>
-                                                  {log.status === "success" ? "Success" : log.status === "failed" ? "Critical" : "Warning"}
+          <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${log.status === "success" ? "bg-secondary-container/20 text-secondary border-secondary/20" : log.status === "failed" ? "bg-error-container/20 text-error border-error/20" : "bg-primary-container/20 text-primary border-primary/20"}`}>
+          <div className={`w-1.5 h-1.5 rounded-full ${log.status === "success" ? "bg-secondary" : log.status === "failed" ? "bg-error" : "bg-primary"}`}></div>
+                                                  {log.status === "success" ? "Success" : log.status === "failed" ? "Failed" : "Complete"}
                                               </div>
           </td>
           <td className="py-3 px-md text-right">

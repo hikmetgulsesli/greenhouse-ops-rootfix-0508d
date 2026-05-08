@@ -24,6 +24,15 @@ export interface UseAppStateReturn {
 
 let idCounter = 100;
 
+function getNextId(existingTasks: Task[]): string {
+  const maxId = existingTasks.reduce((max, t) => {
+    const num = parseInt(t.id.replace(/\D/g, ''), 10);
+    return Math.max(max, num);
+  }, 100);
+  idCounter = Math.max(idCounter, maxId + 1);
+  return `T-${String(idCounter++).padStart(3, '0')}`;
+}
+
 export function useAppState(): UseAppStateReturn {
   const [state, setState] = useState<AppState>(() => {
     try {
@@ -131,7 +140,7 @@ export function useAppState(): UseAppStateReturn {
 
   const addTask = useCallback((task: Omit<Task, 'id'>) => {
     setState((prev) => {
-      const newTask: Task = { ...task, id: `T-${String(idCounter++).padStart(3, '0')}` };
+      const newTask: Task = { ...task, id: getNextId(prev.tasks) };
       const next = { ...prev, tasks: [...prev.tasks, newTask] };
       persist(next);
       return next;

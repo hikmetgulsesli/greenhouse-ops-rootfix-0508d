@@ -7,19 +7,19 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
+import type { AppState } from "../types/domain";
 
 export interface EmptyStateProps {
   onClose?: () => void;
   onBack?: () => void;
   onNavigate?: (...args: unknown[]) => void;
   onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+  state?: AppState;
 }
 
 export function EmptyState(_props: EmptyStateProps = {}) {
-  const { onNavigate, onAction } = _props;
-  const [search, setSearch] = useState('');
+  const { onNavigate, onAction, state } = _props;
+  const search = state?.searchQuery ?? '';
   return (
     <>
       <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-background dark:bg-background border-b border-outline-variant dark:border-outline-variant font-body-md text-body-md text-primary dark:text-primary">
@@ -27,7 +27,7 @@ export function EmptyState(_props: EmptyStateProps = {}) {
       <span className="font-h2 text-h2 text-on-surface dark:text-on-surface tracking-tight">Greenhouse Ops</span>
       <div className="relative hidden md:flex items-center">
       <span className="material-symbols-outlined absolute left-sm text-on-surface-variant text-[20px]">search</span>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} className="bg-surface-container border border-outline-variant rounded-lg pl-xl pr-sm py-xs h-8 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container w-64 placeholder:text-outline" placeholder="Search..." type="text" />
+      <input value={search} onChange={(e) => onAction?.('set-search', e.target.value)} className="bg-surface-container border border-outline-variant rounded-lg pl-xl pr-sm py-xs h-8 text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container w-64 placeholder:text-outline" placeholder="Search..." type="text" />
       </div>
       </div>
       <div className="flex items-center gap-md">

@@ -9,18 +9,19 @@
 
 import { useState } from "react";
 
+import type { AppState } from "../types/domain";
+
 export interface SettingsProps {
   onClose?: () => void;
   onBack?: () => void;
   onNavigate?: (...args: unknown[]) => void;
   onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+  state?: AppState;
 }
 
 export function Settings(_props: SettingsProps = {}) {
   const { onNavigate, onAction, state } = _props;
-  const appState = state as { settings?: { theme?: string; notifications?: boolean; compactMode?: boolean }; searchQuery?: string } | undefined;
-  const [search, setSearch] = useState(appState?.searchQuery ?? '');
+  const search = state?.searchQuery ?? '';
   const [units, setUnits] = useState('metric');
   const [timezone, setTimezone] = useState('utc');
   const [darkMode, setDarkMode] = useState(true);
@@ -31,7 +32,7 @@ export function Settings(_props: SettingsProps = {}) {
       <span className="font-h2 text-h2 text-on-surface">Greenhouse Ops</span>
       <div className="relative flex-1 hidden md:block">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-full py-xs pl-xl pr-md text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="Search operations..." type="text" />
+      <input value={search} onChange={(e) => onAction?.('set-search', e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-full py-xs pl-xl pr-md text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="Search operations..." type="text" />
       </div>
       </div>
       <div className="flex items-center justify-end gap-md w-1/3">

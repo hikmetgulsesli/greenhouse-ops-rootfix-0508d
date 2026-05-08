@@ -20,7 +20,7 @@ export interface DashboardOverviewProps {
 
 export function DashboardOverview(_props: DashboardOverviewProps = {}) {
   const { onNavigate, onAction, state } = _props;
-  const [search, setSearch] = useState(state?.searchQuery ?? "");
+  const search = state?.searchQuery ?? "";
 
   const totalTasks = state?.tasks?.length ?? 142;
   const activeEquipment = state?.equipment?.filter(e => e.status === "online").length ?? 38;
@@ -38,7 +38,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <div className="flex items-center gap-lg">
       <div className="relative hidden md:block">
       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} className="bg-surface border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary text-on-surface pl-[36px] py-2 text-body-sm w-64 placeholder:text-on-surface-variant" placeholder="Search..." type="text" />
+      <input value={search} onChange={(e) => onAction?.("set-search", e.target.value)} className="bg-surface border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary text-on-surface pl-[36px] py-2 text-body-sm w-64 placeholder:text-on-surface-variant" placeholder="Search..." type="text" />
       </div>
       <div className="flex items-center gap-sm">
       <button className="p-2 text-on-surface-variant hover:bg-surface-variant transition-colors rounded">

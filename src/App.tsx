@@ -112,8 +112,11 @@ export default function App() {
       updateTaskStatus(args[0], 'complete');
     }
     if (action === 'export-csv') {
-      const csv = 'data:text/csv;charset=utf-8,ID,Timestamp,Action,Operator,Status,Zone\n' +
-        state.logs.map(l => `${l.id},${l.timestamp},${l.action},${l.operator},${l.status},${l.zone}`).join('\n');
+      const rows = state.logs.map(l => {
+        const escape = (s: string) => `"${s.replace(/"/g, '""')}"`;
+        return [escape(l.id), escape(l.timestamp), escape(l.action), escape(l.operator), escape(l.status), escape(l.zone)].join(',');
+      });
+      const csv = 'data:text/csv;charset=utf-8,\uFEFFID,Timestamp,Action,Operator,Status,Zone\n' + rows.join('\n');
       const encoded = encodeURI(csv);
       const link = document.createElement('a');
       link.setAttribute('href', encoded);
@@ -130,6 +133,15 @@ export default function App() {
     }
     if (action === 'filter-view') {
       navigate('filtered');
+    }
+    if (action === 'set-search' && typeof args[0] === 'string') {
+      setSearchQuery(args[0]);
+    }
+    if (action === 'retry-connection') {
+      retryConnection();
+    }
+    if (action === 'reset-storage') {
+      resetStorageState();
     }
   };
 

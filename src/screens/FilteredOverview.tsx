@@ -20,14 +20,14 @@ export interface FilteredOverviewProps {
 
 export function FilteredOverview(_props: FilteredOverviewProps = {}) {
   const { onNavigate, onAction, state } = _props;
-  const [search, setSearch] = useState(state?.searchQuery ?? "");
+  const search = state?.searchQuery ?? "";
   const [zoneFilter, setZoneFilter] = useState("All Zones");
   const [statusFilter, setStatusFilter] = useState<string[]>(["critical", "in-progress"]);
 
   const tasks = state?.tasks ?? [];
   const filtered = tasks.filter((t) => {
     const matchesSearch = !search || t.title.toLowerCase().includes(search.toLowerCase()) || t.zone.toLowerCase().includes(search.toLowerCase());
-    const matchesZone = zoneFilter === "All Zones" || t.zone.includes(zoneFilter.replace("Zone ", ""));
+    const matchesZone = zoneFilter === "All Zones" || t.zone === zoneFilter;
     const matchesStatus = statusFilter.includes(t.priority === "critical" ? "critical" : t.status === "in-progress" ? "in-progress" : t.status);
     return matchesSearch && matchesZone && matchesStatus;
   });
@@ -56,7 +56,7 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       {/* Search Bar Prominent */}
       <div className="relative max-w-md w-full ml-xl">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg pl-xl pr-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search events, zones, or equipment..." type="text" />
+      <input value={search} onChange={(e) => onAction?.("set-search", e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg pl-xl pr-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search events, zones, or equipment..." type="text" />
       </div>
       </div>
       <div className="flex items-center gap-md">
@@ -133,7 +133,7 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
                           Active Filters
                       </div>
       <div className="flex gap-sm">
-      <button onClick={() => { setStatusFilter([]); setZoneFilter("All Zones"); setSearch(""); }} className="text-on-surface-variant font-body-sm text-body-sm px-md h-8 rounded hover:bg-surface-variant transition-colors">Clear All</button>
+      <button onClick={() => { setStatusFilter([]); setZoneFilter("All Zones"); onAction?.('set-search', ''); }} className="text-on-surface-variant font-body-sm text-body-sm px-md h-8 rounded hover:bg-surface-variant transition-colors">Clear All</button>
       <button className="bg-primary-container text-on-primary-container font-body-sm text-body-sm px-md h-8 rounded flex items-center gap-xs">
       <span className="material-symbols-outlined text-[16px]">save</span>
                               Save View
@@ -169,8 +169,10 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       <label className="font-label-caps text-label-caps text-on-surface-variant">Facility Zone</label>
       <select value={zoneFilter} onChange={(e) => setZoneFilter(e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg px-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary appearance-none">
       <option>All Zones</option>
-      <option>Zone 01 - Nursery</option>
-      <option>Zone 04 - Hydroponics</option>
+      <option>Zone A</option>
+      <option>Zone B</option>
+      <option>Zone C</option>
+      <option>Zone D</option>
       </select>
       </div>
       {/* Time Filter */}

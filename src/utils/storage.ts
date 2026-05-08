@@ -53,11 +53,6 @@ export function retryLoad<T>(loader: () => T, maxRetries = 3): T {
       return loader();
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
-      if (i < maxRetries - 1) {
-        // Small delay before retry
-        const start = Date.now();
-        while (Date.now() - start < 50) { /* busy wait */ }
-      }
     }
   }
   throw lastError ?? new StorageError('Retry exhausted');

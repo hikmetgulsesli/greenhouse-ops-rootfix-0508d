@@ -7,7 +7,6 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
 import type { AppState, EquipmentItem } from "../types/domain";
 
 export interface EquipmentStatusProps {
@@ -31,12 +30,13 @@ function statusColor(status: EquipmentItem["status"]) {
     case "offline": return { bg: "bg-error/10", border: "border-error/20", dot: "bg-error", text: "text-error", label: "Offline" };
     case "maintenance": return { bg: "bg-tertiary/10", border: "border-tertiary/20", dot: "bg-tertiary", text: "text-tertiary", label: "Maintenance" };
     case "error": return { bg: "bg-error/10", border: "border-error/20", dot: "bg-error", text: "text-error", label: "Error" };
+    default: return { bg: "bg-outline/10", border: "border-outline/20", dot: "bg-outline", text: "text-outline", label: "Unknown" };
   }
 }
 
 export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
   const { onNavigate, onAction, state } = _props;
-  const [search, setSearch] = useState(state?.searchQuery ?? "");
+  const search = state?.searchQuery ?? "";
   const equipment = state?.equipment?.length ? state.equipment : staticEquipment;
   const filtered = search ? equipment.filter((e) => e.name.toLowerCase().includes(search.toLowerCase()) || e.zone.toLowerCase().includes(search.toLowerCase())) : equipment;
 
@@ -48,7 +48,7 @@ export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
       <span className="font-h2 text-h2 text-on-surface dark:text-on-surface font-extrabold tracking-tight">Greenhouse Ops</span>
       <div className="relative hidden md:block">
       <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
-      <input value={search} onChange={(e) => setSearch(e.target.value)} className="bg-surface-container border border-outline-variant rounded-xl pl-10 pr-4 py-[6px] font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary w-72 transition-colors placeholder:text-on-surface-variant" placeholder="Search equipment..." type="text" />
+      <input value={search} onChange={(e) => onAction?.('set-search', e.target.value)} className="bg-surface-container border border-outline-variant rounded-xl pl-10 pr-4 py-[6px] font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary w-72 transition-colors placeholder:text-on-surface-variant" placeholder="Search equipment..." type="text" />
       </div>
       </div>
       <div className="flex items-center gap-sm md:gap-md">
