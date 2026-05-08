@@ -7,8 +7,6 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
-
 import type { AppState } from "../types/domain";
 
 export interface SettingsProps {
@@ -22,9 +20,15 @@ export interface SettingsProps {
 export function Settings(_props: SettingsProps = {}) {
   const { onNavigate, onAction, state } = _props;
   const search = state?.searchQuery ?? '';
-  const [units, setUnits] = useState('metric');
-  const [timezone, setTimezone] = useState('utc');
+  const units = state?.settings?.units ?? 'metric';
+  const timezone = state?.settings?.timezone ?? 'utc';
   const darkMode = state?.settings?.theme === 'dark';
+  const setUnits = (val: string) => {
+    onAction?.('update-settings', { units: val });
+  };
+  const setTimezone = (val: string) => {
+    onAction?.('update-settings', { timezone: val });
+  };
   const setDarkMode = (val: boolean) => {
     onAction?.('update-settings', { theme: val ? 'dark' : 'light' });
   };

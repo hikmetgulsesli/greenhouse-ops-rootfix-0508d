@@ -27,7 +27,7 @@ describe('storage utilities', () => {
         alerts: [],
         filterStatus: 'all',
         filterZone: 'all',
-        settings: { theme: 'dark', notifications: true, compactMode: false },
+        settings: { theme: 'dark', notifications: true, compactMode: false, units: 'metric', timezone: 'utc', systemAlerts: true, taskUpdates: false },
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       expect(loadState()).toEqual(state);
@@ -64,7 +64,7 @@ describe('storage utilities', () => {
         alerts: [],
         filterStatus: 'all',
         filterZone: 'all',
-        settings: { theme: 'light', notifications: false, compactMode: true },
+        settings: { theme: 'light', notifications: false, compactMode: true, units: 'metric', timezone: 'utc', systemAlerts: true, taskUpdates: false },
       };
       saveState(state);
       const raw = localStorage.getItem(STORAGE_KEY);

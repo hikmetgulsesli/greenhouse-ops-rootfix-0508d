@@ -7,20 +7,20 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
+import type { AppState } from "../types/domain";
 
 export interface ProfilePanelProps {
   onClose?: () => void;
   onBack?: () => void;
   onNavigate?: (...args: unknown[]) => void;
   onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+  state?: AppState;
 }
 
 export function ProfilePanel(_props: ProfilePanelProps = {}) {
-  const { onClose, onNavigate } = _props;
-  const [systemAlerts, setSystemAlerts] = useState(true);
-  const [taskUpdates, setTaskUpdates] = useState(false);
+  const { onClose, onNavigate, onAction, state } = _props;
+  const systemAlerts = state?.settings?.systemAlerts ?? true;
+  const taskUpdates = state?.settings?.taskUpdates ?? false;
   return (
     <>
       {/* Simulated App Background Environment (to provide context for the overlay) */}
@@ -88,7 +88,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       </div>
       </div>
       <div className="relative inline-flex items-center cursor-pointer ml-md shrink-0">
-      <input checked={systemAlerts} onChange={(e) => setSystemAlerts(e.target.checked)} className="sr-only peer" type="checkbox" value="" />
+      <input aria-label="System Alerts" checked={systemAlerts} onChange={(e) => onAction?.('update-settings', { systemAlerts: e.target.checked })} className="sr-only peer" type="checkbox" value="" />
       <div className="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-outline after:border-surface-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-on-primary-fixed"></div>
       </div>
       </label>
@@ -104,7 +104,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       </div>
       </div>
       <div className="relative inline-flex items-center cursor-pointer ml-md shrink-0">
-      <input checked={taskUpdates} onChange={(e) => setTaskUpdates(e.target.checked)} className="sr-only peer" type="checkbox" value="" />
+      <input aria-label="Task Updates" checked={taskUpdates} onChange={(e) => onAction?.('update-settings', { taskUpdates: e.target.checked })} className="sr-only peer" type="checkbox" value="" />
       <div className="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-outline after:border-surface-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-on-primary-fixed"></div>
       </div>
       </label>
