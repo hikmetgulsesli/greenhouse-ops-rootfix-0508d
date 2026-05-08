@@ -17,8 +17,8 @@ export interface ProfilePanelProps {
   state?: AppState;
 }
 
-export function ProfilePanel(_props: ProfilePanelProps = {}) {
-  const { onClose, onNavigate, onAction, state } = _props;
+export function ProfilePanel(props: ProfilePanelProps = {}) {
+  const { onClose, onNavigate, onAction, state } = props;
   const systemAlerts = state?.settings?.systemAlerts ?? true;
   const taskUpdates = state?.settings?.taskUpdates ?? false;
   return (

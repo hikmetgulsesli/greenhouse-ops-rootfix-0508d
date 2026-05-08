@@ -17,12 +17,12 @@ export interface SettingsProps {
   state?: AppState;
 }
 
-export function Settings(_props: SettingsProps = {}) {
-  const { onNavigate, onAction, state } = _props;
+export function Settings(props: SettingsProps = {}) {
+  const { onNavigate, onAction, state } = props;
   const search = state?.searchQuery ?? '';
   const units = state?.settings?.units ?? 'metric';
   const timezone = state?.settings?.timezone ?? 'utc';
-  const darkMode = state?.settings?.theme === 'dark';
+  const darkMode = (state?.settings?.theme ?? 'light') === 'dark';
   const setUnits = (val: string) => {
     onAction?.('update-settings', { units: val });
   };
@@ -49,7 +49,7 @@ export function Settings(_props: SettingsProps = {}) {
       <button className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:opacity-80 active:scale-95 transition-all">
       <span className="material-symbols-outlined text-[20px]">help</span>
       </button>
-      <button className="bg-error-container text-on-error-container border border-error border-opacity-30 rounded-lg px-md py-xs font-h3 text-body-sm hover:opacity-80 active:scale-95 transition-all hidden lg:block">
+      <button onClick={() => onAction?.('emergency-stop')} className="bg-error-container text-on-error-container border border-error border-opacity-30 rounded-lg px-md py-xs font-h3 text-body-sm hover:opacity-80 active:scale-95 transition-all hidden lg:block">
                       Emergency Stop
                   </button>
       <div onClick={() => onAction?.('toggle-profile')} className="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden ml-sm shrink-0 cursor-pointer">
