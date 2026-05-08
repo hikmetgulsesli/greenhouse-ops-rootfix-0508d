@@ -11,6 +11,9 @@ export class StorageError extends Error {
 
 export function loadState(): AppState | null {
   try {
+    if (typeof localStorage === 'undefined') {
+      throw new StorageError('localStorage is not available');
+    }
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
@@ -27,6 +30,9 @@ export function loadState(): AppState | null {
 
 export function saveState(state: AppState): void {
   try {
+    if (typeof localStorage === 'undefined') {
+      throw new StorageError('localStorage is not available');
+    }
     const serialized = JSON.stringify(state);
     localStorage.setItem(STORAGE_KEY, serialized);
   } catch (err) {
@@ -38,6 +44,9 @@ export function saveState(state: AppState): void {
 
 export function resetStorage(): void {
   try {
+    if (typeof localStorage === 'undefined') {
+      throw new StorageError('localStorage is not available');
+    }
     localStorage.removeItem(STORAGE_KEY);
   } catch (err) {
     throw new StorageError(

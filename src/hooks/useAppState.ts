@@ -27,7 +27,7 @@ let idCounter = 100;
 function getNextId(existingTasks: Task[]): string {
   const maxId = existingTasks.reduce((max, t) => {
     const num = parseInt(t.id.replace(/\D/g, ''), 10);
-    return Math.max(max, num);
+    return Number.isNaN(num) ? max : Math.max(max, num);
   }, 100);
   idCounter = Math.max(idCounter, maxId + 1);
   return `T-${String(idCounter++).padStart(3, '0')}`;

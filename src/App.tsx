@@ -123,6 +123,7 @@ export default function App() {
       });
     }
     if (action === 'export-csv') {
+      if (typeof document === 'undefined') return;
       const rows = state.logs.map(l => {
         const escape = (s: string) => `"${s.replace(/"/g, '""')}"`;
         return [escape(l.id), escape(l.timestamp), escape(l.action), escape(l.operator), escape(l.status), escape(l.zone)].join(',');

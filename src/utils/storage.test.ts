@@ -43,6 +43,14 @@ describe('storage utilities', () => {
       expect(() => loadState()).toThrow(StorageError);
     });
 
+    it('throws StorageError when localStorage is undefined', () => {
+      const originalLocalStorage = globalThis.localStorage;
+      // @ts-expect-error testing runtime failure
+      globalThis.localStorage = undefined;
+      expect(() => loadState()).toThrow(StorageError);
+      globalThis.localStorage = originalLocalStorage;
+    });
+
     it('throws StorageError when localStorage throws', () => {
       vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
         throw new Error('Quota exceeded');
@@ -72,6 +80,14 @@ describe('storage utilities', () => {
       expect(JSON.parse(raw!)).toEqual(state);
     });
 
+    it('throws StorageError when localStorage is undefined', () => {
+      const originalLocalStorage = globalThis.localStorage;
+      // @ts-expect-error testing runtime failure
+      globalThis.localStorage = undefined;
+      expect(() => saveState({} as AppState)).toThrow(StorageError);
+      globalThis.localStorage = originalLocalStorage;
+    });
+
     it('throws StorageError when localStorage throws', () => {
       vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
         throw new Error('Quota exceeded');
@@ -85,6 +101,14 @@ describe('storage utilities', () => {
       localStorage.setItem(STORAGE_KEY, '{}');
       resetStorage();
       expect(localStorage.getItem(STORAGE_KEY)).toBeNull();
+    });
+
+    it('throws StorageError when localStorage is undefined', () => {
+      const originalLocalStorage = globalThis.localStorage;
+      // @ts-expect-error testing runtime failure
+      globalThis.localStorage = undefined;
+      expect(() => resetStorage()).toThrow(StorageError);
+      globalThis.localStorage = originalLocalStorage;
     });
 
     it('throws StorageError when localStorage throws', () => {

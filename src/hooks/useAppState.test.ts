@@ -111,6 +111,39 @@ describe('useAppState hook', () => {
     expect(added.id).toMatch(/^T-/);
   });
 
+  it('adds a task with sequential ID even when existing tasks have non-numeric IDs', () => {
+    const persisted: AppState = {
+      currentScreen: 'dashboard',
+      profileOpen: false,
+      storageError: false,
+      searchQuery: '',
+      tasks: [
+        { id: 'ABC', title: 'Non-numeric ID task', status: 'pending', priority: 'medium', zone: 'Zone A', assignee: 'Test', dueDate: '2024-06-01' },
+      ],
+      equipment: [],
+      logs: [],
+      alerts: [],
+      filterStatus: 'all',
+      filterZone: 'all',
+      settings: { theme: 'dark', notifications: true, compactMode: false, units: 'metric', timezone: 'utc', systemAlerts: true, taskUpdates: false },
+    };
+    localStorage.setItem('greenhouse-ops-state', JSON.stringify(persisted));
+
+    const { result } = renderHook(() => useAppState());
+    act(() => {
+      result.current.addTask({
+        title: 'Second Task',
+        status: 'pending',
+        priority: 'medium',
+        zone: 'Zone B',
+        assignee: 'Test Operator',
+        dueDate: '2024-06-01',
+      });
+    });
+    const added = result.current.state.tasks[result.current.state.tasks.length - 1];
+    expect(added.id).toMatch(/^T-\d{3}$/);
+  });
+
   it('updates task status', () => {
     const { result } = renderHook(() => useAppState());
     const taskId = result.current.state.tasks[0].id;

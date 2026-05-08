@@ -30,7 +30,7 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
   const criticalCount = state?.tasks?.filter(t => t.priority === "critical" && t.status !== "complete").length ?? 0;
 
   const systemHealth = totalEquipment > 0
-    ? Math.round(state!.equipment.reduce((sum, e) => sum + e.health, 0) / totalEquipment)
+    ? Math.round((state?.equipment ?? []).reduce((sum, e) => sum + e.health, 0) / totalEquipment)
     : 98;
 
   const unacknowledgedAlerts = state?.alerts?.filter(a => !a.acknowledged) ?? [];
