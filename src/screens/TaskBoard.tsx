@@ -257,7 +257,7 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
           <div key={task.id} className="bg-surface p-sm rounded border border-tertiary/30 bg-tertiary/5 cursor-grab">
             <div className="flex justify-between items-start mb-xs">
               <span className="font-mono-data text-mono-data text-on-surface-variant">{task.id}</span>
-              <div className="px-2 py-[2px] rounded bg-tertiary/10 text-tertiary font-label-caps text-label-caps border border-tertiary/20">BLOCKED</div>
+              <div className="px-2 py-[2px] rounded bg-tertiary/10 text-tertiary font-label-caps text-label-caps border border-tertiary/20">CRITICAL</div>
             </div>
             <h4 className="font-body-md text-body-md text-on-surface mb-xs">{task.title}</h4>
             <p className="text-[11px] text-tertiary mb-sm leading-tight">Critical priority task awaiting resolution.</p>

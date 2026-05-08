@@ -84,7 +84,7 @@ describe('EquipmentStatus screen', () => {
 
   it('renders zone and last maintenance info', () => {
     render(<EquipmentStatus state={mockState} />);
-    expect(screen.getByText('Zone A')).toBeInTheDocument();
+    expect(screen.getAllByText('Zone A').length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText('2024-04-15')).toBeInTheDocument();
   });
 

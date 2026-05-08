@@ -25,7 +25,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
   const totalTasks = state?.tasks?.length ?? 0;
   const activeEquipment = state?.equipment?.filter(e => e.status === "online").length ?? 0;
   const totalEquipment = state?.equipment?.length ?? 0;
-  const pendingMaint = state?.equipment?.filter(e => e.status === "maintenance" || e.status === "error").length ?? 0;
+  const pendingMaint = state?.equipment?.filter(e => e.status === "maintenance" || e.status === "error" || e.status === "offline").length ?? 0;
   const offlineCount = totalEquipment - activeEquipment;
   const criticalCount = state?.tasks?.filter(t => t.priority === "critical" && t.status !== "complete").length ?? 0;
 
