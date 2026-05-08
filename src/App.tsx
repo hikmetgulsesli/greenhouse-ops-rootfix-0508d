@@ -10,7 +10,7 @@ import { ProfilePanel } from './screens/ProfilePanel';
 import { FilteredOverview } from './screens/FilteredOverview';
 import { EmptyState } from './screens/EmptyState';
 import { StorageErrorState } from './screens/StorageErrorState';
-import type { Screen } from './types/domain';
+import type { Screen, AppState } from './types/domain';
 import './index.css';
 
 export default function App() {
@@ -135,6 +135,9 @@ export default function App() {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    }
+    if (action === 'update-settings' && typeof args[0] === 'object' && args[0] !== null) {
+      updateSettings(args[0] as Partial<AppState['settings']>);
     }
     if (action === 'clear-data') {
       resetStorageState();

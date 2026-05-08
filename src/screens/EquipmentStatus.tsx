@@ -37,7 +37,7 @@ function statusColor(status: EquipmentItem["status"]) {
 export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
   const { onNavigate, onAction, state } = _props;
   const search = state?.searchQuery ?? "";
-  const equipment = state?.equipment?.length ? state.equipment : staticEquipment;
+  const equipment = state?.equipment ?? [];
   const filtered = search ? equipment.filter((e) => e.name.toLowerCase().includes(search.toLowerCase()) || e.zone.toLowerCase().includes(search.toLowerCase())) : equipment;
 
   return (

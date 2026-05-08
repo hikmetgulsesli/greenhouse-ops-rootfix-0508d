@@ -24,7 +24,10 @@ export function Settings(_props: SettingsProps = {}) {
   const search = state?.searchQuery ?? '';
   const [units, setUnits] = useState('metric');
   const [timezone, setTimezone] = useState('utc');
-  const [darkMode, setDarkMode] = useState(true);
+  const darkMode = state?.settings?.theme === 'dark';
+  const setDarkMode = (val: boolean) => {
+    onAction?.('update-settings', { theme: val ? 'dark' : 'light' });
+  };
   return (
     <>
       <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-background border-b border-outline-variant">
