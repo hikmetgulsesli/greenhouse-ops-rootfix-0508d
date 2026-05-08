@@ -1,0 +1,4479 @@
+{
+  "generatedAt": "2026-05-08T08:50:37.812Z",
+  "screenCount": 9,
+  "screens": {
+    "1e7b96bb694e4492a45ac6fab4e17a4e": {
+      "screenId": "1e7b96bb694e4492a45ac6fab4e17a4e",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "main",
+          "layout": "flex-row",
+          "classes": [
+            "relative",
+            "z-10",
+            "w-full",
+            "max-w-2xl",
+            "bg-surface-container",
+            "border",
+            "border-error/20",
+            "rounded-xl",
+            "shadow-2xl",
+            "flex"
+          ],
+          "childCount": 8
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Retry Connection",
+          "classes": [
+            "w-full",
+            "sm:w-auto",
+            "h-[40px]",
+            "px-margin",
+            "bg-primary-container",
+            "text-on-primary-container",
+            "font-body-sm",
+            "text-body-sm",
+            "rounded-xl",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-sm",
+            "hover:bg-inverse-primary",
+            "transition-colors",
+            "focus:outline-none",
+            "focus:ring-2",
+            "focus:ring-primary",
+            "focus:ring-offset-2",
+            "focus:ring-offset-surface-container"
+          ],
+          "icon": "sync",
+          "action": "retry",
+          "expectedBehavior": "retry the failed action and show loading/error feedback"
+        },
+        {
+          "kind": "button",
+          "label": "Reset Local Storage",
+          "classes": [
+            "w-full",
+            "sm:w-auto",
+            "h-[40px]",
+            "px-margin",
+            "bg-transparent",
+            "text-on-surface",
+            "border",
+            "border-outline-variant",
+            "font-body-sm",
+            "text-body-sm",
+            "rounded-xl",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-sm",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "focus:outline-none",
+            "focus:ring-2",
+            "focus:ring-outline",
+            "focus:ring-offset-2",
+            "focus:ring-offset-surface-container"
+          ],
+          "icon": "delete_forever",
+          "action": "destructive",
+          "expectedBehavior": "perform destructive action with visible feedback or confirmation"
+        }
+      ],
+      "inputs": [],
+      "navLinks": [],
+      "cards": [],
+      "icons": [
+        "cloud_off",
+        "terminal",
+        "sync",
+        "delete_forever"
+      ],
+      "images": [],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Inter",
+        "JetBrains Mono",
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "button",
+          "label": "Retry Connection",
+          "icon": "sync",
+          "action": "retry",
+          "expectedBehavior": "retry the failed action and show loading/error feedback"
+        },
+        {
+          "kind": "button",
+          "label": "Reset Local Storage",
+          "icon": "delete_forever",
+          "action": "destructive",
+          "expectedBehavior": "perform destructive action with visible feedback or confirmation"
+        }
+      ],
+      "tabBar": [],
+      "title": "Storage Error State"
+    },
+    "22fb814a8259413e86b78030b27564e4": {
+      "screenId": "22fb814a8259413e86b78030b27564e4",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "aside",
+          "layout": "absolute",
+          "classes": [
+            "fixed",
+            "right-0",
+            "top-0",
+            "h-full",
+            "w-full",
+            "max-w-[400px]",
+            "bg-surface-container-high",
+            "border-l",
+            "border-outline-variant",
+            "shadow-2xl"
+          ],
+          "childCount": 23
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Close panel",
+          "classes": [
+            "p-xs",
+            "rounded-full",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "text-on-surface-variant",
+            "hover:text-on-surface",
+            "focus:outline-none",
+            "focus:ring-2",
+            "focus:ring-primary",
+            "focus:ring-offset-2",
+            "focus:ring-offset-surface-container-highest"
+          ],
+          "icon": "close",
+          "action": "dismiss",
+          "expectedBehavior": "close dialog/panel or return to previous state"
+        },
+        {
+          "kind": "button",
+          "label": "Sign Out",
+          "classes": [
+            "w-full",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-sm",
+            "px-md",
+            "h-10",
+            "rounded-lg",
+            "bg-transparent",
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "hover:bg-surface-variant",
+            "hover:border-outline",
+            "transition-all",
+            "focus:outline-none",
+            "focus:ring-2",
+            "focus:ring-primary",
+            "focus:ring-offset-2",
+            "focus:ring-offset-surface-container-highest"
+          ],
+          "icon": "logout",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/logout",
+          "expectedRoute": "/logout",
+          "routeInferred": true
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "checkbox",
+          "label": "checkbox",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "sr-only",
+            "peer"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [],
+      "cards": [],
+      "icons": [
+        "close",
+        "badge",
+        "warning",
+        "assignment",
+        "logout"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuB7BQtHGLnGae4RD5OLgJUjOvvR2aQ6erQ9DrVUA11txk9oHVAm_bS4WH7Dc3m8srnoA_8ZtCnntYFjatfx6cmIoB0CFOWrCNapgQh4WfwOUsSkixb_-IpybZZG-kjT4CMldnZBfdm5IYHwtmQzly",
+          "alt": "Operator Profile Picture"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Inter",
+        "JetBrains Mono",
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "gridCols": 3,
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "button",
+          "label": "Close panel",
+          "icon": "close",
+          "action": "dismiss",
+          "expectedBehavior": "close dialog/panel or return to previous state"
+        },
+        {
+          "kind": "button",
+          "label": "Sign Out",
+          "icon": "logout",
+          "action": "navigate",
+          "route": "/logout",
+          "expectedBehavior": "navigate:/logout"
+        },
+        {
+          "kind": "input",
+          "label": "checkbox",
+          "type": "checkbox",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [],
+      "title": "Profile Panel"
+    },
+    "23f0723c00bc4647bb74b04f7c17b893": {
+      "screenId": "23f0723c00bc4647bb74b04f7c17b893",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-row",
+          "classes": [
+            "fixed",
+            "top-0",
+            "w-full",
+            "z-50",
+            "flex",
+            "justify-between",
+            "items-center",
+            "px-lg",
+            "h-16",
+            "bg-background"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "aside",
+          "layout": "flex-col",
+          "classes": [
+            "fixed",
+            "left-0",
+            "top-16",
+            "h-[calc(100vh-64px)]",
+            "flex",
+            "flex-col",
+            "py-md",
+            "w-64",
+            "bg-surface-container",
+            "dark:bg-surface-container"
+          ],
+          "childCount": 2
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "ml-64",
+            "mt-16",
+            "flex-1",
+            "h-[calc(100vh-64px)]",
+            "bg-background",
+            "flex",
+            "flex-col",
+            "items-center",
+            "justify-center",
+            "p-lg"
+          ],
+          "childCount": 4
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "classes": [
+            "bg-transparent",
+            "border",
+            "border-error",
+            "text-error",
+            "hover:bg-error-container",
+            "hover:text-on-error-container",
+            "transition-colors",
+            "rounded-lg",
+            "px-sm",
+            "py-[4px]",
+            "h-8",
+            "font-body-sm",
+            "text-body-sm",
+            "flex",
+            "items-center",
+            "justify-center"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "p-xs",
+            "rounded-full",
+            "hover:bg-surface-variant",
+            "dark:hover:bg-surface-variant",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center",
+            "text-on-surface-variant",
+            "dark:text-on-surface-variant"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "classes": [
+            "p-xs",
+            "rounded-full",
+            "hover:bg-surface-variant",
+            "dark:hover:bg-surface-variant",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center",
+            "text-on-surface-variant",
+            "dark:text-on-surface-variant"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/help",
+          "expectedRoute": "/help",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Create Your First Task",
+          "classes": [
+            "bg-primary-container",
+            "text-on-primary-container",
+            "hover:brightness-110",
+            "active:scale-[0.98]",
+            "transition-all",
+            "duration-200",
+            "px-lg",
+            "py-sm",
+            "h-10",
+            "rounded-lg",
+            "font-h3",
+            "text-h3",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-sm",
+            "shadow-[0_4px_12px_rgba(37,99,235,0.15)]",
+            "border",
+            "border-transparent"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "classes": [],
+          "icon": "search",
+          "action": "navigate",
+          "expectedRoute": "/search",
+          "routeInferred": true,
+          "expectedBehavior": "navigate:/search"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search...",
+          "placeholder": "Search...",
+          "name": "",
+          "classes": [
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-lg",
+            "pl-xl",
+            "pr-sm",
+            "py-xs",
+            "h-8",
+            "text-body-sm",
+            "font-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-primary-container",
+            "w-64",
+            "placeholder:text-outline"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "dashboard",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "assignment",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "precision_manufacturing",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "history",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "person",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "search",
+        "notifications",
+        "help",
+        "dashboard",
+        "assignment",
+        "precision_manufacturing",
+        "history",
+        "settings",
+        "person",
+        "playlist_add",
+        "add"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuBnM74xNW2uKmuiylXuPo1MEm6wET1tBk2mr-XLuaUaLkDUStnPhhZN8pzz2j0yLwd7lvCRIW5AXhuM-ZPawNX-1Vt6Huhz2Cu8Kyn0IxqwKBnMk6Z5k8LqmEZAaKTL5riXAC56so16uWyMfMp-KR",
+          "alt": "Operator Profile"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Inter",
+        "JetBrains Mono"
+      ],
+      "layoutHints": {
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "action": "navigate",
+          "route": "/help",
+          "expectedBehavior": "navigate:/help"
+        },
+        {
+          "kind": "button",
+          "label": "Create Your First Task",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "icon": "search",
+          "action": "navigate",
+          "route": "/search",
+          "expectedBehavior": "navigate:/search"
+        },
+        {
+          "kind": "input",
+          "label": "Search...",
+          "type": "text",
+          "placeholder": "Search...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "icon": "search",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": null,
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "active": false
+        }
+      ],
+      "title": "Empty State"
+    },
+    "24d6125f376e42509562cd37fbb3a0a4": {
+      "screenId": "24d6125f376e42509562cd37fbb3a0a4",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "header",
+          "layout": "flex-row",
+          "classes": [
+            "bg-background",
+            "text-primary",
+            "font-body-md",
+            "text-body-md",
+            "fixed",
+            "top-0",
+            "w-full",
+            "z-50",
+            "flex",
+            "justify-between"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "nav",
+          "layout": "absolute",
+          "classes": [
+            "bg-surface-container",
+            "text-primary",
+            "font-body-sm",
+            "text-body-sm",
+            "fixed",
+            "left-0",
+            "top-16",
+            "h-[calc(100vh-64px)]",
+            "w-64",
+            "border-r"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "md:ml-64",
+            "pt-16",
+            "min-h-screen",
+            "p-lg",
+            "flex",
+            "flex-col",
+            "gap-lg"
+          ],
+          "childCount": 69
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "p-2",
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "rounded"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "classes": [
+            "p-2",
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "rounded"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/help",
+          "expectedRoute": "/help",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "classes": [
+            "bg-error/10",
+            "text-error",
+            "border",
+            "border-error",
+            "px-4",
+            "py-2",
+            "rounded",
+            "font-body-sm",
+            "text-body-sm",
+            "hover:bg-error/20",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Schedule Maintenance",
+          "classes": [
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "bg-transparent",
+            "px-4",
+            "py-2",
+            "rounded",
+            "h-10",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "font-body-sm",
+            "text-body-sm",
+            "flex",
+            "items-center",
+            "gap-2"
+          ],
+          "icon": "calendar_month",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "New Task",
+          "classes": [
+            "bg-primary-container",
+            "text-on-primary-container",
+            "px-4",
+            "py-2",
+            "rounded",
+            "h-10",
+            "hover:bg-primary/90",
+            "transition-colors",
+            "font-body-sm",
+            "text-body-sm",
+            "flex",
+            "items-center",
+            "gap-2",
+            "shadow-[0_4px_12px_rgba(37,99,235,0.2)]"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Acknowledge All",
+          "classes": [
+            "text-primary",
+            "font-body-sm",
+            "text-body-sm",
+            "hover:underline"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "View Logs",
+          "classes": [
+            "text-error",
+            "font-body-sm",
+            "text-body-sm",
+            "hover:underline"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Dismiss",
+          "classes": [
+            "text-on-surface-variant",
+            "font-body-sm",
+            "text-body-sm",
+            "hover:text-on-surface"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Adjust HVAC",
+          "classes": [
+            "text-tertiary",
+            "font-body-sm",
+            "text-body-sm",
+            "hover:underline"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "psychiatry",
+          "classes": [],
+          "icon": "psychiatry",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search...",
+          "placeholder": "Search...",
+          "name": "",
+          "classes": [
+            "bg-surface",
+            "border",
+            "border-outline-variant",
+            "rounded",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "text-on-surface",
+            "pl-[36px]",
+            "py-2",
+            "text-body-sm",
+            "w-64",
+            "placeholder:text-on-surface-variant"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "dashboard",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "assignment",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "precision_manufacturing",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "history",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "person",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "search",
+        "notifications",
+        "help",
+        "psychiatry",
+        "dashboard",
+        "assignment",
+        "precision_manufacturing",
+        "history",
+        "settings",
+        "person",
+        "calendar_month",
+        "add",
+        "trending_up",
+        "health_and_safety",
+        "build",
+        "warning",
+        "error",
+        "info",
+        "eco",
+        "thermostat",
+        "humidity_percentage",
+        "light_mode"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCvNE3_fpBxQzscYQ4tuwBoYG6ZlFsuQ1wDbiOe9giNzuVOJCgFGStO-Y5o-haSV73P668EITzCz3ctrRwmZ_-RAqOmRvshx0rg397_P92UaYo6GeR6b59P-L0I_tL_mbir-Y0NJzmrPD8YMKlIyL",
+          "alt": "Operator Profile"
+        },
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCh8l_W44clXxXUvoFsayM42x7pOSJZfmWWollPH0_51VvFSBEMao3E9Px30DUdsM5Q_r6yn_n5ZDO2JaQFUNkYYlslnpIDhGkV43P8L8pZ2NbFJXMm_AxVpEEOAGBljdk16B7q413P_uz7VbYOCw",
+          "alt": "J. Smith"
+        },
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuBl086P1Dj3Q11CK8mptnCxXwYN92yT7SKIn2Uh0NRuIcWhvrSY0G2AN_xjf_qo7rMqUvanrc-mto6zKIN9dOacyagdVFm8Iad-57AdF3RDwxcySzm_ptHnGeOUwp6jSikHg2F17LigkVlY9f5xdd",
+          "alt": "A. Chen"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Inter",
+        "JetBrains Mono",
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col",
+        "gap": "1"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "action": "navigate",
+          "route": "/help",
+          "expectedBehavior": "navigate:/help"
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Schedule Maintenance",
+          "icon": "calendar_month",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "New Task",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Acknowledge All",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "View Logs",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Dismiss",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Adjust HVAC",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "psychiatry",
+          "icon": "psychiatry",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search...",
+          "type": "text",
+          "placeholder": "Search...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "psychiatry",
+          "icon": "psychiatry",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "active": false
+        }
+      ],
+      "title": "Dashboard Overview"
+    },
+    "2e80426a04dc40a2914847f5ed1b913c": {
+      "screenId": "2e80426a04dc40a2914847f5ed1b913c",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-row",
+          "classes": [
+            "fixed",
+            "top-0",
+            "w-full",
+            "z-50",
+            "flex",
+            "justify-between",
+            "items-center",
+            "px-lg",
+            "h-16",
+            "bg-background"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "aside",
+          "layout": "absolute",
+          "classes": [
+            "fixed",
+            "left-0",
+            "top-16",
+            "h-[calc(100vh-64px)]",
+            "w-64",
+            "bg-surface-container",
+            "border-r",
+            "border-outline-variant",
+            "hidden",
+            "md:flex"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "main",
+          "layout": "flex-row",
+          "classes": [
+            "flex-1",
+            "md:ml-64",
+            "p-margin",
+            "lg:p-xl",
+            "max-w-5xl",
+            "mx-auto",
+            "w-full"
+          ],
+          "childCount": 26
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded-full",
+            "flex",
+            "items-center",
+            "justify-center",
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "hover:opacity-80",
+            "active:scale-95",
+            "transition-all"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded-full",
+            "flex",
+            "items-center",
+            "justify-center",
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "hover:opacity-80",
+            "active:scale-95",
+            "transition-all"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/help",
+          "expectedRoute": "/help",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "classes": [
+            "bg-error-container",
+            "text-on-error-container",
+            "border",
+            "border-error",
+            "border-opacity-30",
+            "rounded-lg",
+            "px-md",
+            "py-xs",
+            "font-h3",
+            "text-body-sm",
+            "hover:opacity-80",
+            "active:scale-95",
+            "transition-all",
+            "hidden",
+            "lg:block"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Export CSV",
+          "classes": [
+            "bg-surface-variant",
+            "text-on-surface",
+            "border",
+            "border-outline-variant",
+            "hover:bg-surface-container-highest",
+            "transition-colors",
+            "rounded-lg",
+            "px-md",
+            "py-sm",
+            "font-body-sm",
+            "text-body-sm",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-sm",
+            "shrink-0",
+            "active:scale-95"
+          ],
+          "icon": "download",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Clear Data",
+          "classes": [
+            "bg-transparent",
+            "text-error",
+            "border",
+            "border-error",
+            "hover:bg-error",
+            "hover:bg-opacity-10",
+            "transition-colors",
+            "rounded-lg",
+            "px-md",
+            "py-sm",
+            "font-body-sm",
+            "text-body-sm",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-sm",
+            "shrink-0",
+            "active:scale-95"
+          ],
+          "icon": "delete",
+          "action": "destructive",
+          "expectedBehavior": "perform destructive action with visible feedback or confirmation"
+        },
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "classes": [],
+          "icon": "search",
+          "action": "navigate",
+          "expectedRoute": "/search",
+          "routeInferred": true,
+          "expectedBehavior": "navigate:/search"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search operations...",
+          "placeholder": "Search operations...",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-full",
+            "py-xs",
+            "pl-xl",
+            "pr-md",
+            "text-body-sm",
+            "font-body-sm",
+            "text-on-surface",
+            "placeholder:text-on-surface-variant",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "outline-none",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "select",
+          "label": "select",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-surface",
+            "border",
+            "border-outline-variant",
+            "text-body-sm",
+            "font-body-sm",
+            "rounded-lg",
+            "py-sm",
+            "pl-md",
+            "pr-xl",
+            "text-on-surface",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "appearance-none",
+            "outline-none",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "dashboard",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "assignment",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "precision_manufacturing",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "history",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]",
+            "fill"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "person",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "search",
+        "notifications",
+        "help",
+        "spa",
+        "dashboard",
+        "assignment",
+        "precision_manufacturing",
+        "history",
+        "settings",
+        "person",
+        "tune",
+        "expand_more",
+        "palette",
+        "database",
+        "download",
+        "delete"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuA9GEUwlA4cDFLioftgPLUhWrhHV4hzLCS1keftrJDtPE3veWMOiGx4epYLajjWi_Ob3Uxx619IfDqspkWgaZlWPO_1-4sRqj206hFYSsSXHEJXjcsuXZsKlfjbBw6gh71leVM2Ticnu4-kGrNitT",
+          "alt": "Operator Profile"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Inter",
+        "JetBrains Mono",
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "action": "navigate",
+          "route": "/help",
+          "expectedBehavior": "navigate:/help"
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Export CSV",
+          "icon": "download",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Clear Data",
+          "icon": "delete",
+          "action": "destructive",
+          "expectedBehavior": "perform destructive action with visible feedback or confirmation"
+        },
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "icon": "search",
+          "action": "navigate",
+          "route": "/search",
+          "expectedBehavior": "navigate:/search"
+        },
+        {
+          "kind": "input",
+          "label": "Search operations...",
+          "type": "text",
+          "placeholder": "Search operations...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "select",
+          "type": "select",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "icon": "search",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "active": false
+        }
+      ],
+      "title": "Settings"
+    },
+    "6a412003f5bd404094c6ea5543ce75e9": {
+      "screenId": "6a412003f5bd404094c6ea5543ce75e9",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "header",
+          "layout": "flex-row",
+          "classes": [
+            "bg-background",
+            "border-b",
+            "border-outline-variant",
+            "fixed",
+            "top-0",
+            "w-full",
+            "z-50",
+            "flex",
+            "justify-between",
+            "items-center"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "nav",
+          "layout": "absolute",
+          "classes": [
+            "bg-surface-container",
+            "text-primary",
+            "font-body-sm",
+            "text-body-sm",
+            "border-r",
+            "border-outline-variant",
+            "fixed",
+            "left-0",
+            "top-16",
+            "h-[calc(100vh-64px)]"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "md:ml-64",
+            "pt-16",
+            "h-screen",
+            "flex",
+            "flex-col",
+            "bg-background"
+          ],
+          "childCount": 73
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded",
+            "flex",
+            "items-center",
+            "justify-center",
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "transition-colors"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded",
+            "flex",
+            "items-center",
+            "justify-center",
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "transition-colors"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/help",
+          "expectedRoute": "/help",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "classes": [
+            "h-8",
+            "px-md",
+            "rounded",
+            "bg-error-container",
+            "text-on-error-container",
+            "font-body-sm",
+            "text-body-sm",
+            "border",
+            "border-error/20",
+            "hover:bg-error/20",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-xs",
+            "ml-sm"
+          ],
+          "icon": "warning",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Filter",
+          "classes": [
+            "h-10",
+            "px-md",
+            "rounded",
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "font-body-sm",
+            "text-body-sm",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-xs"
+          ],
+          "icon": "filter_list",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "New Task",
+          "classes": [
+            "h-10",
+            "px-md",
+            "rounded",
+            "bg-primary-container",
+            "text-on-primary-container",
+            "font-body-sm",
+            "text-body-sm",
+            "hover:opacity-90",
+            "transition-opacity",
+            "flex",
+            "items-center",
+            "gap-xs"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "eco",
+          "classes": [],
+          "icon": "eco",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search tasks...",
+          "placeholder": "Search tasks...",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "pl-xl",
+            "pr-sm",
+            "py-[6px]",
+            "text-body-sm",
+            "font-body-sm",
+            "text-on-surface",
+            "placeholder:text-on-surface-variant",
+            "transition-colors",
+            "outline-none",
+            "h-8"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "dashboard",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "assignment",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "precision_manufacturing",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "history",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "person",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "search",
+        "notifications",
+        "help",
+        "warning",
+        "eco",
+        "dashboard",
+        "assignment",
+        "precision_manufacturing",
+        "history",
+        "settings",
+        "person",
+        "filter_list",
+        "add",
+        "calendar_today",
+        "person_add",
+        "schedule",
+        "check_circle"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuDfncGZaWkRDpu-caJB3n6U7RtmRvb_C3ueBtTYI4Z3k5ClMJXdQQ8p5gvbKkHyeT64h2a8KLSTWhWcUHQ9Zba6taG-TzHhsxmLacSVa70_pWsawwQYXKLlxi3nG-ySjxHHxsFbWbRVfvynni6qji",
+          "alt": "Operator Profile"
+        },
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCLgyXRlicDcu4Zqhyqm0VlZtUVwxXCFBiegaccANTiNJeo3EZCNx8hYGGkWKn2H_DenY17gTNXpbqRQalTivc3VOHKpgWK7jSUIsItSEtaVigokpXBq9BkeYkpkZTQ6_TBJaeWHt4-3saP9JtZKI",
+          "alt": "Assignee"
+        },
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCK06-kBnxr17Cnrsd1vS5r8NgqdT8RpMaF4TpfJdnnswVV-aPr2ea0ilsjgPhlhZ7Cyinke3thV_HhOxSlwFoGlZd_texMX49JC6wXLGlfU8__oi79VZTlFDhcaL7EL7WkbQcR61YPURTCDf_Jpw",
+          "alt": "Assignee"
+        },
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCbDe1YICT4RWq3y_7Fbs4URWWsNOpnz0xxmUVJ2hP3bRyt17wH9-pXmIY-lwlEDA7Rfil1Yegej9eETAt2YyMYscPgQ8MpGpuD8-ke-l3d8x_aGySGUREzlQejnSKEzEg5__eS_gdomiFqJi7BFG",
+          "alt": "Assignee"
+        },
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuB2un1mpqT4VKIbusOIB7hAZ4Ot0F7xPueQpviNUuSAdAAn5I5xouUCnrvv5JFENqEZHR4Zow6_pMT0GrfA0eMKLcPcXY46KhiadlA9xzE3xuRHZOLdLro6OPOW1xmhmF4iI6UxN8APfcLFpP4yji",
+          "alt": "Assignee"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Inter",
+        "JetBrains Mono",
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "flexDirection": "col",
+        "gap": "1"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "action": "navigate",
+          "route": "/help",
+          "expectedBehavior": "navigate:/help"
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": "warning",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Filter",
+          "icon": "filter_list",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "New Task",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "eco",
+          "icon": "eco",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search tasks...",
+          "type": "text",
+          "placeholder": "Search tasks...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "eco",
+          "icon": "eco",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "active": false
+        }
+      ],
+      "title": "Task Board"
+    },
+    "bd7e2ea9837b4be5b03ca528937e504d": {
+      "screenId": "bd7e2ea9837b4be5b03ca528937e504d",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-row",
+          "classes": [
+            "fixed",
+            "top-0",
+            "w-full",
+            "z-50",
+            "flex",
+            "justify-between",
+            "items-center",
+            "px-lg",
+            "h-16",
+            "bg-background"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "aside",
+          "layout": "flex-col",
+          "classes": [
+            "fixed",
+            "left-0",
+            "top-16",
+            "h-[calc(100vh-64px)]",
+            "flex",
+            "flex-col",
+            "py-md",
+            "bg-surface-container",
+            "border-r",
+            "border-outline-variant"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "flex-1",
+            "ml-64",
+            "mt-16",
+            "p-lg",
+            "flex",
+            "flex-col",
+            "gap-lg",
+            "h-[calc(100vh-64px)]",
+            "overflow-y-auto"
+          ],
+          "childCount": 33
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "p-sm",
+            "rounded-full",
+            "flex",
+            "items-center",
+            "justify-center"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "p-sm",
+            "rounded-full",
+            "flex",
+            "items-center",
+            "justify-center"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/help",
+          "expectedRoute": "/help",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "classes": [
+            "bg-error-container",
+            "text-on-error-container",
+            "border",
+            "border-error-container",
+            "hover:bg-error/20",
+            "transition-colors",
+            "px-md",
+            "h-10",
+            "rounded-lg",
+            "font-body-sm",
+            "text-body-sm",
+            "flex",
+            "items-center",
+            "gap-sm"
+          ],
+          "icon": "warning",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Clear All",
+          "classes": [
+            "text-on-surface-variant",
+            "font-body-sm",
+            "text-body-sm",
+            "px-md",
+            "h-8",
+            "rounded",
+            "hover:bg-surface-variant",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "View",
+          "classes": [
+            "bg-primary-container",
+            "text-on-primary-container",
+            "font-body-sm",
+            "text-body-sm",
+            "px-md",
+            "h-8",
+            "rounded",
+            "flex",
+            "items-center",
+            "gap-xs"
+          ],
+          "icon": "save",
+          "action": "form-submit",
+          "expectedBehavior": "validate inputs and submit/apply changes"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_right",
+          "classes": [
+            "text-outline",
+            "group-hover:text-primary",
+            "transition-colors"
+          ],
+          "icon": "chevron_right",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "classes": [],
+          "icon": "search",
+          "action": "navigate",
+          "expectedRoute": "/search",
+          "routeInferred": true,
+          "expectedBehavior": "navigate:/search"
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "classes": [],
+          "icon": "person",
+          "action": "navigate",
+          "expectedRoute": "#",
+          "routeInferred": true,
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search events, zones, or equipment...",
+          "placeholder": "Search events, zones, or equipment...",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-lg",
+            "pl-xl",
+            "pr-md",
+            "h-10",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "select",
+          "label": "select",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-lg",
+            "px-md",
+            "h-10",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-primary",
+            "appearance-none"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "text",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-transparent",
+            "border-none",
+            "p-0",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:ring-0"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "dashboard",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "assignment",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "precision_manufacturing",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "history",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "person",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "search",
+        "notifications",
+        "help",
+        "warning",
+        "person",
+        "dns",
+        "dashboard",
+        "assignment",
+        "precision_manufacturing",
+        "history",
+        "settings",
+        "tune",
+        "save",
+        "close",
+        "calendar_today",
+        "expand_more",
+        "chevron_right"
+      ],
+      "images": [],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Inter",
+        "JetBrains Mono",
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "gridCols": 12,
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "action": "navigate",
+          "route": "/help",
+          "expectedBehavior": "navigate:/help"
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": "warning",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Clear All",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "View",
+          "icon": "save",
+          "action": "form-submit",
+          "expectedBehavior": "validate inputs and submit/apply changes"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_right",
+          "icon": "chevron_right",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "icon": "search",
+          "action": "navigate",
+          "route": "/search",
+          "expectedBehavior": "navigate:/search"
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "icon": "person",
+          "action": "navigate",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "input",
+          "label": "Search events, zones, or equipment...",
+          "type": "text",
+          "placeholder": "Search events, zones, or equipment...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "select",
+          "type": "select",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "text",
+          "type": "text",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "icon": "search",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": "warning",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "icon": "person",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "active": false
+        }
+      ],
+      "title": "Filtered Overview"
+    },
+    "c53e2da106074ef48b47204d8bafcf50": {
+      "screenId": "c53e2da106074ef48b47204d8bafcf50",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "header",
+          "layout": "flex-row",
+          "classes": [
+            "fixed",
+            "top-0",
+            "w-full",
+            "z-50",
+            "flex",
+            "justify-between",
+            "items-center",
+            "px-lg",
+            "h-16",
+            "bg-background"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "nav",
+          "layout": "flex-col",
+          "classes": [
+            "fixed",
+            "left-0",
+            "top-16",
+            "h-[calc(100vh-64px)]",
+            "w-64",
+            "bg-surface-container",
+            "border-r",
+            "border-outline-variant",
+            "flex",
+            "flex-col"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "main",
+          "layout": "flex-row",
+          "classes": [
+            "flex-1",
+            "ml-64",
+            "p-margin",
+            "overflow-y-auto"
+          ],
+          "childCount": 31
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "hover:bg-surface-variant",
+            "p-2",
+            "rounded-full",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center",
+            "opacity-80",
+            "hover:opacity-100",
+            "hover:scale-95"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "classes": [
+            "hover:bg-surface-variant",
+            "p-2",
+            "rounded-full",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center",
+            "opacity-80",
+            "hover:opacity-100",
+            "hover:scale-95"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/help",
+          "expectedRoute": "/help",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "classes": [
+            "ml-sm",
+            "bg-error-container",
+            "text-error",
+            "border",
+            "border-error-container",
+            "hover:border-error",
+            "px-4",
+            "py-2",
+            "rounded-xl",
+            "font-body-sm",
+            "text-body-sm",
+            "font-semibold",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-xs",
+            "shadow-[0_0_8px_rgba(147,0,10,0.2)]"
+          ],
+          "icon": "warning",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Export",
+          "classes": [
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "px-4",
+            "py-2",
+            "rounded-xl",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-xs",
+            "font-body-sm",
+            "text-body-sm"
+          ],
+          "icon": "download",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Apply Filters",
+          "classes": [
+            "bg-primary-container",
+            "text-on-primary-container",
+            "px-6",
+            "py-2",
+            "rounded-lg",
+            "font-body-sm",
+            "text-body-sm",
+            "hover:opacity-90",
+            "transition-opacity",
+            "h-[38px]"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "more_vert",
+          "classes": [
+            "text-outline",
+            "hover:text-primary",
+            "opacity-0",
+            "group-hover:opacity-100",
+            "transition-opacity"
+          ],
+          "icon": "more_vert",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_left",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded",
+            "flex",
+            "items-center",
+            "justify-center",
+            "hover:bg-surface-variant",
+            "disabled:opacity-50"
+          ],
+          "icon": "chevron_left",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "1",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded",
+            "flex",
+            "items-center",
+            "justify-center",
+            "bg-surface-variant",
+            "text-primary",
+            "font-semibold"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "2",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded",
+            "flex",
+            "items-center",
+            "justify-center",
+            "hover:bg-surface-variant"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "3",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded",
+            "flex",
+            "items-center",
+            "justify-center",
+            "hover:bg-surface-variant"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_right",
+          "classes": [
+            "w-8",
+            "h-8",
+            "rounded",
+            "flex",
+            "items-center",
+            "justify-center",
+            "hover:bg-surface-variant"
+          ],
+          "icon": "chevron_right",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "hub",
+          "classes": [],
+          "icon": "hub",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search operations...",
+          "placeholder": "Search operations...",
+          "name": "",
+          "classes": [
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-full",
+            "py-1.5",
+            "pl-10",
+            "pr-4",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-primary",
+            "w-64",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "text",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-lg",
+            "py-2",
+            "pl-10",
+            "pr-4",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-primary",
+            "cursor-pointer",
+            "hover:bg-surface-variant",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "select",
+          "label": "select",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-lg",
+            "py-2",
+            "pl-4",
+            "pr-10",
+            "text-body-sm",
+            "text-on-surface",
+            "appearance-none",
+            "focus:outline-none",
+            "focus:border-primary",
+            "hover:bg-surface-variant",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search by ID, action, or personnel...",
+          "placeholder": "Search by ID, action, or personnel...",
+          "name": "",
+          "classes": [
+            "w-full",
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-lg",
+            "py-2",
+            "pl-10",
+            "pr-4",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-primary",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm"
+          ],
+          "icon": "dashboard",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm"
+          ],
+          "icon": "assignment",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm"
+          ],
+          "icon": "precision_manufacturing",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm"
+          ],
+          "icon": "history",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "href": "#",
+          "classes": [
+            "font-body-sm",
+            "text-body-sm"
+          ],
+          "icon": "person",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "search",
+        "notifications",
+        "help",
+        "warning",
+        "hub",
+        "dashboard",
+        "assignment",
+        "precision_manufacturing",
+        "history",
+        "settings",
+        "person",
+        "download",
+        "calendar_today",
+        "arrow_drop_down",
+        "more_vert",
+        "chevron_left",
+        "chevron_right"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuAtl1lyeiVpd3Udb0v7xCHfEEKgsS9CpNyJ1Atx6IC6ml_ikX-r2cmW2U44Yum48MILHvfWDHDRg4AT17b3RzHXofy9tZ5sQWXP8KG2m-ReJIPsppFWUYWWcT6JX4IbTYwAZHDwfiZiPXZjFiW9bP",
+          "alt": "Operator Profile"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "flexDirection": "col",
+        "gap": "1"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "action": "navigate",
+          "route": "/help",
+          "expectedBehavior": "navigate:/help"
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": "warning",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Export",
+          "icon": "download",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Apply Filters",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "more_vert",
+          "icon": "more_vert",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_left",
+          "icon": "chevron_left",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "1",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "2",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "3",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_right",
+          "icon": "chevron_right",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "hub",
+          "icon": "hub",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search operations...",
+          "type": "text",
+          "placeholder": "Search operations...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "text",
+          "type": "text",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "select",
+          "type": "select",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "Search by ID, action, or personnel...",
+          "type": "text",
+          "placeholder": "Search by ID, action, or personnel...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "hub",
+          "icon": "hub",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "RootFix Console Zone 04 - Active",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "active": false
+        }
+      ],
+      "title": "Maintenance Log"
+    },
+    "d55ca87e45354b5b8d9d9835bb334098": {
+      "screenId": "d55ca87e45354b5b8d9d9835bb334098",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-row",
+          "classes": [
+            "bg-background",
+            "dark:bg-background",
+            "fixed",
+            "top-0",
+            "w-full",
+            "z-50",
+            "flex",
+            "justify-between",
+            "items-center",
+            "px-lg"
+          ],
+          "childCount": 4
+        },
+        {
+          "tag": "aside",
+          "layout": "absolute",
+          "classes": [
+            "bg-surface-container",
+            "dark:bg-surface-container",
+            "fixed",
+            "left-0",
+            "top-16",
+            "h-[calc(100vh-64px)]",
+            "w-64",
+            "border-r",
+            "border-outline-variant",
+            "dark:border-outline-variant"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "main",
+          "layout": "block",
+          "classes": [
+            "w-full",
+            "md:ml-64",
+            "mt-16",
+            "h-[calc(100vh-64px)]",
+            "overflow-y-auto",
+            "bg-background",
+            "p-md",
+            "md:p-lg"
+          ],
+          "childCount": 74
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "p-sm",
+            "rounded-full",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:bg-surface-variant",
+            "p-sm",
+            "rounded-full",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center"
+          ],
+          "icon": "help",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/help",
+          "expectedRoute": "/help",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "classes": [
+            "bg-error-container",
+            "text-on-error-container",
+            "hover:bg-error",
+            "hover:text-on-error",
+            "transition-colors",
+            "font-body-sm",
+            "text-body-sm",
+            "px-md",
+            "py-[8px]",
+            "rounded-xl",
+            "font-semibold",
+            "flex",
+            "items-center",
+            "gap-xs",
+            "ml-sm"
+          ],
+          "icon": "warning",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Filter View",
+          "classes": [
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "font-body-sm",
+            "text-body-sm",
+            "px-md",
+            "py-[8px]",
+            "rounded-xl",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-sm"
+          ],
+          "icon": "tune",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/settings",
+          "expectedRoute": "/settings",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "View Logs",
+          "classes": [
+            "flex-1",
+            "bg-transparent",
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "font-body-sm",
+            "text-body-sm",
+            "px-md",
+            "py-[8px]",
+            "rounded-xl",
+            "hover:bg-surface-variant",
+            "transition-colors",
+            "flex",
+            "justify-center",
+            "items-center",
+            "gap-xs"
+          ],
+          "icon": "list_alt",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Quick Fix",
+          "classes": [
+            "flex-1",
+            "bg-primary",
+            "text-on-primary",
+            "font-body-sm",
+            "text-body-sm",
+            "px-md",
+            "py-[8px]",
+            "rounded-xl",
+            "hover:bg-primary-container",
+            "hover:text-on-primary-container",
+            "transition-colors",
+            "flex",
+            "justify-center",
+            "items-center",
+            "gap-xs",
+            "shadow-sm"
+          ],
+          "icon": "build",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Quick Fix",
+          "classes": [
+            "flex-1",
+            "bg-error",
+            "text-on-error",
+            "font-body-sm",
+            "text-body-sm",
+            "px-md",
+            "py-[8px]",
+            "rounded-xl",
+            "hover:bg-error-container",
+            "hover:text-on-error-container",
+            "transition-colors",
+            "flex",
+            "justify-center",
+            "items-center",
+            "gap-xs",
+            "shadow-sm"
+          ],
+          "icon": "power_settings_new",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "classes": [],
+          "icon": "search",
+          "action": "navigate",
+          "expectedRoute": "/search",
+          "routeInferred": true,
+          "expectedBehavior": "navigate:/search"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search equipment...",
+          "placeholder": "Search equipment...",
+          "name": "",
+          "classes": [
+            "bg-surface-container",
+            "border",
+            "border-outline-variant",
+            "rounded-xl",
+            "pl-10",
+            "pr-4",
+            "py-[6px]",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "w-72",
+            "transition-colors",
+            "placeholder:text-on-surface-variant"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "dashboard",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "assignment",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "precision_manufacturing",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "history",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "person",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "search",
+        "notifications",
+        "help",
+        "warning",
+        "dashboard",
+        "assignment",
+        "precision_manufacturing",
+        "history",
+        "settings",
+        "person",
+        "tune",
+        "air",
+        "list_alt",
+        "water_drop",
+        "build",
+        "power_settings_new",
+        "lightbulb"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuCRdYHluq5RB0dICHW5V-fB-6RtVocRCk4d6Zp3aDzDlHKYbvb3XFNduZMCNGan00iettXidWm1v2IO3EFDqpA0m5nFuI04mR-VLLBYs0tX7tG1PvxchtxN8D1ZRqG6Xlx2W8CBlKDwmtFH74Mhgm",
+          "alt": "System Status"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-primary-fixed-variant": "#003ea8",
+        "secondary-fixed-dim": "#b9c7df",
+        "on-secondary-fixed-variant": "#3a485b",
+        "tertiary-fixed-dim": "#ffb596",
+        "on-secondary-fixed": "#0d1c2e",
+        "tertiary": "#ffb596",
+        "tertiary-container": "#bc4800",
+        "surface-container": "#1d1f27",
+        "inverse-primary": "#0053db",
+        "outline-variant": "#434655",
+        "on-primary": "#002a78",
+        "tertiary-fixed": "#ffdbcd",
+        "secondary-fixed": "#d5e3fc",
+        "on-primary-fixed": "#00174b",
+        "surface-variant": "#32343d",
+        "inverse-on-surface": "#2e3039",
+        "on-secondary-container": "#abb9d1",
+        "on-error": "#690005",
+        "surface-container-lowest": "#0c0e16",
+        "primary": "#b4c5ff",
+        "on-tertiary-fixed": "#360f00",
+        "background": "#11131b",
+        "surface-tint": "#b4c5ff",
+        "on-surface-variant": "#c3c6d7",
+        "error-container": "#93000a",
+        "surface-container-highest": "#32343d",
+        "error": "#ffb4ab",
+        "on-background": "#e1e2ed",
+        "surface": "#11131b",
+        "on-error-container": "#ffdad6",
+        "primary-fixed": "#dbe1ff",
+        "inverse-surface": "#e1e2ed",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "secondary-container": "#3c4a5e",
+        "outline": "#8d90a0",
+        "surface-dim": "#11131b",
+        "primary-container": "#2563eb",
+        "surface-bright": "#373942",
+        "on-tertiary": "#581e00",
+        "secondary": "#b9c7df",
+        "surface-container-high": "#282a32",
+        "on-tertiary-container": "#ffede6",
+        "on-secondary": "#233144",
+        "on-primary-container": "#eeefff",
+        "surface-container-low": "#191b23",
+        "on-surface": "#e1e2ed",
+        "primary-fixed-dim": "#b4c5ff"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Inter",
+        "JetBrains Mono"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Account",
+          "icon": "person",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "action": "navigate",
+          "route": "/help",
+          "expectedBehavior": "navigate:/help"
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": "warning",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Filter View",
+          "icon": "tune",
+          "action": "navigate",
+          "route": "/settings",
+          "expectedBehavior": "navigate:/settings"
+        },
+        {
+          "kind": "button",
+          "label": "View Logs",
+          "icon": "list_alt",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Quick Fix",
+          "icon": "build",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Quick Fix",
+          "icon": "power_settings_new",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "icon": "search",
+          "action": "navigate",
+          "route": "/search",
+          "expectedBehavior": "navigate:/search"
+        },
+        {
+          "kind": "input",
+          "label": "Search equipment...",
+          "type": "text",
+          "placeholder": "Search equipment...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "Greenhouse Ops",
+          "icon": "search",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "help",
+          "icon": "help",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "Emergency Stop",
+          "icon": "warning",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "dashboard",
+          "icon": "dashboard",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Task Board",
+          "icon": "assignment",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Equipment",
+          "icon": "precision_manufacturing",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Logs",
+          "icon": "history",
+          "route": "#",
+          "active": false
+        }
+      ],
+      "title": "Equipment Status"
+    }
+  }
+}

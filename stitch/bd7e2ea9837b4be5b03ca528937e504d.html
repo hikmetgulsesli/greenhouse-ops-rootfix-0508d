@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greenhouse Ops - Filtered Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "tertiary": "#ffb596",
+                        "tertiary-container": "#bc4800",
+                        "surface-container": "#1d1f27",
+                        "inverse-primary": "#0053db",
+                        "outline-variant": "#434655",
+                        "on-primary": "#002a78",
+                        "tertiary-fixed": "#ffdbcd",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-primary-fixed": "#00174b",
+                        "surface-variant": "#32343d",
+                        "inverse-on-surface": "#2e3039",
+                        "on-secondary-container": "#abb9d1",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0c0e16",
+                        "primary": "#b4c5ff",
+                        "on-tertiary-fixed": "#360f00",
+                        "background": "#11131b",
+                        "surface-tint": "#b4c5ff",
+                        "on-surface-variant": "#c3c6d7",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#32343d",
+                        "error": "#ffb4ab",
+                        "on-background": "#e1e2ed",
+                        "surface": "#11131b",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-surface": "#e1e2ed",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "secondary-container": "#3c4a5e",
+                        "outline": "#8d90a0",
+                        "surface-dim": "#11131b",
+                        "primary-container": "#2563eb",
+                        "surface-bright": "#373942",
+                        "on-tertiary": "#581e00",
+                        "secondary": "#b9c7df",
+                        "surface-container-high": "#282a32",
+                        "on-tertiary-container": "#ffede6",
+                        "on-secondary": "#233144",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-low": "#191b23",
+                        "on-surface": "#e1e2ed",
+                        "primary-fixed-dim": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Inter"],
+                        "mono-data": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }],
+                        "mono-data": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h1": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md flex min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-background border-b border-outline-variant flat no shadows">
+<div class="flex items-center gap-lg flex-1">
+<span class="font-h2 text-h2 text-on-surface font-extrabold tracking-tight">Greenhouse Ops</span>
+<!-- Search Bar Prominent -->
+<div class="relative max-w-md w-full ml-xl">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg pl-xl pr-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search events, zones, or equipment..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="bg-error-container text-on-error-container border border-error-container hover:bg-error/20 transition-colors px-md h-10 rounded-lg font-body-sm text-body-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                Emergency Stop
+            </button>
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant ml-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">person</span>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] flex flex-col py-md bg-surface-container border-r border-outline-variant docked w-64 flat no shadows z-40">
+<div class="px-md mb-lg">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded bg-surface border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">dns</span>
+</div>
+<div>
+<h2 class="font-h3 text-h3 text-primary">RootFix Console</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Zone 04 - Active</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-sm flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-semibold Active: translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="assignment" style="font-variation-settings: 'FILL' 1;">assignment</span>
+                Task Board
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+                Equipment
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                Logs
+            </a>
+</nav>
+<div class="mt-auto px-sm flex flex-col gap-xs pt-md border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+                Account
+            </a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 ml-64 mt-16 p-lg flex flex-col gap-lg h-[calc(100vh-64px)] overflow-y-auto">
+<!-- Header -->
+<div class="flex flex-col gap-xs">
+<h1 class="font-h1 text-h1 text-on-surface">Event Operations</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Review and manage prioritized system events and anomalies.</p>
+</div>
+<!-- Complex Filter Panel -->
+<section class="bg-surface border border-outline-variant rounded-xl p-md flex flex-col gap-md">
+<div class="flex justify-between items-center border-b border-outline-variant pb-md">
+<div class="flex items-center gap-md font-h3 text-h3 text-on-surface">
+<span class="material-symbols-outlined text-outline">tune</span>
+                    Active Filters
+                </div>
+<div class="flex gap-sm">
+<button class="text-on-surface-variant font-body-sm text-body-sm px-md h-8 rounded hover:bg-surface-variant transition-colors">Clear All</button>
+<button class="bg-primary-container text-on-primary-container font-body-sm text-body-sm px-md h-8 rounded flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">save</span>
+                        Save View
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-md items-end">
+<!-- Status Filter Group -->
+<div class="col-span-12 md:col-span-5 flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Status</label>
+<div class="flex flex-wrap gap-sm">
+<!-- Active Filter Chip 1 -->
+<div class="bg-error-container border border-error text-on-error-container rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer hover:bg-error-container/80">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+                            Critical
+                            <span class="material-symbols-outlined text-[14px] ml-xs opacity-70 hover:opacity-100">close</span>
+</div>
+<!-- Active Filter Chip 2 -->
+<div class="bg-tertiary-container border border-tertiary text-on-tertiary-container rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer hover:bg-tertiary-container/80">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+                            In Progress
+                            <span class="material-symbols-outlined text-[14px] ml-xs opacity-70 hover:opacity-100">close</span>
+</div>
+<!-- Inactive Filter Chip -->
+<div class="bg-surface-container border border-outline-variant text-on-surface-variant rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer hover:bg-surface-variant">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+                            Resolved
+                        </div>
+</div>
+</div>
+<!-- Zone Filter -->
+<div class="col-span-12 md:col-span-3 flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Facility Zone</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded-lg px-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary appearance-none">
+<option>All Zones</option>
+<option>Zone 01 - Nursery</option>
+<option>Zone 04 - Hydroponics</option>
+</select>
+</div>
+<!-- Time Filter -->
+<div class="col-span-12 md:col-span-4 flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Time Range</label>
+<div class="flex items-center gap-sm bg-surface-container border border-outline-variant rounded-lg px-md h-10 focus-within:border-primary">
+<span class="material-symbols-outlined text-outline text-[18px]">calendar_today</span>
+<input class="w-full bg-transparent border-none p-0 font-body-sm text-body-sm text-on-surface focus:ring-0" readonly="" type="text" value="Last 24 Hours"/>
+<span class="material-symbols-outlined text-outline text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Results Header -->
+<div class="flex justify-between items-center mt-sm">
+<span class="font-body-md text-body-md text-on-surface-variant">Showing 12 of 84 events</span>
+<div class="flex items-center gap-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Sort by:</span>
+<select class="bg-transparent border-none text-on-surface font-body-sm text-body-sm focus:ring-0 p-0 pr-lg cursor-pointer">
+<option>Priority (High to Low)</option>
+<option>Newest First</option>
+<option>Oldest First</option>
+</select>
+</div>
+</div>
+<!-- Data Table (High Density) -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-low font-label-caps text-label-caps text-on-surface-variant">
+<th class="py-sm px-md font-semibold w-24">Event ID</th>
+<th class="py-sm px-md font-semibold">Description</th>
+<th class="py-sm px-md font-semibold w-32">Zone</th>
+<th class="py-sm px-md font-semibold w-40">Status</th>
+<th class="py-sm px-md font-semibold w-32">Timestamp</th>
+<th class="py-sm px-md font-semibold w-16 text-center">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<!-- Row 1: Critical -->
+<tr class="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
+<td class="py-md px-md font-mono-data text-mono-data text-primary">#EV-9021</td>
+<td class="py-md px-md text-on-surface font-medium">Nutrient Pump Pressure Loss Detected</td>
+<td class="py-md px-md text-on-surface-variant">Zone 04</td>
+<td class="py-md px-md">
+<div class="inline-flex items-center gap-xs bg-error-container/20 text-on-error-container border border-error-container/30 rounded-full px-sm py-[2px] font-label-caps">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+                                Critical
+                            </div>
+</td>
+<td class="py-md px-md font-mono-data text-mono-data text-on-surface-variant">10:42 AM</td>
+<td class="py-md px-md text-center">
+<button class="text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: In Progress -->
+<tr class="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
+<td class="py-md px-md font-mono-data text-mono-data text-primary">#EV-9018</td>
+<td class="py-md px-md text-on-surface font-medium">Main HVAC Filter Replacement Cycle</td>
+<td class="py-md px-md text-on-surface-variant">Zone 01</td>
+<td class="py-md px-md">
+<div class="inline-flex items-center gap-xs bg-tertiary-container/20 text-on-tertiary-container border border-tertiary-container/30 rounded-full px-sm py-[2px] font-label-caps">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+                                In Progress
+                            </div>
+</td>
+<td class="py-md px-md font-mono-data text-mono-data text-on-surface-variant">09:15 AM</td>
+<td class="py-md px-md text-center">
+<button class="text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Critical -->
+<tr class="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
+<td class="py-md px-md font-mono-data text-mono-data text-primary">#EV-8994</td>
+<td class="py-md px-md text-on-surface font-medium">CO2 Concentration Exceeds Threshold</td>
+<td class="py-md px-md text-on-surface-variant">Zone 04</td>
+<td class="py-md px-md">
+<div class="inline-flex items-center gap-xs bg-error-container/20 text-on-error-container border border-error-container/30 rounded-full px-sm py-[2px] font-label-caps">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+                                Critical
+                            </div>
+</td>
+<td class="py-md px-md font-mono-data text-mono-data text-on-surface-variant">08:03 AM</td>
+<td class="py-md px-md text-center">
+<button class="text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: In Progress -->
+<tr class="hover:bg-surface-variant transition-colors group">
+<td class="py-md px-md font-mono-data text-mono-data text-primary">#EV-8990</td>
+<td class="py-md px-md text-on-surface font-medium">Automated Sensor Calibration Routine</td>
+<td class="py-md px-md text-on-surface-variant">Zone 02</td>
+<td class="py-md px-md">
+<div class="inline-flex items-center gap-xs bg-tertiary-container/20 text-on-tertiary-container border border-tertiary-container/30 rounded-full px-sm py-[2px] font-label-caps">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+                                In Progress
+                            </div>
+</td>
+<td class="py-md px-md font-mono-data text-mono-data text-on-surface-variant">07:45 AM</td>
+<td class="py-md px-md text-center">
+<button class="text-outline group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+</body></html>

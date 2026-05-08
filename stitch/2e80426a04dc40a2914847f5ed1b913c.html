@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greenhouse Ops - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "tertiary": "#ffb596",
+                        "tertiary-container": "#bc4800",
+                        "surface-container": "#1d1f27",
+                        "inverse-primary": "#0053db",
+                        "outline-variant": "#434655",
+                        "on-primary": "#002a78",
+                        "tertiary-fixed": "#ffdbcd",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-primary-fixed": "#00174b",
+                        "surface-variant": "#32343d",
+                        "inverse-on-surface": "#2e3039",
+                        "on-secondary-container": "#abb9d1",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0c0e16",
+                        "primary": "#b4c5ff",
+                        "on-tertiary-fixed": "#360f00",
+                        "background": "#11131b",
+                        "surface-tint": "#b4c5ff",
+                        "on-surface-variant": "#c3c6d7",
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#32343d",
+                        "error": "#ffb4ab",
+                        "on-background": "#e1e2ed",
+                        "surface": "#11131b",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-surface": "#e1e2ed",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "secondary-container": "#3c4a5e",
+                        "outline": "#8d90a0",
+                        "surface-dim": "#11131b",
+                        "primary-container": "#2563eb",
+                        "surface-bright": "#373942",
+                        "on-tertiary": "#581e00",
+                        "secondary": "#b9c7df",
+                        "surface-container-high": "#282a32",
+                        "on-tertiary-container": "#ffede6",
+                        "on-secondary": "#233144",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-low": "#191b23",
+                        "on-surface": "#e1e2ed",
+                        "primary-fixed-dim": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "unit": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Inter"],
+                        "mono-data": ["JetBrains Mono"],
+                        "body-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }],
+                        "mono-data": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "h2": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h1": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen antialiased flex flex-col font-body-md">
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-background border-b border-outline-variant">
+<div class="flex items-center gap-margin w-1/3">
+<span class="font-h2 text-h2 text-on-surface">Greenhouse Ops</span>
+<div class="relative flex-1 hidden md:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-full py-xs pl-xl pr-md text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="Search operations..." type="text"/>
+</div>
+</div>
+<div class="flex items-center justify-end gap-md w-1/3">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+<button class="bg-error-container text-on-error-container border border-error border-opacity-30 rounded-lg px-md py-xs font-h3 text-body-sm hover:opacity-80 active:scale-95 transition-all hidden lg:block">
+                Emergency Stop
+            </button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden ml-sm shrink-0">
+<img alt="Operator Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9GEUwlA4cDFLioftgPLUhWrhHV4hzLCS1keftrJDtPE3veWMOiGx4epYLajjWi_Ob3Uxx619IfDqspkWgaZlWPO_1-4sRqj206hFYSsSXHEJXjcsuXZsKlfjbBw6gh71leVM2Ticnu4-kGrNitTpLtpyfDnxn_iJ0PEaZmoxuP8wOuGWfZe4E25kUiZutQP__g-lS5v2vXmFeMO0yC8XSsghhVli8sI0TY8p9w8KR0qYR1Rslefp3Yn4ZN0PFUWHAmNJIdt_BRyI"/>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 pt-16">
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container border-r border-outline-variant hidden md:flex flex-col py-md z-40">
+<div class="px-md mb-xl flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-variant border border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary fill text-[24px]">spa</span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="font-h3 text-h3 text-primary truncate">RootFix Console</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Zone 04 - Active</span>
+</div>
+</div>
+<nav class="flex-1 px-sm space-y-unit">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+                    Task Board
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">precision_manufacturing</span>
+                    Equipment
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+                    Logs
+                </a>
+</nav>
+<div class="px-sm space-y-unit mt-auto">
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-semibold font-body-sm text-body-sm translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] fill">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors font-body-sm text-body-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">person</span>
+                    Account
+                </a>
+</div>
+</aside>
+<main class="flex-1 md:ml-64 p-margin lg:p-xl max-w-5xl mx-auto w-full">
+<header class="mb-lg">
+<h1 class="font-h1 text-h1 text-on-surface">Settings</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Manage your operational preferences and system configurations.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-margin">
+<section class="bg-surface-container rounded-xl border border-outline-variant overflow-hidden flex flex-col">
+<div class="p-md border-b border-outline-variant bg-surface-container-highest bg-opacity-30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+<h2 class="font-h3 text-h3 text-on-surface">General</h2>
+</div>
+</div>
+<div class="p-md flex flex-col gap-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">System Units</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Measurement standards for telemetry data.</span>
+</div>
+<div class="relative min-w-[160px]">
+<select class="w-full bg-surface border border-outline-variant text-body-sm font-body-sm rounded-lg py-sm pl-md pr-xl text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none transition-colors">
+<option value="metric">Metric (Celsius, L)</option>
+<option value="imperial">Imperial (Fahrenheit, Gal)</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<div class="w-full h-px bg-outline-variant opacity-50"></div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Timezone</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Default timezone for system logs.</span>
+</div>
+<div class="relative min-w-[160px]">
+<select class="w-full bg-surface border border-outline-variant text-body-sm font-body-sm rounded-lg py-sm pl-md pr-xl text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none outline-none transition-colors">
+<option value="utc">UTC (Coordinated Universal Time)</option>
+<option value="local">Local System Time</option>
+<option value="est">EST (Eastern Standard Time)</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-container rounded-xl border border-outline-variant overflow-hidden flex flex-col">
+<div class="p-md border-b border-outline-variant bg-surface-container-highest bg-opacity-30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">palette</span>
+<h2 class="font-h3 text-h3 text-on-surface">Theme</h2>
+</div>
+</div>
+<div class="p-md flex flex-col gap-md">
+<div class="flex items-center justify-between gap-md h-full py-sm">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Dark Mode</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Force high-contrast dark interface.</span>
+</div>
+<button aria-checked="true" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none bg-primary-container" role="switch" type="button">
+<span class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-on-primary-container shadow ring-0 transition duration-200 ease-in-out translate-x-5"></span>
+</button>
+</div>
+</div>
+</section>
+<section class="bg-surface-container rounded-xl border border-outline-variant overflow-hidden flex flex-col lg:col-span-2">
+<div class="p-md border-b border-outline-variant bg-surface-container-highest bg-opacity-30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">database</span>
+<h2 class="font-h3 text-h3 text-on-surface">Persistence</h2>
+</div>
+</div>
+<div class="p-md flex flex-col lg:flex-row lg:items-center gap-margin">
+<div class="flex-1 bg-surface rounded-lg border border-outline-variant p-md flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Export Data</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Download all configuration and local logs as CSV.</span>
+</div>
+<button class="bg-surface-variant text-on-surface border border-outline-variant hover:bg-surface-container-highest transition-colors rounded-lg px-md py-sm font-body-sm text-body-sm flex items-center justify-center gap-sm shrink-0 active:scale-95">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                                Export CSV
+                            </button>
+</div>
+<div class="flex-1 bg-error-container bg-opacity-10 rounded-lg border border-error border-opacity-30 p-md flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-error-container">Clear Storage</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Permanently wipe local cache and temporary files.</span>
+</div>
+<button class="bg-transparent text-error border border-error hover:bg-error hover:bg-opacity-10 transition-colors rounded-lg px-md py-sm font-body-sm text-body-sm flex items-center justify-center gap-sm shrink-0 active:scale-95">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                                Clear Data
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>
