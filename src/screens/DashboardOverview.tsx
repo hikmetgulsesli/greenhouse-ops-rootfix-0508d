@@ -22,10 +22,17 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
   const { onNavigate, onAction, state } = _props;
   const search = state?.searchQuery ?? "";
 
-  const totalTasks = state?.tasks?.length ?? 142;
-  const activeEquipment = state?.equipment?.filter(e => e.status === "online").length ?? 38;
-  const totalEquipment = state?.equipment?.length ?? 40;
-  const pendingMaint = state?.equipment?.filter(e => e.status === "maintenance" || e.status === "error").length ?? 4;
+  const totalTasks = state?.tasks?.length ?? 0;
+  const activeEquipment = state?.equipment?.filter(e => e.status === "online").length ?? 0;
+  const totalEquipment = state?.equipment?.length ?? 0;
+  const pendingMaint = state?.equipment?.filter(e => e.status === "maintenance" || e.status === "error" || e.status === "offline").length ?? 0;
+  const offlineCount = totalEquipment - activeEquipment;
+  const criticalCount = state?.tasks?.filter(t => t.priority === "critical" && t.status !== "complete").length ?? 0;
+
+  const systemHealth = totalEquipment > 0
+    ? Math.round(state!.equipment.reduce((sum, e) => sum + e.health, 0) / totalEquipment)
+    : 98;
+
   const unacknowledgedAlerts = state?.alerts?.filter(a => !a.acknowledged) ?? [];
 
   return (
@@ -157,11 +164,11 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <span className="material-symbols-outlined text-primary">health_and_safety</span>
       </div>
       <div className="flex items-end gap-2 relative z-10">
-      <div className="font-mono-data text-[32px] leading-none text-on-surface font-semibold">98<span className="text-h2 font-h2">%</span></div>
+      <div className="font-mono-data text-[32px] leading-none text-on-surface font-semibold">{systemHealth}<span className="text-h2 font-h2">%</span></div>
       </div>
       {/* Mini progress bar */}
       <div className="w-full bg-surface-variant h-1 mt-4 rounded-full relative z-10">
-      <div className="bg-primary h-1 rounded-full w-[98%]"></div>
+      <div className="bg-primary h-1 rounded-full" style={{width: `${systemHealth}%`}}></div>
       </div>
       </div>
       {/* Pending Maintenance */}
@@ -174,7 +181,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <div className="font-mono-data text-[32px] leading-none text-on-surface font-semibold relative z-10">{String(pendingMaint).padStart(2, "0")}</div>
       <div className="mt-2 text-tertiary font-body-sm text-body-sm flex items-center gap-1 relative z-10">
       <span className="material-symbols-outlined text-[14px]">warning</span>
-      <span>1 Critical</span>
+      <span>{criticalCount} Critical</span>
       </div>
       </div>
       </div>
