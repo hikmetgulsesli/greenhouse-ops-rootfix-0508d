@@ -17,8 +17,8 @@ export interface StorageErrorStateProps {
   state?: unknown;
 }
 
-export function StorageErrorState(_props: StorageErrorStateProps = {}) {
-  const { onAction } = _props;
+export function StorageErrorState(props: StorageErrorStateProps = {}) {
+  const { onAction } = props;
   return (
     <>
       {/* Decorative ambient background glow */}

@@ -34,8 +34,8 @@ function formatLogDate(isoString: string): string {
   }
 }
 
-export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
-  const { onNavigate, onAction, state } = _props;
+export function MaintenanceLog(props: MaintenanceLogProps = {}) {
+  const { onNavigate, onAction, state } = props;
   const search = state?.searchQuery ?? "";
   const [filterType, setFilterType] = useState("All Equipment");
   const logs = state?.logs?.length ? state.logs : [];
@@ -94,7 +94,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
             <span className="material-symbols-outlined">help</span>
           </button>
           <button
-            onClick={() => onAction?.("emergency-stop")}
+            onClick={() => onAction?.('emergency-stop')}
             className="ml-sm bg-error-container text-error border border-error-container hover:border-error px-4 py-2 rounded-xl font-body-sm text-body-sm font-semibold transition-colors flex items-center gap-xs shadow-[0_0_8px_rgba(147,0,10,0.2)]"
           >
             <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>warning</span>

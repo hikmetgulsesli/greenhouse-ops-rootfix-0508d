@@ -18,8 +18,8 @@ export interface DashboardOverviewProps {
   state?: AppState;
 }
 
-export function DashboardOverview(_props: DashboardOverviewProps = {}) {
-  const { onNavigate, onAction, state } = _props;
+export function DashboardOverview(props: DashboardOverviewProps = {}) {
+  const { onNavigate, onAction, state } = props;
   const search = state?.searchQuery ?? "";
 
   const totalTasks = state?.tasks?.length ?? 0;
@@ -55,7 +55,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <span className="material-symbols-outlined">help</span>
       </button>
       </div>
-      <button className="bg-error/10 text-error border border-error px-4 py-2 rounded font-body-sm text-body-sm hover:bg-error/20 transition-colors">
+      <button onClick={() => onAction?.('emergency-stop')} className="bg-error/10 text-error border border-error px-4 py-2 rounded font-body-sm text-body-sm hover:bg-error/20 transition-colors">
                       Emergency Stop
                   </button>
       <img onClick={() => onAction?.("toggle-profile")} alt="Operator Profile" className="w-8 h-8 rounded-full border border-outline-variant cursor-pointer" data-alt="A small circular profile picture of an operator, styled for a dark-themed corporate dashboard. Minimalist lighting, professional headshot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvNE3_fpBxQzscYQ4tuwBoYG6ZlFsuQ1wDbiOe9giNzuVOJCgFGStO-Y5o-haSV73P668EITzCz3ctrRwmZ_-RAqOmRvshx0rg397_P92UaYo6GeR6b59P-L0I_tL_mbir-Y0NJzmrPD8YMKlIyLirQaNia1oNJG5pDigUySMMh-0GUx38gpejEXP85um_sb08A7B94d2Y5SZ2eS1qnJJAisBE8x-nMwowVMAUp8tlMEDlvwF0ZkGG522ZFVEH-YHxu2V-KnTMYew" />

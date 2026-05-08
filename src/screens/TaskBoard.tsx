@@ -93,8 +93,8 @@ function InProgressCard({ task }: { task: Task }) {
   );
 }
 
-export function TaskBoard(_props: TaskBoardProps = {}) {
-  const { onNavigate, onAction, state } = _props;
+export function TaskBoard(props: TaskBoardProps = {}) {
+  const { onNavigate, onAction, state } = props;
   const search = state?.searchQuery ?? "";
 
   const tasks = state?.tasks ?? [];

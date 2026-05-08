@@ -34,8 +34,8 @@ function statusColor(status: EquipmentItem["status"]) {
   }
 }
 
-export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
-  const { onNavigate, onAction, state } = _props;
+export function EquipmentStatus(props: EquipmentStatusProps = {}) {
+  const { onNavigate, onAction, state } = props;
   const search = state?.searchQuery ?? "";
   const equipment = state?.equipment ?? [];
   const filtered = search ? equipment.filter((e) => e.name.toLowerCase().includes(search.toLowerCase()) || e.zone.toLowerCase().includes(search.toLowerCase())) : equipment;
@@ -59,7 +59,7 @@ export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
       <span className="material-symbols-outlined">help</span>
       </button>
       <div className="w-[1px] h-8 bg-outline-variant mx-xs hidden md:block"></div>
-      <button className="bg-error-container text-on-error-container hover:bg-error hover:text-on-error transition-colors font-body-sm text-body-sm px-md py-[8px] rounded-xl font-semibold flex items-center gap-xs ml-sm">
+      <button onClick={() => onAction?.('emergency-stop')} className="bg-error-container text-on-error-container hover:bg-error hover:text-on-error transition-colors font-body-sm text-body-sm px-md py-[8px] rounded-xl font-semibold flex items-center gap-xs ml-sm">
       <span className="material-symbols-outlined text-[18px]">warning</span>
       <span className="hidden md:inline">Emergency Stop</span>
       </button>
