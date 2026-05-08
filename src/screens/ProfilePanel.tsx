@@ -18,6 +18,9 @@ export interface ProfilePanelProps {
 }
 
 export function ProfilePanel(_props: ProfilePanelProps = {}) {
+  const { onClose, onNavigate } = _props;
+  const [systemAlerts, setSystemAlerts] = useState(true);
+  const [taskUpdates, setTaskUpdates] = useState(false);
   return (
     <>
       {/* Simulated App Background Environment (to provide context for the overlay) */}
@@ -45,7 +48,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       {/* Header */}
       <header className="flex items-center justify-between px-lg py-md border-b border-outline-variant bg-surface-container-highest">
       <h2 className="font-h2 text-h2 text-on-surface">Profile</h2>
-      <button aria-label="Close panel" className="p-xs rounded-full hover:bg-surface-variant transition-colors text-on-surface-variant hover:text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-highest">
+      <button onClick={onClose} aria-label="Close panel" className="p-xs rounded-full hover:bg-surface-variant transition-colors text-on-surface-variant hover:text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-highest">
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'wght' 300"}}>close</span>
       </button>
       </header>
@@ -85,7 +88,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       </div>
       </div>
       <div className="relative inline-flex items-center cursor-pointer ml-md shrink-0">
-      <input checked={true} className="sr-only peer" type="checkbox" value="" />
+      <input checked={systemAlerts} onChange={(e) => setSystemAlerts(e.target.checked)} className="sr-only peer" type="checkbox" value="" />
       <div className="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-outline after:border-surface-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-on-primary-fixed"></div>
       </div>
       </label>
@@ -101,7 +104,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       </div>
       </div>
       <div className="relative inline-flex items-center cursor-pointer ml-md shrink-0">
-      <input className="sr-only peer" type="checkbox" value="" />
+      <input checked={taskUpdates} onChange={(e) => setTaskUpdates(e.target.checked)} className="sr-only peer" type="checkbox" value="" />
       <div className="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-surface after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-outline after:border-surface-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary peer-checked:after:bg-on-primary-fixed"></div>
       </div>
       </label>
@@ -110,7 +113,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       </div>
       {/* Footer / Actions */}
       <footer className="p-lg border-t border-outline-variant bg-surface-container-highest mt-auto">
-      <button className="w-full flex items-center justify-center gap-sm px-md h-10 rounded-lg bg-transparent border border-outline-variant text-on-surface hover:bg-surface-variant hover:border-outline transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-highest">
+      <button onClick={() => onNavigate?.('dashboard')} className="w-full flex items-center justify-center gap-sm px-md h-10 rounded-lg bg-transparent border border-outline-variant text-on-surface hover:bg-surface-variant hover:border-outline transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-highest">
       <span className="material-symbols-outlined text-[20px]">logout</span>
       <span className="font-body-md text-body-md font-medium">Sign Out</span>
       </button>
