@@ -158,7 +158,7 @@ export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
           <span className={`font-mono-data text-mono-data ${s.text}`}>{item.health}%</span>
           </div>
           <div className="h-2 w-full bg-surface border border-outline-variant rounded-full overflow-hidden">
-          <div className={`h-full ${s.status === "offline" ? "bg-error" : s.status === "maintenance" ? "bg-tertiary" : "bg-primary"} rounded-full transition-all duration-500`} style={{width: `${item.health}%`}}></div>
+          <div className={`h-full ${item.status === "offline" ? "bg-error" : item.status === "maintenance" ? "bg-tertiary" : "bg-primary"} rounded-full transition-all duration-500`} style={{width: `${item.health}%`}}></div>
           </div>
           </div>
           </div>
