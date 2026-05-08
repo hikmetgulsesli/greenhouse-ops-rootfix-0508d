@@ -1,0 +1,83 @@
+[
+  {
+    "screenId": "22fb814a8259413e86b78030b27564e4",
+    "title": "Profile Panel",
+    "componentName": "ProfilePanel",
+    "file": "src/screens/ProfilePanel.tsx",
+    "buttons": 2,
+    "inputs": 2,
+    "links": 0
+  },
+  {
+    "screenId": "c53e2da106074ef48b47204d8bafcf50",
+    "title": "Maintenance Log",
+    "componentName": "MaintenanceLog",
+    "file": "src/screens/MaintenanceLog.tsx",
+    "buttons": 15,
+    "inputs": 3,
+    "links": 6
+  },
+  {
+    "screenId": "2e80426a04dc40a2914847f5ed1b913c",
+    "title": "Settings",
+    "componentName": "Settings",
+    "file": "src/screens/Settings.tsx",
+    "buttons": 6,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "23f0723c00bc4647bb74b04f7c17b893",
+    "title": "Empty State",
+    "componentName": "EmptyState",
+    "file": "src/screens/EmptyState.tsx",
+    "buttons": 4,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "bd7e2ea9837b4be5b03ca528937e504d",
+    "title": "Filtered Overview",
+    "componentName": "FilteredOverview",
+    "file": "src/screens/FilteredOverview.tsx",
+    "buttons": 9,
+    "inputs": 2,
+    "links": 6
+  },
+  {
+    "screenId": "d55ca87e45354b5b8d9d9835bb334098",
+    "title": "Equipment Status",
+    "componentName": "EquipmentStatus",
+    "file": "src/screens/EquipmentStatus.tsx",
+    "buttons": 10,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "24d6125f376e42509562cd37fbb3a0a4",
+    "title": "Dashboard Overview",
+    "componentName": "DashboardOverview",
+    "file": "src/screens/DashboardOverview.tsx",
+    "buttons": 9,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "6a412003f5bd404094c6ea5543ce75e9",
+    "title": "Task Board",
+    "componentName": "TaskBoard",
+    "file": "src/screens/TaskBoard.tsx",
+    "buttons": 5,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "1e7b96bb694e4492a45ac6fab4e17a4e",
+    "title": "Storage Error State",
+    "componentName": "StorageErrorState",
+    "file": "src/screens/StorageErrorState.tsx",
+    "buttons": 2,
+    "inputs": 0,
+    "links": 0
+  }
+]
