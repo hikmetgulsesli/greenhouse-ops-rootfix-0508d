@@ -55,7 +55,7 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
       <span className="material-symbols-outlined">help</span>
       </button>
       </div>
-      <button onClick={() => onAction?.('emergency-stop')} className="bg-error/10 text-error border border-error px-4 py-2 rounded font-body-sm text-body-sm hover:bg-error/20 transition-colors">
+      <button onClick={() => onAction?.('emergency-stop')} className="bg-error text-on-error border border-error px-4 py-2 rounded font-body-sm text-body-sm hover:bg-error/90 transition-colors">
                       Emergency Stop
                   </button>
       <img onClick={() => onAction?.("toggle-profile")} alt="Operator Profile" className="w-8 h-8 rounded-full border border-outline-variant cursor-pointer" data-alt="A small circular profile picture of an operator, styled for a dark-themed corporate dashboard. Minimalist lighting, professional headshot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvNE3_fpBxQzscYQ4tuwBoYG6ZlFsuQ1wDbiOe9giNzuVOJCgFGStO-Y5o-haSV73P668EITzCz3ctrRwmZ_-RAqOmRvshx0rg397_P92UaYo6GeR6b59P-L0I_tL_mbir-Y0NJzmrPD8YMKlIyLirQaNia1oNJG5pDigUySMMh-0GUx38gpejEXP85um_sb08A7B94d2Y5SZ2eS1qnJJAisBE8x-nMwowVMAUp8tlMEDlvwF0ZkGG522ZFVEH-YHxu2V-KnTMYew" />
@@ -68,7 +68,7 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
       <span className="material-symbols-outlined">psychiatry</span>
       </div>
       <div>
-      <h2 className="font-h3 text-h3 text-primary">RootFix Console</h2>
+      <div className="font-h3 text-h3 text-primary">RootFix Console</div>
       <p className="text-on-surface-variant text-label-caps font-label-caps uppercase mt-1">Zone 04 - Active</p>
       </div>
       </div>
@@ -190,7 +190,7 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
       {/* System Alerts Widget */}
       <div className="bg-surface rounded-xl border border-outline-variant flex flex-col h-[300px]">
       <div className="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low rounded-t-xl">
-      <h3 className="font-h3 text-h3 text-on-surface">System Alerts</h3>
+      <h2 className="font-h3 text-h3 text-on-surface">System Alerts</h2>
       <button onClick={() => onAction?.("acknowledge-all")} className="text-primary font-body-sm text-body-sm hover:underline">Acknowledge All</button>
       </div>
       <div className="p-md flex-1 overflow-y-auto flex flex-col gap-sm">
@@ -206,9 +206,9 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
           <span className="text-on-surface-variant text-label-caps font-label-caps">{alert.time}</span>
           </div>
           <p className="text-on-surface-variant font-body-sm text-body-sm mt-1">{alert.message}</p>
-          <div className="mt-sm flex gap-2">
-          <button onClick={() => onAction?.("acknowledge-alert", alert.id)} className="text-primary font-body-sm text-body-sm hover:underline">Acknowledge</button>
-          <button onClick={() => onAction?.("dismiss-alert", alert.id)} className="text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface">Dismiss</button>
+          <div className="mt-sm flex gap-2 relative z-10">
+          <button onClick={() => onAction?.("acknowledge-alert", alert.id)} className="text-primary font-body-sm text-body-sm hover:underline relative z-10">Acknowledge</button>
+          <button onClick={() => onAction?.("dismiss-alert", alert.id)} className="text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface relative z-10">Dismiss</button>
           </div>
           </div>
           </div>
@@ -219,7 +219,7 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
       {/* Recent Activity Feed */}
       <div className="bg-surface rounded-xl border border-outline-variant">
       <div className="p-md border-b border-outline-variant bg-surface-container-low rounded-t-xl">
-      <h3 className="font-h3 text-h3 text-on-surface">Recent Activity</h3>
+      <h2 className="font-h3 text-h3 text-on-surface">Recent Activity</h2>
       </div>
       <div className="p-0">
       <table className="w-full text-left border-collapse">
@@ -256,10 +256,10 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
       <div className="bg-surface rounded-xl border border-outline-variant p-md relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
       <div className="relative z-10">
-      <h3 className="font-h3 text-h3 text-on-surface mb-md flex items-center gap-2">
+      <h2 className="font-h3 text-h3 text-on-surface mb-md flex items-center gap-2">
       <span className="material-symbols-outlined text-primary">eco</span>
                                   Zone 04 Environment
-                              </h3>
+                              </h2>
       <div className="grid grid-cols-2 gap-sm">
       <div className="bg-surface-container p-sm rounded border border-outline-variant flex flex-col items-center justify-center py-4">
       <span className="material-symbols-outlined text-on-surface-variant mb-1">thermostat</span>
@@ -286,7 +286,7 @@ export function DashboardOverview(props: DashboardOverviewProps = {}) {
       </div>
       {/* Active Operators */}
       <div className="bg-surface rounded-xl border border-outline-variant p-md">
-      <h3 className="font-h3 text-h3 text-on-surface mb-md">Active Operators</h3>
+      <h2 className="font-h3 text-h3 text-on-surface mb-md">Active Operators</h2>
       <div className="flex flex-col gap-sm">
       <div className="flex items-center gap-md p-2 rounded hover:bg-surface-variant transition-colors">
       <div className="relative">
