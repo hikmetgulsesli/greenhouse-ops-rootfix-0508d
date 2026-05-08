@@ -17,8 +17,8 @@ export interface EmptyStateProps {
   state?: AppState;
 }
 
-export function EmptyState(_props: EmptyStateProps = {}) {
-  const { onNavigate, onAction, state } = _props;
+export function EmptyState(props: EmptyStateProps = {}) {
+  const { onNavigate, onAction, state } = props;
   const search = state?.searchQuery ?? '';
   return (
     <>
@@ -31,14 +31,14 @@ export function EmptyState(_props: EmptyStateProps = {}) {
       </div>
       </div>
       <div className="flex items-center gap-md">
-      <button className="bg-transparent border border-error text-error hover:bg-error-container hover:text-on-error-container transition-colors rounded-lg px-sm py-[4px] h-8 font-body-sm text-body-sm flex items-center justify-center">
+      <button onClick={() => onAction?.('emergency-stop')} className="bg-transparent border border-error text-error hover:bg-error-container hover:text-on-error-container transition-colors rounded-lg px-sm py-[4px] h-8 font-body-sm text-body-sm flex items-center justify-center">
                       Emergency Stop
                   </button>
       <div className="flex items-center gap-xs">
-      <button className="p-xs rounded-full hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant">
+      <button disabled aria-label="Notifications" title="Notifications not available" className="p-xs rounded-full hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="p-xs rounded-full hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant">
+      <button disabled aria-label="Help" title="Help not available" className="p-xs rounded-full hover:bg-surface-variant dark:hover:bg-surface-variant transition-colors flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant">
       <span className="material-symbols-outlined">help</span>
       </button>
       </div>

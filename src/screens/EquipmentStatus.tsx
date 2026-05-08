@@ -34,8 +34,8 @@ function statusColor(status: EquipmentItem["status"]) {
   }
 }
 
-export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
-  const { onNavigate, onAction, state } = _props;
+export function EquipmentStatus(props: EquipmentStatusProps = {}) {
+  const { onNavigate, onAction, state } = props;
   const search = state?.searchQuery ?? "";
   const equipment = state?.equipment ?? [];
   const filtered = search ? equipment.filter((e) => e.name.toLowerCase().includes(search.toLowerCase()) || e.zone.toLowerCase().includes(search.toLowerCase())) : equipment;
@@ -52,14 +52,14 @@ export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
       </div>
       </div>
       <div className="flex items-center gap-sm md:gap-md">
-      <button className="text-on-surface-variant hover:bg-surface-variant p-sm rounded-full transition-colors flex items-center justify-center">
+      <button disabled aria-label="Notifications" title="Notifications not available" className="text-on-surface-variant hover:bg-surface-variant p-sm rounded-full transition-colors flex items-center justify-center">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-variant p-sm rounded-full transition-colors flex items-center justify-center">
+      <button disabled aria-label="Help" title="Help not available" className="text-on-surface-variant hover:bg-surface-variant p-sm rounded-full transition-colors flex items-center justify-center">
       <span className="material-symbols-outlined">help</span>
       </button>
       <div className="w-[1px] h-8 bg-outline-variant mx-xs hidden md:block"></div>
-      <button className="bg-error-container text-on-error-container hover:bg-error hover:text-on-error transition-colors font-body-sm text-body-sm px-md py-[8px] rounded-xl font-semibold flex items-center gap-xs ml-sm">
+      <button onClick={() => onAction?.('emergency-stop')} className="bg-error-container text-on-error-container hover:bg-error hover:text-on-error transition-colors font-body-sm text-body-sm px-md py-[8px] rounded-xl font-semibold flex items-center gap-xs ml-sm">
       <span className="material-symbols-outlined text-[18px]">warning</span>
       <span className="hidden md:inline">Emergency Stop</span>
       </button>

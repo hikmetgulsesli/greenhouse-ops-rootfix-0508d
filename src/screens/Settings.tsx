@@ -43,10 +43,10 @@ export function Settings(props: SettingsProps = {}) {
       </div>
       </div>
       <div className="flex items-center justify-end gap-md w-1/3">
-      <button className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:opacity-80 active:scale-95 transition-all">
+      <button disabled aria-label="Notifications" title="Notifications not available" className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:opacity-80 active:scale-95 transition-all">
       <span className="material-symbols-outlined text-[20px]">notifications</span>
       </button>
-      <button className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:opacity-80 active:scale-95 transition-all">
+      <button disabled aria-label="Help" title="Help not available" className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:opacity-80 active:scale-95 transition-all">
       <span className="material-symbols-outlined text-[20px]">help</span>
       </button>
       <button onClick={() => onAction?.('emergency-stop')} className="bg-error-container text-on-error-container border border-error border-opacity-30 rounded-lg px-md py-xs font-h3 text-body-sm hover:opacity-80 active:scale-95 transition-all hidden lg:block">

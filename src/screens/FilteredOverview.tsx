@@ -29,8 +29,8 @@ function formatEventTime(dateStr: string): string {
   }
 }
 
-export function FilteredOverview(_props: FilteredOverviewProps = {}) {
-  const { onNavigate, onAction, state } = _props;
+export function FilteredOverview(props: FilteredOverviewProps = {}) {
+  const { onNavigate, onAction, state } = props;
   const search = state?.searchQuery ?? "";
   const [zoneFilter, setZoneFilter] = useState("All Zones");
   const [statusFilter, setStatusFilter] = useState<string[]>(["critical", "in-progress"]);
@@ -89,14 +89,14 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
           </div>
         </div>
         <div className="flex items-center gap-md">
-          <button aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
+          <button disabled aria-label="Notifications" title="Notifications not available" className="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
             <span className="material-symbols-outlined">notifications</span>
           </button>
-          <button aria-label="Help" className="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
+          <button disabled aria-label="Help" title="Help not available" className="text-on-surface-variant hover:bg-surface-variant transition-colors p-sm rounded-full flex items-center justify-center">
             <span className="material-symbols-outlined">help</span>
           </button>
           <button
-            onClick={() => onAction?.("emergency-stop")}
+            onClick={() => onAction?.('emergency-stop')}
             className="bg-error-container text-on-error-container border border-error-container hover:bg-error/20 transition-colors px-md h-10 rounded-lg font-body-sm text-body-sm flex items-center gap-sm"
           >
             <span className="material-symbols-outlined text-[18px]">warning</span>
@@ -320,8 +320,8 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
                   </td>
                 </tr>
               ) : (
-                displayRows.map((row, idx) => (
-                  <tr key={idx} className="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
+                displayRows.map((row) => (
+                  <tr key={row.id} className="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
                     <td className="py-md px-md font-mono-data text-mono-data text-primary">{row.id}</td>
                     <td className="py-md px-md text-on-surface font-medium">{row.desc}</td>
                     <td className="py-md px-md text-on-surface-variant">{row.zone}</td>
