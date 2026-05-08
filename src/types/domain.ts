@@ -81,11 +81,11 @@ export const initialEquipment: EquipmentItem[] = [
 ];
 
 export const initialLogs: LogEntry[] = [
-  { id: 'L-001', timestamp: '11:05:22', action: 'Manual override: Valve V-04', operator: 'J. Smith', status: 'success', zone: 'Zone A' },
-  { id: 'L-002', timestamp: '10:42:01', action: 'Automated task: Nutrient Mix B', operator: 'System', status: 'failed', zone: 'Zone C' },
-  { id: 'L-003', timestamp: '09:30:45', action: 'Diagnostic run: Lighting Array North', operator: 'A. Chen', status: 'complete', zone: 'Zone B' },
-  { id: 'L-004', timestamp: '08:15:12', action: 'Scheduled maintenance: HVAC H-01', operator: 'M. Rivera', status: 'success', zone: 'Zone A' },
-  { id: 'L-005', timestamp: '07:00:00', action: 'System backup completed', operator: 'System', status: 'success', zone: 'All' },
+  { id: 'L-001', timestamp: '2024-05-08T11:05:22', action: 'Manual override: Valve V-04', operator: 'J. Smith', status: 'success', zone: 'Zone A' },
+  { id: 'L-002', timestamp: '2024-05-08T10:42:01', action: 'Automated task: Nutrient Mix B', operator: 'System', status: 'failed', zone: 'Zone C' },
+  { id: 'L-003', timestamp: '2024-05-07T09:30:45', action: 'Diagnostic run: Lighting Array North', operator: 'A. Chen', status: 'complete', zone: 'Zone B' },
+  { id: 'L-004', timestamp: '2024-05-06T08:15:12', action: 'Scheduled maintenance: HVAC H-01', operator: 'M. Rivera', status: 'success', zone: 'Zone A' },
+  { id: 'L-005', timestamp: '2024-05-05T07:00:00', action: 'System backup completed', operator: 'System', status: 'success', zone: 'All' },
 ];
 
 export const initialAlerts: AlertItem[] = [
