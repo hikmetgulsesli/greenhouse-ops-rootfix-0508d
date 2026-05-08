@@ -8,16 +8,24 @@
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
 import { useState } from "react";
+import type { AppState } from "../types/domain";
 
 export interface TaskBoardProps {
   onClose?: () => void;
   onBack?: () => void;
   onNavigate?: (...args: unknown[]) => void;
   onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+  state?: AppState;
 }
 
 export function TaskBoard(_props: TaskBoardProps = {}) {
+  const { onNavigate, onAction, state } = _props;
+  const search = state?.searchQuery ?? "";
+
+  const todoCount = state?.tasks?.filter((t) => t.status === "pending").length ?? 3;
+  const inProgressCount = state?.tasks?.filter((t) => t.status === "in-progress").length ?? 2;
+  const completeCount = state?.tasks?.filter((t) => t.status === "complete").length ?? 12;
+
   return (
     <>
       {/* TopNavBar */}
@@ -28,7 +36,7 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <div className="flex-1 max-w-md mx-xl hidden md:block">
       <div className="relative flex items-center">
       <span className="material-symbols-outlined absolute left-sm text-outline">search</span>
-      <input className="w-full bg-surface-container border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary pl-xl pr-sm py-[6px] text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant transition-colors outline-none h-8" placeholder="Search tasks..." type="text" />
+      <input value={search} onChange={(e) => onAction?.("set-search", e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary pl-xl pr-sm py-[6px] text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant transition-colors outline-none h-8" placeholder="Search tasks..." type="text" />
       </div>
       </div>
       <div className="flex items-center gap-md">
@@ -42,7 +50,7 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <span className="material-symbols-outlined text-[16px]">warning</span>
                       Emergency Stop
                   </button>
-      <div className="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant ml-sm flex-shrink-0">
+      <div onClick={() => onAction?.("toggle-profile")} className="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant ml-sm flex-shrink-0 cursor-pointer">
       <img alt="Operator Profile" className="w-full h-full object-cover" data-alt="A close up, low-light professional headshot of an agricultural operator in a dark, high-tech industrial setting. The lighting is cinematic, with deep blue and subtle orange hues reflecting a corporate, modern aesthetic. The subject is focused, wearing dark protective gear. The image reinforces a quiet, technical authority suitable for a sophisticated dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfncGZaWkRDpu-caJB3n6U7RtmRvb_C3ueBtTYI4Z3k5ClMJXdQQ8p5gvbKkHyeT64h2a8KLSTWhWcUHQ9Zba6taG-TzHhsxmLacSVa70_pWsawwQYXKLlxi3nG-ySjxHHxsFbWbRVfvynni6qjiq0ngRnzBuLI0f88fQNDL2HFn5fgG549Xjj3pu5Uh0BQc_tsQsR36aMuTJ_tTUKmMN6RueTPwV0qO_BmrA4Or8n_3j_R0tIqLuUZrQ11uIZ4CS-k0t9ji0jdpc" />
       </div>
       </div>
@@ -59,32 +67,32 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       </div>
       </div>
       <div className="flex-1 px-sm space-y-xs overflow-y-auto">
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      <button onClick={() => onNavigate?.("dashboard")} className="w-full text-left flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined text-[20px]">dashboard</span>
       <span>Dashboard</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded bg-secondary-container text-on-secondary-container font-semibold translate-x-1 transition-transform" href="#">
+      </button>
+      <button onClick={() => onNavigate?.("task-board")} className="w-full text-left flex items-center gap-md px-md py-sm rounded bg-secondary-container text-on-secondary-container font-semibold translate-x-1 transition-transform">
       <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings: "'FILL' 1"}}>assignment</span>
       <span>Task Board</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      </button>
+      <button onClick={() => onNavigate?.("equipment")} className="w-full text-left flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined text-[20px]">precision_manufacturing</span>
       <span>Equipment</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      </button>
+      <button onClick={() => onNavigate?.("logs")} className="w-full text-left flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined text-[20px]">history</span>
       <span>Logs</span>
-      </a>
+      </button>
       </div>
       <div className="px-sm pt-md border-t border-outline-variant mt-auto space-y-xs">
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      <button onClick={() => onNavigate?.("settings")} className="w-full text-left flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined text-[20px]">settings</span>
       <span>Settings</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+      </button>
+      <button onClick={() => onAction?.("toggle-profile")} className="w-full text-left flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-variant transition-colors">
       <span className="material-symbols-outlined text-[20px]">person</span>
       <span>Account</span>
-      </a>
+      </button>
       </div>
       </nav>
       {/* Main Content Canvas */}
@@ -96,11 +104,11 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Manage and track active greenhouse operations.</p>
       </div>
       <div className="flex gap-sm">
-      <button className="h-10 px-md rounded border border-outline-variant text-on-surface font-body-sm text-body-sm hover:bg-surface-variant transition-colors flex items-center gap-xs">
+      <button onClick={() => onNavigate?.("filtered")} className="h-10 px-md rounded border border-outline-variant text-on-surface font-body-sm text-body-sm hover:bg-surface-variant transition-colors flex items-center gap-xs">
       <span className="material-symbols-outlined text-[18px]">filter_list</span>
                           Filter
                       </button>
-      <button className="h-10 px-md rounded bg-primary-container text-on-primary-container font-body-sm text-body-sm hover:opacity-90 transition-opacity flex items-center gap-xs">
+      <button onClick={() => onAction?.("new-task")} className="h-10 px-md rounded bg-primary-container text-on-primary-container font-body-sm text-body-sm hover:opacity-90 transition-opacity flex items-center gap-xs">
       <span className="material-symbols-outlined text-[18px]">add</span>
                           New Task
                       </button>
@@ -116,7 +124,7 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <div className="w-2 h-2 rounded-full bg-outline"></div>
       <h3 className="font-h3 text-h3 text-on-surface">To Do</h3>
       </div>
-      <span className="font-mono-data text-mono-data bg-surface-variant px-2 py-1 rounded text-on-surface-variant">3</span>
+      <span className="font-mono-data text-mono-data bg-surface-variant px-2 py-1 rounded text-on-surface-variant">{todoCount}</span>
       </div>
       <div className="p-sm flex-1 overflow-y-auto kanban-col-scroll space-y-sm">
       {/* Task Card */}
@@ -177,7 +185,7 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <div className="w-2 h-2 rounded-full bg-primary"></div>
       <h3 className="font-h3 text-h3 text-on-surface">In Progress</h3>
       </div>
-      <span className="font-mono-data text-mono-data bg-surface-variant px-2 py-1 rounded text-on-surface-variant">2</span>
+      <span className="font-mono-data text-mono-data bg-surface-variant px-2 py-1 rounded text-on-surface-variant">{inProgressCount}</span>
       </div>
       <div className="p-sm flex-1 overflow-y-auto kanban-col-scroll space-y-sm">
       {/* Task Card */}
@@ -258,7 +266,7 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <div className="w-2 h-2 rounded-full bg-secondary"></div>
       <h3 className="font-h3 text-h3 text-on-surface">Completed</h3>
       </div>
-      <span className="font-mono-data text-mono-data bg-surface-variant px-2 py-1 rounded text-on-surface-variant">12</span>
+      <span className="font-mono-data text-mono-data bg-surface-variant px-2 py-1 rounded text-on-surface-variant">{completeCount}</span>
       </div>
       <div className="p-sm flex-1 overflow-y-auto kanban-col-scroll space-y-sm">
       {/* Task Card */}

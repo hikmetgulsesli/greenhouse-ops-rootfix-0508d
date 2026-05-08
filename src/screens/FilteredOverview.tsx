@@ -8,16 +8,45 @@
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
 import { useState } from "react";
+import type { AppState } from "../types/domain";
 
 export interface FilteredOverviewProps {
   onClose?: () => void;
   onBack?: () => void;
   onNavigate?: (...args: unknown[]) => void;
   onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+  state?: AppState;
 }
 
 export function FilteredOverview(_props: FilteredOverviewProps = {}) {
+  const { onNavigate, onAction, state } = _props;
+  const search = state?.searchQuery ?? "";
+  const [zoneFilter, setZoneFilter] = useState("All Zones");
+  const [statusFilter, setStatusFilter] = useState<string[]>(["critical", "in-progress"]);
+
+  const tasks = state?.tasks ?? [];
+  const filtered = tasks.filter((t) => {
+    const matchesSearch = !search || t.title.toLowerCase().includes(search.toLowerCase()) || t.zone.toLowerCase().includes(search.toLowerCase());
+    const matchesZone = zoneFilter === "All Zones" || t.zone === zoneFilter;
+    const matchesStatus = statusFilter.includes(t.priority === "critical" ? "critical" : t.status === "in-progress" ? "in-progress" : t.status);
+    return matchesSearch && matchesZone && matchesStatus;
+  });
+
+  const staticRows = [
+    { id: "#EV-9021", desc: "Nutrient Pump Pressure Loss Detected", zone: "Zone 04", status: "critical", time: "10:42 AM" },
+    { id: "#EV-9018", desc: "Main HVAC Filter Replacement Cycle", zone: "Zone 01", status: "in-progress", time: "09:15 AM" },
+    { id: "#EV-8994", desc: "CO2 Concentration Exceeds Threshold", zone: "Zone 04", status: "critical", time: "08:03 AM" },
+    { id: "#EV-8990", desc: "Automated Sensor Calibration Routine", zone: "Zone 02", status: "in-progress", time: "07:45 AM" },
+  ];
+
+  const displayRows = filtered.length ? filtered.map((t, i) => ({
+    id: t.id,
+    desc: t.title,
+    zone: t.zone,
+    status: t.priority === "critical" ? "critical" : t.status === "in-progress" ? "in-progress" : "resolved",
+    time: t.dueDate,
+  })) : staticRows;
+
   return (
     <>
       {/* TopNavBar */}
@@ -27,7 +56,7 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       {/* Search Bar Prominent */}
       <div className="relative max-w-md w-full ml-xl">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
-      <input className="w-full bg-surface-container border border-outline-variant rounded-lg pl-xl pr-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search events, zones, or equipment..." type="text" />
+      <input value={search} onChange={(e) => onAction?.("set-search", e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg pl-xl pr-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search events, zones, or equipment..." type="text" />
       </div>
       </div>
       <div className="flex items-center gap-md">
@@ -41,7 +70,7 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       <span className="material-symbols-outlined text-[18px]">warning</span>
                       Emergency Stop
                   </button>
-      <div className="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant ml-sm flex items-center justify-center">
+      <div onClick={() => onAction?.("toggle-profile")} className="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant ml-sm flex items-center justify-center cursor-pointer">
       <span className="material-symbols-outlined text-outline">person</span>
       </div>
       </div>
@@ -60,33 +89,33 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       </div>
       </div>
       <nav className="flex-1 px-sm flex flex-col gap-xs">
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+      <button onClick={() => onNavigate?.("dashboard")} className="w-full text-left flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm">
       <span className="material-symbols-outlined" data-icon="dashboard">dashboard</span>
                       Dashboard
-                  </a>
+                  </button>
       {/* Active Tab */}
-      <a className="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-semibold Active: translate-x-1 transition-transform" href="#">
+      <button onClick={() => onNavigate?.("task-board")} className="w-full text-left flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-semibold translate-x-1 transition-transform">
       <span className="material-symbols-outlined" data-icon="assignment" style={{fontVariationSettings: "'FILL' 1"}}>assignment</span>
                       Task Board
-                  </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+                  </button>
+      <button onClick={() => onNavigate?.("equipment")} className="w-full text-left flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm">
       <span className="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
                       Equipment
-                  </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+                  </button>
+      <button onClick={() => onNavigate?.("logs")} className="w-full text-left flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm">
       <span className="material-symbols-outlined" data-icon="history">history</span>
                       Logs
-                  </a>
+                  </button>
       </nav>
       <div className="mt-auto px-sm flex flex-col gap-xs pt-md border-t border-outline-variant">
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+      <button onClick={() => onNavigate?.("settings")} className="w-full text-left flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm">
       <span className="material-symbols-outlined" data-icon="settings">settings</span>
                       Settings
-                  </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm" href="#">
+                  </button>
+      <button onClick={() => onAction?.("toggle-profile")} className="w-full text-left flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant font-body-sm text-body-sm">
       <span className="material-symbols-outlined" data-icon="person">person</span>
                       Account
-                  </a>
+                  </button>
       </div>
       </aside>
       {/* Main Canvas */}
@@ -104,7 +133,7 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
                           Active Filters
                       </div>
       <div className="flex gap-sm">
-      <button className="text-on-surface-variant font-body-sm text-body-sm px-md h-8 rounded hover:bg-surface-variant transition-colors">Clear All</button>
+      <button onClick={() => { setStatusFilter([]); setZoneFilter("All Zones"); onAction?.('set-search', ''); }} className="text-on-surface-variant font-body-sm text-body-sm px-md h-8 rounded hover:bg-surface-variant transition-colors">Clear All</button>
       <button className="bg-primary-container text-on-primary-container font-body-sm text-body-sm px-md h-8 rounded flex items-center gap-xs">
       <span className="material-symbols-outlined text-[16px]">save</span>
                               Save View
@@ -117,19 +146,19 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       <label className="font-label-caps text-label-caps text-on-surface-variant">Status</label>
       <div className="flex flex-wrap gap-sm">
       {/* Active Filter Chip 1 */}
-      <div className="bg-error-container border border-error text-on-error-container rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer hover:bg-error-container/80">
+      <div onClick={() => setStatusFilter(prev => prev.includes("critical") ? prev.filter(s => s !== "critical") : [...prev, "critical"])} className={`border rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer transition-colors ${statusFilter.includes("critical") ? "bg-error-container border-error text-on-error-container" : "bg-surface-container border-outline-variant text-on-surface-variant hover:bg-surface-variant"}`}>
       <div className="w-2 h-2 rounded-full bg-error"></div>
                                   Critical
-                                  <span className="material-symbols-outlined text-[14px] ml-xs opacity-70 hover:opacity-100">close</span>
+                                  {statusFilter.includes("critical") && <span className="material-symbols-outlined text-[14px] ml-xs opacity-70 hover:opacity-100">close</span>}
       </div>
       {/* Active Filter Chip 2 */}
-      <div className="bg-tertiary-container border border-tertiary text-on-tertiary-container rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer hover:bg-tertiary-container/80">
+      <div onClick={() => setStatusFilter(prev => prev.includes("in-progress") ? prev.filter(s => s !== "in-progress") : [...prev, "in-progress"])} className={`border rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer transition-colors ${statusFilter.includes("in-progress") ? "bg-tertiary-container border-tertiary text-on-tertiary-container" : "bg-surface-container border-outline-variant text-on-surface-variant hover:bg-surface-variant"}`}>
       <div className="w-2 h-2 rounded-full bg-tertiary"></div>
                                   In Progress
-                                  <span className="material-symbols-outlined text-[14px] ml-xs opacity-70 hover:opacity-100">close</span>
+                                  {statusFilter.includes("in-progress") && <span className="material-symbols-outlined text-[14px] ml-xs opacity-70 hover:opacity-100">close</span>}
       </div>
       {/* Inactive Filter Chip */}
-      <div className="bg-surface-container border border-outline-variant text-on-surface-variant rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer hover:bg-surface-variant">
+      <div onClick={() => setStatusFilter(prev => prev.includes("resolved") ? prev.filter(s => s !== "resolved") : [...prev, "resolved"])} className={`border rounded-full px-sm py-xs flex items-center gap-xs font-body-sm text-body-sm cursor-pointer transition-colors ${statusFilter.includes("resolved") ? "bg-secondary-container border-secondary text-on-secondary-container" : "bg-surface-container border-outline-variant text-on-surface-variant hover:bg-surface-variant"}`}>
       <div className="w-2 h-2 rounded-full bg-outline"></div>
                                   Resolved
                               </div>
@@ -138,10 +167,12 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       {/* Zone Filter */}
       <div className="col-span-12 md:col-span-3 flex flex-col gap-sm">
       <label className="font-label-caps text-label-caps text-on-surface-variant">Facility Zone</label>
-      <select className="w-full bg-surface-container border border-outline-variant rounded-lg px-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary appearance-none">
+      <select value={zoneFilter} onChange={(e) => setZoneFilter(e.target.value)} className="w-full bg-surface-container border border-outline-variant rounded-lg px-md h-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary appearance-none">
       <option>All Zones</option>
-      <option>Zone 01 - Nursery</option>
-      <option>Zone 04 - Hydroponics</option>
+      <option>Zone A</option>
+      <option>Zone B</option>
+      <option>Zone C</option>
+      <option>Zone D</option>
       </select>
       </div>
       {/* Time Filter */}
@@ -157,7 +188,7 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       </section>
       {/* Results Header */}
       <div className="flex justify-between items-center mt-sm">
-      <span className="font-body-md text-body-md text-on-surface-variant">Showing 12 of 84 events</span>
+      <span className="font-body-md text-body-md text-on-surface-variant">Showing {displayRows.length} of {displayRows.length} events</span>
       <div className="flex items-center gap-sm">
       <span className="font-body-sm text-body-sm text-on-surface-variant">Sort by:</span>
       <select className="bg-transparent border-none text-on-surface font-body-sm text-body-sm focus:ring-0 p-0 pr-lg cursor-pointer">
@@ -181,78 +212,25 @@ export function FilteredOverview(_props: FilteredOverviewProps = {}) {
       </tr>
       </thead>
       <tbody className="font-body-sm text-body-sm">
-      {/* Row 1: Critical */}
-      <tr className="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
-      <td className="py-md px-md font-mono-data text-mono-data text-primary">#EV-9021</td>
-      <td className="py-md px-md text-on-surface font-medium">Nutrient Pump Pressure Loss Detected</td>
-      <td className="py-md px-md text-on-surface-variant">Zone 04</td>
-      <td className="py-md px-md">
-      <div className="inline-flex items-center gap-xs bg-error-container/20 text-on-error-container border border-error-container/30 rounded-full px-sm py-[2px] font-label-caps">
-      <div className="w-1.5 h-1.5 rounded-full bg-error"></div>
-                                      Critical
+      {displayRows.map((row, idx) => (
+        <tr key={idx} className="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
+        <td className="py-md px-md font-mono-data text-mono-data text-primary">{row.id}</td>
+        <td className="py-md px-md text-on-surface font-medium">{row.desc}</td>
+        <td className="py-md px-md text-on-surface-variant">{row.zone}</td>
+        <td className="py-md px-md">
+        <div className={`inline-flex items-center gap-xs rounded-full px-sm py-[2px] font-label-caps ${row.status === "critical" ? "bg-error-container/20 text-on-error-container border border-error-container/30" : row.status === "in-progress" ? "bg-tertiary-container/20 text-on-tertiary-container border border-tertiary-container/30" : "bg-secondary-container/20 text-on-secondary-container border border-secondary-container/30"}`}>
+        <div className={`w-1.5 h-1.5 rounded-full ${row.status === "critical" ? "bg-error" : row.status === "in-progress" ? "bg-tertiary" : "bg-secondary"}`}></div>
+                                      {row.status === "critical" ? "Critical" : row.status === "in-progress" ? "In Progress" : "Resolved"}
                                   </div>
-      </td>
-      <td className="py-md px-md font-mono-data text-mono-data text-on-surface-variant">10:42 AM</td>
-      <td className="py-md px-md text-center">
-      <button className="text-outline group-hover:text-primary transition-colors">
-      <span className="material-symbols-outlined text-[20px]">chevron_right</span>
-      </button>
-      </td>
-      </tr>
-      {/* Row 2: In Progress */}
-      <tr className="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
-      <td className="py-md px-md font-mono-data text-mono-data text-primary">#EV-9018</td>
-      <td className="py-md px-md text-on-surface font-medium">Main HVAC Filter Replacement Cycle</td>
-      <td className="py-md px-md text-on-surface-variant">Zone 01</td>
-      <td className="py-md px-md">
-      <div className="inline-flex items-center gap-xs bg-tertiary-container/20 text-on-tertiary-container border border-tertiary-container/30 rounded-full px-sm py-[2px] font-label-caps">
-      <div className="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
-                                      In Progress
-                                  </div>
-      </td>
-      <td className="py-md px-md font-mono-data text-mono-data text-on-surface-variant">09:15 AM</td>
-      <td className="py-md px-md text-center">
-      <button className="text-outline group-hover:text-primary transition-colors">
-      <span className="material-symbols-outlined text-[20px]">chevron_right</span>
-      </button>
-      </td>
-      </tr>
-      {/* Row 3: Critical */}
-      <tr className="border-b border-outline-variant hover:bg-surface-variant transition-colors group">
-      <td className="py-md px-md font-mono-data text-mono-data text-primary">#EV-8994</td>
-      <td className="py-md px-md text-on-surface font-medium">CO2 Concentration Exceeds Threshold</td>
-      <td className="py-md px-md text-on-surface-variant">Zone 04</td>
-      <td className="py-md px-md">
-      <div className="inline-flex items-center gap-xs bg-error-container/20 text-on-error-container border border-error-container/30 rounded-full px-sm py-[2px] font-label-caps">
-      <div className="w-1.5 h-1.5 rounded-full bg-error"></div>
-                                      Critical
-                                  </div>
-      </td>
-      <td className="py-md px-md font-mono-data text-mono-data text-on-surface-variant">08:03 AM</td>
-      <td className="py-md px-md text-center">
-      <button className="text-outline group-hover:text-primary transition-colors">
-      <span className="material-symbols-outlined text-[20px]">chevron_right</span>
-      </button>
-      </td>
-      </tr>
-      {/* Row 4: In Progress */}
-      <tr className="hover:bg-surface-variant transition-colors group">
-      <td className="py-md px-md font-mono-data text-mono-data text-primary">#EV-8990</td>
-      <td className="py-md px-md text-on-surface font-medium">Automated Sensor Calibration Routine</td>
-      <td className="py-md px-md text-on-surface-variant">Zone 02</td>
-      <td className="py-md px-md">
-      <div className="inline-flex items-center gap-xs bg-tertiary-container/20 text-on-tertiary-container border border-tertiary-container/30 rounded-full px-sm py-[2px] font-label-caps">
-      <div className="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
-                                      In Progress
-                                  </div>
-      </td>
-      <td className="py-md px-md font-mono-data text-mono-data text-on-surface-variant">07:45 AM</td>
-      <td className="py-md px-md text-center">
-      <button className="text-outline group-hover:text-primary transition-colors">
-      <span className="material-symbols-outlined text-[20px]">chevron_right</span>
-      </button>
-      </td>
-      </tr>
+        </td>
+        <td className="py-md px-md font-mono-data text-mono-data text-on-surface-variant">{row.time}</td>
+        <td className="py-md px-md text-center">
+        <button onClick={() => onNavigate?.("task-board")} className="text-outline group-hover:text-primary transition-colors">
+        <span className="material-symbols-outlined text-[20px]">chevron_right</span>
+        </button>
+        </td>
+        </tr>
+      ))}
       </tbody>
       </table>
       </div>

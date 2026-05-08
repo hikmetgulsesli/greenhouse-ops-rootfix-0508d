@@ -18,6 +18,7 @@ export interface StorageErrorStateProps {
 }
 
 export function StorageErrorState(_props: StorageErrorStateProps = {}) {
+  const { onAction } = _props;
   return (
     <>
       {/* Decorative ambient background glow */}
@@ -58,11 +59,11 @@ export function StorageErrorState(_props: StorageErrorStateProps = {}) {
       </div>
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-md mt-sm pt-md border-t border-outline-variant/50">
-      <button className="w-full sm:w-auto h-[40px] px-margin bg-primary-container text-on-primary-container font-body-sm text-body-sm rounded-xl flex items-center justify-center gap-sm hover:bg-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container">
+      <button onClick={() => onAction?.('retry-connection')} className="w-full sm:w-auto h-[40px] px-margin bg-primary-container text-on-primary-container font-body-sm text-body-sm rounded-xl flex items-center justify-center gap-sm hover:bg-inverse-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container">
       <span className="material-symbols-outlined text-[18px]">sync</span>
                           Retry Connection
                       </button>
-      <button className="w-full sm:w-auto h-[40px] px-margin bg-transparent text-on-surface border border-outline-variant font-body-sm text-body-sm rounded-xl flex items-center justify-center gap-sm hover:bg-surface-variant transition-colors focus:outline-none focus:ring-2 focus:ring-outline focus:ring-offset-2 focus:ring-offset-surface-container">
+      <button onClick={() => onAction?.('reset-storage')} className="w-full sm:w-auto h-[40px] px-margin bg-transparent text-on-surface border border-outline-variant font-body-sm text-body-sm rounded-xl flex items-center justify-center gap-sm hover:bg-surface-variant transition-colors focus:outline-none focus:ring-2 focus:ring-outline focus:ring-offset-2 focus:ring-offset-surface-container">
       <span className="material-symbols-outlined text-[18px]">delete_forever</span>
                           Reset Local Storage
                       </button>
