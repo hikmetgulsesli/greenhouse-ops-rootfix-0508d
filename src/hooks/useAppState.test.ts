@@ -168,7 +168,7 @@ describe('useAppState hook', () => {
       alerts: [],
       filterStatus: 'all',
       filterZone: 'all',
-      settings: { theme: 'light', notifications: false, compactMode: true },
+      settings: { theme: 'light', notifications: false, compactMode: true, units: 'metric', timezone: 'utc', systemAlerts: true, taskUpdates: false },
     };
     localStorage.setItem('greenhouse-ops-state', JSON.stringify(persisted));
 

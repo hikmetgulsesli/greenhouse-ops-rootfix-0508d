@@ -61,6 +61,10 @@ export interface AppState {
     theme: 'dark' | 'light';
     notifications: boolean;
     compactMode: boolean;
+    units: 'metric' | 'imperial';
+    timezone: 'utc' | 'local' | 'est';
+    systemAlerts: boolean;
+    taskUpdates: boolean;
   };
 }
 
@@ -110,6 +114,10 @@ export function createInitialState(): AppState {
       theme: 'dark',
       notifications: true,
       compactMode: false,
+      units: 'metric',
+      timezone: 'utc',
+      systemAlerts: true,
+      taskUpdates: false,
     },
   };
 }

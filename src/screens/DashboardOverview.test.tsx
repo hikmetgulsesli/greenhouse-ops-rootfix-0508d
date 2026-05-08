@@ -30,7 +30,7 @@ const mockState: AppState = {
   ],
   filterStatus: 'all',
   filterZone: 'all',
-  settings: { theme: 'dark', notifications: true, compactMode: false },
+  settings: { theme: 'dark', notifications: true, compactMode: false, units: 'metric', timezone: 'utc', systemAlerts: true, taskUpdates: false },
 };
 
 describe('DashboardOverview screen', () => {
