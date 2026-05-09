@@ -1,0 +1,83 @@
+[
+  {
+    "screenId": "67d3ec10906e45f981bbd933f1418837",
+    "title": "Task Board",
+    "componentName": "TaskBoard",
+    "file": "src/screens/TaskBoard.tsx",
+    "buttons": 4,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "ca1a7d3fe81d41318b2e1f76be7c2179",
+    "title": "Empty State",
+    "componentName": "EmptyState",
+    "file": "src/screens/EmptyState.tsx",
+    "buttons": 5,
+    "inputs": 0,
+    "links": 6
+  },
+  {
+    "screenId": "e7859044a941411cae69dd8627485e97",
+    "title": "Storage Error State",
+    "componentName": "StorageErrorState",
+    "file": "src/screens/StorageErrorState.tsx",
+    "buttons": 5,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "afe38f630e8c48ddb5958b9d3ef19976",
+    "title": "Dashboard Overview",
+    "componentName": "DashboardOverview",
+    "file": "src/screens/DashboardOverview.tsx",
+    "buttons": 7,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "e2ae111a581b4568a0aa1e486fe6b76d",
+    "title": "Settings",
+    "componentName": "Settings",
+    "file": "src/screens/Settings.tsx",
+    "buttons": 5,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "558bf4a24e7349e4919be75eea8a8a2c",
+    "title": "Profile Panel",
+    "componentName": "ProfilePanel",
+    "file": "src/screens/ProfilePanel.tsx",
+    "buttons": 5,
+    "inputs": 3,
+    "links": 0
+  },
+  {
+    "screenId": "390fdce0edae4fb180d5506b3f8735f1",
+    "title": "Maintenance Log",
+    "componentName": "MaintenanceLog",
+    "file": "src/screens/MaintenanceLog.tsx",
+    "buttons": 7,
+    "inputs": 3,
+    "links": 6
+  },
+  {
+    "screenId": "8ffebffa64284a8d97c9090c386e981d",
+    "title": "Equipment Status",
+    "componentName": "EquipmentStatus",
+    "file": "src/screens/EquipmentStatus.tsx",
+    "buttons": 13,
+    "inputs": 1,
+    "links": 6
+  },
+  {
+    "screenId": "0dd6e1a4eb15414183a5fd43c9283b08",
+    "title": "Filtered Overview",
+    "componentName": "FilteredOverview",
+    "file": "src/screens/FilteredOverview.tsx",
+    "buttons": 15,
+    "inputs": 1,
+    "links": 6
+  }
+]
