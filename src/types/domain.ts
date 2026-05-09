@@ -62,6 +62,13 @@ export interface AlertItem {
   acknowledged: boolean;
 }
 
+export interface BaseScreenProps {
+  onClose?: () => void;
+  onBack?: () => void;
+  onNavigate?: (screen: ScreenName) => void;
+  state?: AppState;
+}
+
 export interface UserProfile {
   name: string;
   role: string;
@@ -69,6 +76,7 @@ export interface UserProfile {
   initials: string;
   avatar?: string;
 }
+
 
 export interface AppSettings {
   units: 'metric' | 'imperial' | 'scientific';

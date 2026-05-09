@@ -8,16 +8,22 @@
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
 import { useState } from "react";
+import type { BaseScreenProps } from '../types/domain';
 
-export interface SettingsProps {
-  onClose?: () => void;
-  onBack?: () => void;
-  onNavigate?: (...args: unknown[]) => void;
-  onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+export interface SettingsProps extends BaseScreenProps {
+  onAction?: (action: string, payload?: unknown) => void;
 }
 
-export function Settings(_props: SettingsProps = {}) {
+export function Settings({ onNavigate, onAction, state }: SettingsProps = {}) {
+  const settings = state?.settings;
+  const [units, setUnits] = useState(settings?.units ?? 'metric');
+  const [timezone, setTimezone] = useState(settings?.timezone ?? 'UTC');
+  const [darkMode, setDarkMode] = useState(settings?.darkMode ?? true);
+
+  const handleUpdate = (patch: Record<string, unknown>) => {
+    onAction?.('update-settings', patch);
+  };
+
   return (
     <>
       {/* TopNavBar */}
@@ -28,14 +34,20 @@ export function Settings(_props: SettingsProps = {}) {
       <div className="flex-1 max-w-md mx-lg hidden md:block">
       <div className="relative">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-body-lg">search</span>
-      <input className="w-full bg-surface-container-low border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary pl-10 pr-sm py-sm text-body-md text-on-surface placeholder:text-on-surface-variant transition-all" placeholder="Search..." type="text" />
+      <input
+        className="w-full bg-surface-container-low border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary pl-10 pr-sm py-sm text-body-md text-on-surface placeholder:text-on-surface-variant transition-all"
+        placeholder="Search..."
+        type="text"
+        value={state?.searchQuery ?? ''}
+        onChange={(e) => {/* search wired via App */}}
+      />
       </div>
       </div>
       <div className="flex items-center gap-md">
-      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded active:scale-95 duration-100 flex items-center justify-center">
+      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded active:scale-95 duration-100 flex items-center justify-center" aria-label="Notifications">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded active:scale-95 duration-100 flex items-center justify-center">
+      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded active:scale-95 duration-100 flex items-center justify-center" aria-label="Help">
       <span className="material-symbols-outlined">help</span>
       </button>
       <button className="bg-error text-on-error px-md py-sm rounded font-label-md text-label-md hover:bg-error-container transition-colors active:scale-95 duration-100 hidden sm:block">
@@ -59,32 +71,32 @@ export function Settings(_props: SettingsProps = {}) {
       </div>
       </div>
       <div className="flex-1 flex flex-col gap-unit px-sm">
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('dashboard')}>
       <span className="material-symbols-outlined">dashboard</span>
       <span>Dashboard</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('task-board')}>
       <span className="material-symbols-outlined">assignment</span>
       <span>Task Board</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('equipment')}>
       <span className="material-symbols-outlined">precision_manufacturing</span>
       <span>Equipment</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('logs')}>
       <span className="material-symbols-outlined">database</span>
       <span>Logs</span>
-      </a>
+      </button>
       </div>
       <div className="mt-auto flex flex-col gap-unit px-sm">
-      <a className="flex items-center gap-md px-md py-sm rounded text-primary font-bold border-r-2 border-primary bg-primary-container/10 transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded text-primary font-bold border-r-2 border-primary bg-primary-container/10 transition-all active:translate-x-1 duration-150 w-full text-left">
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>settings</span>
       <span>Settings</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('profile')}>
       <span className="material-symbols-outlined">account_circle</span>
       <span>Account</span>
-      </a>
+      </button>
       </div>
       </nav>
       {/* Main Content */}
@@ -104,18 +116,33 @@ export function Settings(_props: SettingsProps = {}) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-lg">
       <div className="flex flex-col gap-sm">
       <label className="font-label-md text-label-md text-on-surface-variant">System Units</label>
-      <select className="bg-surface-container-lowest border border-outline-variant rounded p-sm text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none w-full appearance-none">
-      <option>Metric (Celsius, Liters)</option>
-      <option>Imperial (Fahrenheit, Gallons)</option>
-      <option>Scientific (Kelvin, Cubic Meters)</option>
+      <select
+        className="bg-surface-container-lowest border border-outline-variant rounded p-sm text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none w-full appearance-none"
+        value={units}
+        onChange={(e) => {
+          const v = e.target.value as 'metric' | 'imperial' | 'scientific';
+          setUnits(v);
+          handleUpdate({ units: v });
+        }}
+      >
+      <option value="metric">Metric (Celsius, Liters)</option>
+      <option value="imperial">Imperial (Fahrenheit, Gallons)</option>
+      <option value="scientific">Scientific (Kelvin, Cubic Meters)</option>
       </select>
       </div>
       <div className="flex flex-col gap-sm">
       <label className="font-label-md text-label-md text-on-surface-variant">Timezone</label>
-      <select className="bg-surface-container-lowest border border-outline-variant rounded p-sm text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none w-full appearance-none">
-      <option>UTC (Coordinated Universal Time)</option>
-      <option>PST (Pacific Standard Time)</option>
-      <option>EST (Eastern Standard Time)</option>
+      <select
+        className="bg-surface-container-lowest border border-outline-variant rounded p-sm text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none w-full appearance-none"
+        value={timezone}
+        onChange={(e) => {
+          setTimezone(e.target.value);
+          handleUpdate({ timezone: e.target.value });
+        }}
+      >
+      <option value="UTC">UTC (Coordinated Universal Time)</option>
+      <option value="PST">PST (Pacific Standard Time)</option>
+      <option value="EST">EST (Eastern Standard Time)</option>
       </select>
       </div>
       </div>
@@ -129,10 +156,19 @@ export function Settings(_props: SettingsProps = {}) {
       </div>
       <p className="font-body-md text-body-md text-on-surface-variant mb-lg">Force dark mode for low-light environments. Recommended for console operators.</p>
       </div>
-      <div className="flex items-center justify-between p-md bg-surface-container-low border border-outline-variant rounded">
+      <div
+        className="flex items-center justify-between p-md bg-surface-container-low border border-outline-variant rounded cursor-pointer"
+        onClick={() => {
+          const v = !darkMode;
+          setDarkMode(v);
+          handleUpdate({ darkMode: v });
+        }}
+        role="switch"
+        aria-checked={darkMode}
+      >
       <span className="font-body-md text-body-md text-on-surface">Dark Mode Enforced</span>
-      <div className="w-10 h-6 bg-primary rounded-full relative cursor-pointer border border-primary flex items-center px-1">
-      <div className="w-4 h-4 bg-surface rounded-full absolute right-1"></div>
+      <div className={`w-10 h-6 rounded-full relative border flex items-center px-1 transition-colors ${darkMode ? 'bg-primary border-primary' : 'bg-surface-container-highest border-outline-variant'}`}>
+      <div className={`w-4 h-4 bg-surface rounded-full absolute transition-all ${darkMode ? 'right-1' : 'left-1'}`}></div>
       </div>
       </div>
       </section>
@@ -148,7 +184,7 @@ export function Settings(_props: SettingsProps = {}) {
       <h3 className="font-label-md text-label-md text-on-surface mb-unit">Export Telemetry Data</h3>
       <p className="font-body-sm text-body-sm text-on-surface-variant">Download local operational logs as CSV.</p>
       </div>
-      <button className="bg-transparent border border-outline-variant text-on-surface px-md py-sm rounded font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-sm shrink-0">
+      <button className="bg-transparent border border-outline-variant text-on-surface px-md py-sm rounded font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-sm shrink-0" onClick={() => onAction?.('export-data')}>
       <span className="material-symbols-outlined text-body-lg">download</span>
                                           Export Data
                                       </button>
@@ -158,7 +194,7 @@ export function Settings(_props: SettingsProps = {}) {
       <h3 className="font-label-md text-label-md text-error mb-unit">Clear Local Storage</h3>
       <p className="font-body-sm text-body-sm text-on-surface-variant">Purge cached sensor states. Requires restart.</p>
       </div>
-      <button className="bg-error text-on-error px-md py-sm rounded font-label-md text-label-md hover:bg-error-container transition-colors flex items-center gap-sm shrink-0">
+      <button className="bg-error text-on-error px-md py-sm rounded font-label-md text-label-md hover:bg-error-container transition-colors flex items-center gap-sm shrink-0" onClick={() => onAction?.('clear-storage')}>
       <span className="material-symbols-outlined text-body-lg">delete_forever</span>
                                           Clear Storage
                                       </button>

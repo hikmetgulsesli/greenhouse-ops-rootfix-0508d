@@ -7,17 +7,13 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
+import type { BaseScreenProps, ScreenName } from '../types/domain';
 
-export interface EmptyStateProps {
-  onClose?: () => void;
-  onBack?: () => void;
-  onNavigate?: (...args: unknown[]) => void;
-  onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+export interface EmptyStateProps extends BaseScreenProps {
+  onAction?: (action: string) => void;
 }
 
-export function EmptyState(_props: EmptyStateProps = {}) {
+export function EmptyState({ onNavigate, onAction }: EmptyStateProps = {}) {
   return (
     <>
       {/* TopNavBar */}
@@ -27,10 +23,10 @@ export function EmptyState(_props: EmptyStateProps = {}) {
       </div>
       <div className="flex items-center gap-md">
       <div className="flex items-center gap-sm">
-      <button className="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-100 text-on-surface-variant flex items-center justify-center">
+      <button className="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-100 text-on-surface-variant flex items-center justify-center" aria-label="Notifications">
       <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
       </button>
-      <button className="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-100 text-on-surface-variant flex items-center justify-center">
+      <button className="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-100 text-on-surface-variant flex items-center justify-center" aria-label="Help">
       <span className="material-symbols-outlined" data-icon="help">help</span>
       </button>
       </div>
@@ -57,32 +53,32 @@ export function EmptyState(_props: EmptyStateProps = {}) {
       </div>
       </div>
       <div className="flex-1 px-sm space-y-1">
-      <a className="flex items-center gap-sm px-md py-sm rounded-r-full text-primary font-bold border-r-2 border-primary bg-primary-container/10 active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('dashboard')}>
       <span className="material-symbols-outlined" data-icon="dashboard">dashboard</span>
       <span className="font-label-md text-label-md">Dashboard</span>
-      </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('task-board')}>
       <span className="material-symbols-outlined" data-icon="assignment">assignment</span>
       <span className="font-label-md text-label-md">Task Board</span>
-      </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('equipment')}>
       <span className="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
       <span className="font-label-md text-label-md">Equipment</span>
-      </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('logs')}>
       <span className="material-symbols-outlined" data-icon="database">database</span>
       <span className="font-label-md text-label-md">Logs</span>
-      </a>
+      </button>
       </div>
       <div className="mt-auto px-sm pt-lg border-t border-outline-variant/30 space-y-1">
-      <a className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('settings')}>
       <span className="material-symbols-outlined" data-icon="settings">settings</span>
       <span className="font-label-md text-label-md">Settings</span>
-      </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-sm px-md py-sm rounded-r-full text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('profile')}>
       <span className="material-symbols-outlined" data-icon="account_circle">account_circle</span>
       <span className="font-label-md text-label-md">Account</span>
-      </a>
+      </button>
       </div>
       </nav>
       {/* Main Content Area: Empty State */}
@@ -102,11 +98,11 @@ export function EmptyState(_props: EmptyStateProps = {}) {
                       </p>
       {/* Action Area */}
       <div className="flex flex-col sm:flex-row gap-md w-full justify-center">
-      <button className="bg-[#2563EB] text-[#ffffff] font-label-md text-label-md py-3 px-6 rounded hover:bg-[#1d4ed8] focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0c0e16] focus:ring-[#2563EB] transition-all flex items-center justify-center gap-sm shadow-[0_0_15px_rgba(37,99,235,0.15)] active:scale-95 duration-100">
+      <button className="bg-[#2563EB] text-[#ffffff] font-label-md text-label-md py-3 px-6 rounded hover:bg-[#1d4ed8] focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0c0e16] focus:ring-[#2563EB] transition-all flex items-center justify-center gap-sm shadow-[0_0_15px_rgba(37,99,235,0.15)] active:scale-95 duration-100" onClick={() => onAction?.('create-first-task')}>
       <span className="material-symbols-outlined" data-icon="add" style={{fontSize: "18px"}}>add</span>
                               Create Your First Task
                           </button>
-      <button className="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-6 rounded hover:bg-surface-container-low transition-all flex items-center justify-center gap-sm active:scale-95 duration-100">
+      <button className="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-6 rounded hover:bg-surface-container-low transition-all flex items-center justify-center gap-sm active:scale-95 duration-100" onClick={() => onAction?.('scan-equipment')}>
       <span className="material-symbols-outlined" data-icon="qr_code_scanner" style={{fontSize: "18px"}}>qr_code_scanner</span>
                               Scan Equipment
                           </button>

@@ -8,16 +8,16 @@
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
 import { useState } from "react";
+import type { BaseScreenProps } from '../types/domain';
 
-export interface ProfilePanelProps {
-  onClose?: () => void;
-  onBack?: () => void;
-  onNavigate?: (...args: unknown[]) => void;
-  onAction?: (...args: unknown[]) => void;
-  state?: unknown;
-}
+export interface ProfilePanelProps extends BaseScreenProps {}
 
-export function ProfilePanel(_props: ProfilePanelProps = {}) {
+export function ProfilePanel({ onNavigate, onClose, state }: ProfilePanelProps = {}) {
+  const profile = state?.profile;
+  const settings = state?.settings;
+  const [systemAlerts, setSystemAlerts] = useState(settings?.notifications.systemAlerts ?? true);
+  const [taskUpdates, setTaskUpdates] = useState(settings?.notifications.taskUpdates ?? true);
+
   return (
     <>
       {/* Dashboard Background (Simulated behind the overlay) */}
@@ -48,32 +48,32 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       <div className="text-on-surface-variant font-label-sm text-label-sm mt-xs">Facility A1</div>
       </div>
       <div className="flex-1 flex flex-col gap-sm px-sm">
-      <div className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all">
+      <button className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all text-left w-full" onClick={() => onNavigate?.('dashboard')}>
       <span className="material-symbols-outlined">dashboard</span>
       <span className="font-label-md text-label-md">Dashboard</span>
-      </div>
-      <div className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all text-left w-full" onClick={() => onNavigate?.('task-board')}>
       <span className="material-symbols-outlined">assignment</span>
       <span className="font-label-md text-label-md">Task Board</span>
-      </div>
-      <div className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all text-left w-full" onClick={() => onNavigate?.('equipment')}>
       <span className="material-symbols-outlined">precision_manufacturing</span>
       <span className="font-label-md text-label-md">Equipment</span>
-      </div>
-      <div className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all text-left w-full" onClick={() => onNavigate?.('logs')}>
       <span className="material-symbols-outlined">database</span>
       <span className="font-label-md text-label-md">Logs</span>
-      </div>
+      </button>
       </div>
       <div className="mt-auto flex flex-col gap-sm px-sm border-t border-outline-variant pt-md">
-      <div className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all">
+      <button className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-on-surface-variant hover:bg-surface-container-highest transition-all text-left w-full" onClick={() => onNavigate?.('settings')}>
       <span className="material-symbols-outlined">settings</span>
       <span className="font-label-md text-label-md">Settings</span>
-      </div>
-      <div className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-primary font-bold border-r-2 border-primary bg-primary-container/10">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded cursor-pointer text-primary font-bold border-r-2 border-primary bg-primary-container/10 text-left w-full">
       <span className="material-symbols-outlined">account_circle</span>
       <span className="font-label-md text-label-md">Account</span>
-      </div>
+      </button>
       </div>
       </nav>
       <main className="flex-1 p-lg"></main>
@@ -86,7 +86,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       {/* Header */}
       <div className="flex justify-between items-center p-lg border-b border-[#1f2937]">
       <h2 className="font-headline-md text-headline-md text-[#e1e2ed]">Profile Settings</h2>
-      <button className="text-[#8d90a0] hover:text-[#e1e2ed] transition-colors p-xs rounded hover:bg-[#282a32]">
+      <button className="text-[#8d90a0] hover:text-[#e1e2ed] transition-colors p-xs rounded hover:bg-[#282a32]" onClick={() => onClose?.()} aria-label="Close profile panel">
       <span className="material-symbols-outlined">close</span>
       </button>
       </div>
@@ -95,15 +95,15 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       {/* User Info Card */}
       <div className="bg-[#191b23] border border-[#1f2937] rounded-lg p-lg flex flex-col items-center text-center">
       <div className="w-24 h-24 rounded-full bg-[#282a32] border-2 border-[#1f2937] mb-md overflow-hidden relative group">
-      <img alt="Alex Rivera Profile" className="w-full h-full object-cover" data-alt="A professional headshot of a senior technician named Alex Rivera. He is wearing modern, dark technical attire appropriate for an industrial or greenhouse setting. The lighting is crisp and cool, casting a subtle blue-toned rim light against a dark background, fitting a high-tech dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuIZPWUqYl8V2-ikJvftLczOJ9HlPRUiHdTSVLwup2A4Uqcw2RUB2Y9XJDL72Pc3KStgGPWJ6l3ZioDmXo1GdI8feCFlV5hZ2TFotZoJ6zY25pfrCF_tvxkowC6ev1X7hwIT1oivGAH-hQWesIIHPPutL9Zqp2A01FPYMYR7wQz72ppo1tp7tByFZskIvwNHbTsdZbGd3p407yTsXXL1FJQXCM99BkdtSURS1YyPttb6EhPOToZ_MrUZlBqVY6C37B_wrvBi1Mq94" />
+      <img alt={profile?.name ? `${profile.name} Profile` : 'User Profile'} className="w-full h-full object-cover" data-alt="A professional headshot of a senior technician named Alex Rivera. He is wearing modern, dark technical attire appropriate for an industrial or greenhouse setting. The lighting is crisp and cool, casting a subtle blue-toned rim light against a dark background, fitting a high-tech dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuIZPWUqYl8V2-ikJvftLczOJ9HlPRUiHdTSVLwup2A4Uqcw2RUB2Y9XJDL72Pc3KStgGPWJ6l3ZioDmXo1GdI8feCFlV5hZ2TFotZoJ6zY25pfrCF_tvxkowC6ev1X7hwIT1oivGAH-hQWesIIHPPutL9Zqp2A01FPYMYR7wQz72ppo1tp7tByFZskIvwNHbTsdZbGd3p407yTsXXL1FJQXCM99BkdtSURS1YyPttb6EhPOToZ_MrUZlBqVY6C37B_wrvBi1Mq94" />
       <div className="absolute inset-0 bg-[#0c0e16]/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer backdrop-blur-sm">
       <span className="material-symbols-outlined text-[#e1e2ed]">photo_camera</span>
       </div>
       </div>
-      <h3 className="font-headline-sm text-headline-sm text-[#e1e2ed] mb-unit">Alex Rivera</h3>
-      <span className="font-label-md text-label-md text-[#b4c5ff] bg-[#2563eb]/10 px-md py-xs rounded-full border border-[#2563eb]/20">Senior Technician</span>
+      <h3 className="font-headline-sm text-headline-sm text-[#e1e2ed] mb-unit">{profile?.name ?? 'Alex Rivera'}</h3>
+      <span className="font-label-md text-label-md text-[#b4c5ff] bg-[#2563eb]/10 px-md py-xs rounded-full border border-[#2563eb]/20">{profile?.role ?? 'Senior Technician'}</span>
       <div className="mt-md font-mono-data text-mono-data text-[#8d90a0] flex items-center gap-xs">
-      <span className="material-symbols-outlined text-[16px]">badge</span> ID: AR-9421-B
+      <span className="material-symbols-outlined text-[16px]">badge</span> ID: {profile?.id ?? 'AR-9421-B'}
                       </div>
       </div>
       {/* Preferences Section */}
@@ -122,7 +122,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       </div>
       </div>
       <label className="relative inline-flex items-center cursor-pointer">
-      <input checked={true} className="sr-only peer" type="checkbox" value="" />
+      <input checked={systemAlerts} className="sr-only peer" type="checkbox" value="" onChange={() => setSystemAlerts(v => !v)} />
       <div className="w-11 h-6 bg-[#32343d] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#e1e2ed] after:border-[#434655] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2563eb]"></div>
       </label>
       </div>
@@ -138,7 +138,7 @@ export function ProfilePanel(_props: ProfilePanelProps = {}) {
       </div>
       </div>
       <label className="relative inline-flex items-center cursor-pointer">
-      <input checked={true} className="sr-only peer" type="checkbox" value="" />
+      <input checked={taskUpdates} className="sr-only peer" type="checkbox" value="" onChange={() => setTaskUpdates(v => !v)} />
       <div className="w-11 h-6 bg-[#32343d] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#e1e2ed] after:border-[#434655] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2563eb]"></div>
       </label>
       </div>

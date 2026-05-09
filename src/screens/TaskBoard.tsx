@@ -8,16 +8,49 @@
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
 import { useState } from "react";
+import type { BaseScreenProps, Task, TaskStatus } from '../types/domain';
 
-export interface TaskBoardProps {
-  onClose?: () => void;
-  onBack?: () => void;
-  onNavigate?: (...args: unknown[]) => void;
-  onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+export interface TaskBoardProps extends BaseScreenProps {
+  onAction?: (action: string, payload?: unknown) => void;
 }
 
-export function TaskBoard(_props: TaskBoardProps = {}) {
+const STATUS_LABELS: Record<TaskStatus, string> = {
+  'todo': 'To Do',
+  'in-progress': 'In Progress',
+  'delayed': 'Delayed',
+  'done': 'Done',
+};
+
+const STATUS_BADGE: Record<TaskStatus, string> = {
+  'todo': 'bg-surface-variant text-on-surface-variant border border-outline-variant/50',
+  'in-progress': 'bg-primary-container/20 text-primary border border-primary/30',
+  'delayed': 'bg-surface-variant text-outline border border-outline-variant/50',
+  'done': 'bg-secondary-container/30 text-secondary border border-secondary/30',
+};
+
+const PRIORITY_BADGE: Record<string, string> = {
+  'Critical': 'bg-error-container/20 text-error border border-error/30 animate-pulse',
+  'High': 'bg-tertiary-container/20 text-tertiary border border-tertiary/30',
+  'Normal': 'bg-surface-variant text-on-surface-variant border border-outline-variant/50',
+  'Low': 'bg-surface-variant text-on-surface-variant border border-outline-variant/50',
+};
+
+export function TaskBoard({ onNavigate, onAction, state }: TaskBoardProps = {}) {
+  const tasks = state?.tasks ?? [];
+  const [showNewTask, setShowNewTask] = useState(false);
+
+  const todoTasks = tasks.filter((t) => t.status === 'todo');
+  const inProgressTasks = tasks.filter((t) => t.status === 'in-progress');
+  const delayedTasks = tasks.filter((t) => t.status === 'delayed');
+  const doneTasks = tasks.filter((t) => t.status === 'done');
+
+  const columns: { status: TaskStatus; items: Task[] }[] = [
+    { status: 'todo', items: todoTasks },
+    { status: 'in-progress', items: inProgressTasks },
+    { status: 'delayed', items: delayedTasks },
+    { status: 'done', items: doneTasks },
+  ];
+
   return (
     <>
       {/* TopNavBar */}
@@ -29,7 +62,13 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <div className="flex-1 max-w-md mx-lg hidden md:block">
       <div className="relative">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded px-10 py-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container text-body-sm font-body-sm text-on-surface outline-none transition-colors" placeholder="Search tasks..." type="text" />
+      <input
+        className="w-full bg-surface-container-lowest border border-outline-variant rounded px-10 py-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container text-body-sm font-body-sm text-on-surface outline-none transition-colors"
+        placeholder="Search tasks..."
+        type="text"
+        value={state?.searchQuery ?? ''}
+        onChange={(e) => {/* search wired via App */}}
+      />
       </div>
       </div>
       <div className="flex items-center gap-md">
@@ -37,10 +76,10 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
                       Emergency Stop
                   </button>
       <div className="flex items-center gap-sm">
-      <button className="p-xs rounded hover:bg-surface-container-high transition-colors active:scale-95 duration-100">
+      <button className="p-xs rounded hover:bg-surface-container-high transition-colors active:scale-95 duration-100" aria-label="Notifications">
       <span className="material-symbols-outlined text-on-surface-variant">notifications</span>
       </button>
-      <button className="p-xs rounded hover:bg-surface-container-high transition-colors active:scale-95 duration-100">
+      <button className="p-xs rounded hover:bg-surface-container-high transition-colors active:scale-95 duration-100" aria-label="Help">
       <span className="material-symbols-outlined text-on-surface-variant">help</span>
       </button>
       </div>
@@ -60,32 +99,32 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       </div>
       </div>
       <div className="flex-1 flex flex-col gap-xs px-md">
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('dashboard')}>
       <span className="material-symbols-outlined">dashboard</span>
       <span className="font-label-md text-label-md">Dashboard</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-2 border-primary bg-primary-container/10 transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-2 border-primary bg-primary-container/10 transition-all active:translate-x-1 duration-150 w-full text-left">
       <span className="material-symbols-outlined fill">assignment</span>
       <span className="font-label-md text-label-md">Task Board</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('equipment')}>
       <span className="material-symbols-outlined">precision_manufacturing</span>
       <span className="font-label-md text-label-md">Equipment</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('logs')}>
       <span className="material-symbols-outlined">database</span>
       <span className="font-label-md text-label-md">Logs</span>
-      </a>
+      </button>
       </div>
       <div className="mt-auto flex flex-col gap-xs px-md pt-lg border-t border-outline-variant/50">
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('settings')}>
       <span className="material-symbols-outlined">settings</span>
       <span className="font-label-md text-label-md">Settings</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('profile')}>
       <span className="material-symbols-outlined">account_circle</span>
       <span className="font-label-md text-label-md">Account</span>
-      </a>
+      </button>
       </div>
       </nav>
       {/* Main Canvas */}
@@ -96,109 +135,109 @@ export function TaskBoard(_props: TaskBoardProps = {}) {
       <h1 className="font-headline-lg text-headline-lg text-on-surface">Operational Task Board</h1>
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage and track active maintenance and operational tasks across all zones.</p>
       </div>
-      <button className="bg-primary-container text-on-primary-container px-lg py-sm rounded font-label-md text-label-md hover:bg-primary-fixed transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-container-lowest focus:ring-primary-container flex items-center gap-sm">
+      <button className="bg-primary-container text-on-primary-container px-lg py-sm rounded font-label-md text-label-md hover:bg-primary-fixed transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-container-lowest focus:ring-primary-container flex items-center gap-sm" onClick={() => setShowNewTask(true)}>
       <span className="material-symbols-outlined text-sm">add</span>
                           New Task
                       </button>
       </div>
       {/* Kanban Board */}
       <div className="flex-1 overflow-x-auto p-lg flex gap-lg">
-      {/* Column: To Do */}
-      <div className="flex flex-col w-80 shrink-0 bg-surface-container rounded-lg border border-outline-variant h-full max-h-full overflow-hidden">
-      <div className="p-md border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
-      <h3 className="font-headline-sm text-headline-sm text-on-surface">To Do</h3>
-      <span className="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded font-mono-data text-mono-data text-xs">3</span>
-      </div>
-      <div className="flex-1 overflow-y-auto p-sm flex flex-col gap-sm">
-      {/* Task Card */}
-      <div className="bg-surface p-md rounded border border-outline-variant hover:border-outline cursor-grab transition-colors relative group">
-      <div className="flex justify-between items-start mb-sm">
-      <span className="font-mono-data text-mono-data text-on-surface-variant text-xs">TS-104</span>
-      <span className="bg-tertiary-container/20 text-tertiary px-2 py-0.5 rounded font-label-sm text-label-sm border border-tertiary/30">High</span>
-      </div>
-      <h4 className="font-body-lg text-body-lg text-on-surface mb-md">Replace LED Panel</h4>
-      <p className="font-body-sm text-body-sm text-on-surface-variant mb-md line-clamp-2">Panel array B4 showing 15% efficiency drop. Requires immediate replacement to maintain DLI targets.</p>
-      <div className="flex justify-between items-end border-t border-outline-variant pt-sm mt-auto">
-      <div className="flex gap-xs items-center text-on-surface-variant">
-      <span className="material-symbols-outlined text-sm">schedule</span>
-      <span className="font-label-sm text-label-sm">Due Today</span>
-      </div>
-      <img alt="Operator" className="w-6 h-6 rounded-full border border-surface" data-alt="A very small circular avatar portrait of an industrial worker. The image is set against a dark, high-contrast background suitable for a dark-mode user interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYmvuKi3DBWgnapNs4UYxX1L7W23IQO2Mo_qLprKocWRNebqyGGjJoM3iNaRCEj6rGEhq_Nf3piVyAt0dGuBuvhC1Yg2O5UmXAkouKEVg7D7cphO48PmP9q0IfMvJid16qYCMj5l3cBavc4r99BcZ5zBm-u6mhOw99T3K1cAXN46mjLIG_PYRfNhnDJOzHpiMu0Ky9BHx3GvfzR6EBGD7CZWUirmbsxdANWNGRWeQdh4kJ-3GAmcLH8MMvO94cSAmQrAt_qiyFE20" />
-      </div>
-      </div>
-      {/* Task Card */}
-      <div className="bg-surface p-md rounded border border-outline-variant hover:border-outline cursor-grab transition-colors relative group">
-      <div className="flex justify-between items-start mb-sm">
-      <span className="font-mono-data text-mono-data text-on-surface-variant text-xs">TS-105</span>
-      <span className="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-label-sm border border-outline-variant/50">Normal</span>
-      </div>
-      <h4 className="font-body-lg text-body-lg text-on-surface mb-md">Calibrate CO2 Sensors</h4>
-      <div className="flex justify-between items-end border-t border-outline-variant pt-sm mt-auto">
-      <div className="flex gap-xs items-center text-on-surface-variant">
-      <span className="material-symbols-outlined text-sm">precision_manufacturing</span>
-      <span className="font-label-sm text-label-sm">Zone C</span>
-      </div>
-      <div className="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-sm text-xs border border-surface">JD</div>
-      </div>
-      </div>
-      </div>
-      </div>
-      {/* Column: In Progress */}
-      <div className="flex flex-col w-80 shrink-0 bg-surface-container rounded-lg border border-outline-variant h-full max-h-full overflow-hidden">
-      <div className="p-md border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
-      <h3 className="font-headline-sm text-headline-sm text-on-surface">In Progress</h3>
-      <span className="bg-primary-container/20 text-primary px-2 py-0.5 rounded font-mono-data text-mono-data text-xs border border-primary/30">2</span>
-      </div>
-      <div className="flex-1 overflow-y-auto p-sm flex flex-col gap-sm">
-      {/* Task Card */}
-      <div className="bg-surface p-md rounded border-l-2 border-l-primary border border-outline-variant shadow-[0_0_15px_rgba(37,99,235,0.05)] cursor-grab transition-colors relative group">
-      <div className="flex justify-between items-start mb-sm">
-      <span className="font-mono-data text-mono-data text-on-surface-variant text-xs">TS-098</span>
-      <span className="bg-error-container/20 text-error px-2 py-0.5 rounded font-label-sm text-label-sm border border-error/30 animate-pulse">Critical</span>
-      </div>
-      <h4 className="font-body-lg text-body-lg text-on-surface mb-md">Repair Irrigation Pump 2</h4>
-      <p className="font-body-sm text-body-sm text-on-surface-variant mb-md line-clamp-2">Main line pressure dropped below threshold. Pump assembly requires tear-down and seal replacement.</p>
-      <div className="flex justify-between items-end border-t border-outline-variant pt-sm mt-auto">
-      <div className="flex gap-xs items-center text-primary">
-      <span className="material-symbols-outlined text-sm animate-spin" style={{animationDuration: "3s"}}>sync</span>
-      <span className="font-label-sm text-label-sm">Active 2h 15m</span>
-      </div>
-      <img alt="Operator" className="w-6 h-6 rounded-full border border-surface" data-alt="A very small circular avatar portrait of an engineer looking serious. Set against a dark, minimalistic background suitable for a dark-mode industrial application UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2g8Qx4WTV2vM1M1IPIf7OMin5WWJ1ap_PWy6XRnAb2HeeFh30XUGAOZ04Zdt0VEIML-Z584b6JQcPa3ZCRFyPF9JEp5gf4Lk5ZrMQZMCD5CyWXf7IGnOJTgqVZIt4qx1VrVDCAak9wkNZ77bJ_d0lgLMop9cDSpHeCeUUQs9OBZV6KRE6ZG5F-wwvpV0K-DQNwvuRGSe6IkOqHTdSVUhiEe_vwZPHLxzG_O-hnhiwPwIfgtCpq0U7MpGw5R3qfEPLwxU_840O-zw" />
-      </div>
-      </div>
-      </div>
-      </div>
-      {/* Column: Delayed */}
-      <div className="flex flex-col w-80 shrink-0 bg-surface-container rounded-lg border border-outline-variant h-full max-h-full overflow-hidden opacity-80">
-      <div className="p-md border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
-      <h3 className="font-headline-sm text-headline-sm text-on-surface-variant">Delayed</h3>
-      <span className="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded font-mono-data text-mono-data text-xs">1</span>
-      </div>
-      <div className="flex-1 overflow-y-auto p-sm flex flex-col gap-sm">
-      {/* Task Card */}
-      <div className="bg-surface-dim p-md rounded border border-outline-variant/50 cursor-grab transition-colors relative group">
-      <div className="flex justify-between items-start mb-sm">
-      <span className="font-mono-data text-mono-data text-outline text-xs">TS-085</span>
-      <span className="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded font-label-sm text-label-sm border border-outline-variant/50">Normal</span>
-      </div>
-      <h4 className="font-body-lg text-body-lg text-outline mb-md">Update Firmware - Node Cluster A</h4>
-      <div className="bg-surface-container-high p-xs rounded mb-md flex items-center gap-xs border border-outline-variant/30">
-      <span className="material-symbols-outlined text-on-surface-variant text-sm">warning</span>
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Awaiting vendor patch</span>
-      </div>
-      <div className="flex justify-between items-end border-t border-outline-variant/30 pt-sm mt-auto">
-      <div className="flex gap-xs items-center text-outline">
-      <span className="material-symbols-outlined text-sm">event</span>
-      <span className="font-label-sm text-label-sm">Postponed</span>
-      </div>
-      <div className="w-6 h-6 rounded-full bg-surface-container-highest text-outline flex items-center justify-center font-label-sm text-xs border border-surface-dim">SY</div>
-      </div>
-      </div>
-      </div>
-      </div>
+        {columns.map((col) => (
+          <div key={col.status} className={`flex flex-col w-80 shrink-0 bg-surface-container rounded-lg border border-outline-variant h-full max-h-full overflow-hidden ${col.status === 'delayed' ? 'opacity-80' : ''}`}>
+            <div className="p-md border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+              <h3 className="font-headline-sm text-headline-sm text-on-surface">{STATUS_LABELS[col.status]}</h3>
+              <span className={`px-2 py-0.5 rounded font-mono-data text-mono-data text-xs ${STATUS_BADGE[col.status]}`}>{col.items.length}</span>
+            </div>
+            <div className="flex-1 overflow-y-auto p-sm flex flex-col gap-sm">
+              {col.items.map((task) => (
+                <div key={task.id} className="bg-surface p-md rounded border border-outline-variant hover:border-outline cursor-grab transition-colors relative group">
+                  <div className="flex justify-between items-start mb-sm">
+                    <span className="font-mono-data text-mono-data text-on-surface-variant text-xs">{task.id}</span>
+                    <span className={`px-2 py-0.5 rounded font-label-sm text-label-sm ${PRIORITY_BADGE[task.priority] ?? PRIORITY_BADGE.Normal}`}>{task.priority}</span>
+                  </div>
+                  <h4 className="font-body-lg text-body-lg text-on-surface mb-md">{task.title}</h4>
+                  {task.description && (
+                    <p className="font-body-sm text-body-sm text-on-surface-variant mb-md line-clamp-2">{task.description}</p>
+                  )}
+                  <div className="flex justify-between items-end border-t border-outline-variant pt-sm mt-auto">
+                    <div className="flex gap-xs items-center text-on-surface-variant">
+                      <span className="material-symbols-outlined text-sm">schedule</span>
+                      <span className="font-label-sm text-label-sm">{task.dueDate}</span>
+                    </div>
+                    {task.assigneeInitials ? (
+                      <div className="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-sm text-xs border border-surface">{task.assigneeInitials}</div>
+                    ) : (
+                      <img alt={task.assignee} className="w-6 h-6 rounded-full border border-surface" src="" />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
       </main>
       </div>
+      {/* New Task Modal */}
+      {showNewTask && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-surface-container-lowest/80 backdrop-blur-sm">
+          <div className="bg-surface border border-outline-variant rounded-xl shadow-2xl max-w-lg w-full p-xl flex flex-col gap-lg">
+            <h2 className="font-headline-lg text-headline-lg text-on-surface">Create New Task</h2>
+            <NewTaskForm onSubmit={(task) => { onAction?.('new-task', task); setShowNewTask(false); }} onCancel={() => setShowNewTask(false)} />
+          </div>
+        </div>
+      )}
     </>
+  );
+}
+
+function NewTaskForm({ onSubmit, onCancel }: { onSubmit: (task: Record<string, string>) => void; onCancel: () => void }) {
+  const [form, setForm] = useState({ title: '', description: '', priority: 'Normal', assignee: '', zone: '' });
+  return (
+    <div className="flex flex-col gap-md">
+      <div className="flex flex-col gap-sm">
+        <label className="font-label-md text-label-md text-on-surface-variant">Title</label>
+        <input className="bg-surface-container-low border border-outline-variant rounded p-sm text-on-surface" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+      </div>
+      <div className="flex flex-col gap-sm">
+        <label className="font-label-md text-label-md text-on-surface-variant">Description</label>
+        <textarea className="bg-surface-container-low border border-outline-variant rounded p-sm text-on-surface" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+      </div>
+      <div className="grid grid-cols-2 gap-md">
+        <div className="flex flex-col gap-sm">
+          <label className="font-label-md text-label-md text-on-surface-variant">Priority</label>
+          <select className="bg-surface-container-low border border-outline-variant rounded p-sm text-on-surface" value={form.priority} onChange={(e) => setForm({ ...form, priority: e.target.value })}>
+            <option>Critical</option>
+            <option>High</option>
+            <option>Normal</option>
+            <option>Low</option>
+          </select>
+        </div>
+        <div className="flex flex-col gap-sm">
+          <label className="font-label-md text-label-md text-on-surface-variant">Zone</label>
+          <input className="bg-surface-container-low border border-outline-variant rounded p-sm text-on-surface" value={form.zone} onChange={(e) => setForm({ ...form, zone: e.target.value })} />
+        </div>
+      </div>
+      <div className="flex flex-col gap-sm">
+        <label className="font-label-md text-label-md text-on-surface-variant">Assignee</label>
+        <input className="bg-surface-container-low border border-outline-variant rounded p-sm text-on-surface" value={form.assignee} onChange={(e) => setForm({ ...form, assignee: e.target.value })} />
+      </div>
+      <div className="flex justify-end gap-md mt-sm">
+        <button className="px-md py-sm rounded border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors" onClick={onCancel}>Cancel</button>
+        <button className="px-md py-sm rounded bg-primary text-on-primary hover:bg-primary/90 transition-colors" onClick={() => {
+          onSubmit({
+            id: `TS-${Math.floor(Math.random() * 1000)}`,
+            title: form.title || 'Untitled Task',
+            description: form.description,
+            priority: form.priority,
+            status: 'todo',
+            assignee: form.assignee || 'Unassigned',
+            assigneeInitials: form.assignee ? form.assignee.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase() : 'UN',
+            dueDate: 'TBD',
+            zone: form.zone || 'General',
+          });
+        }}>Create Task</button>
+      </div>
+    </div>
   );
 }

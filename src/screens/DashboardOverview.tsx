@@ -7,17 +7,74 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
+import type { BaseScreenProps, AlertItem, LogEntry } from '../types/domain';
 
-export interface DashboardOverviewProps {
-  onClose?: () => void;
-  onBack?: () => void;
-  onNavigate?: (...args: unknown[]) => void;
-  onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+export interface DashboardOverviewProps extends BaseScreenProps {
+  onAction?: (action: string, id?: string) => void;
 }
 
-export function DashboardOverview(_props: DashboardOverviewProps = {}) {
+export function DashboardOverview({ onNavigate, onAction, state }: DashboardOverviewProps = {}) {
+  const tasks = state?.tasks ?? [];
+  const equipment = state?.equipment ?? [];
+  const alerts = state?.alerts ?? [];
+  const logs = state?.logs ?? [];
+
+  const totalTasks = tasks.length;
+  const activeEquipment = equipment.filter((e) => e.status === 'online').length;
+  const totalEquipment = equipment.length;
+  const pendingMaintenance = equipment.filter((e) => e.status === 'maintenance').length;
+  const systemHealth = totalEquipment > 0
+    ? Math.round(equipment.reduce((sum, e) => sum + e.health, 0) / totalEquipment)
+    : 100;
+
+  const unacknowledgedAlerts = alerts.filter((a) => !a.acknowledged);
+
+  const severityIcon: Record<string, string> = {
+    critical: 'water_drop',
+    warning: 'thermostat',
+    info: 'info',
+  };
+
+  const severityTitleClass: Record<string, string> = {
+    critical: 'text-error',
+    warning: 'text-tertiary',
+    info: 'text-primary',
+  };
+
+  const severityBgClass: Record<string, string> = {
+    critical: 'bg-error/10 border-error/30',
+    warning: 'bg-tertiary/10 border-tertiary/30',
+    info: 'bg-primary/10 border-primary/30',
+  };
+
+  const severityIconBgClass: Record<string, string> = {
+    critical: 'bg-error/20 text-error',
+    warning: 'bg-tertiary/20 text-tertiary',
+    info: 'bg-primary/20 text-primary',
+  };
+
+  const recentLogs = logs.slice(0, 3);
+
+  const statusBadgeClass = (status: LogEntry['status']) => {
+    switch (status) {
+      case 'Success': return 'text-primary bg-primary/10';
+      case 'Warning': return 'text-tertiary bg-tertiary/10';
+      case 'Critical': return 'text-error bg-error/10';
+      case 'Standby': return 'text-secondary-fixed bg-secondary-fixed/10';
+      default: return 'text-on-surface-variant bg-surface-variant';
+    }
+  };
+
+  const statusDotClass = (status: LogEntry['status']) => {
+    switch (status) {
+      case 'Success': return 'bg-primary';
+      case 'Warning': return 'bg-tertiary';
+      case 'Critical': return 'bg-error';
+      case 'Standby': return 'bg-secondary-fixed';
+      default: return 'bg-on-surface-variant';
+    }
+  };
+
   return (
     <>
       {/* TopNavBar */}
@@ -29,17 +86,23 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       {/* Search Bar (on_left configuration logic adapted for top nav layout) */}
       <div className="hidden md:flex items-center bg-surface-container-low border border-outline-variant rounded-full px-sm py-xs focus-within:border-primary-container focus-within:ring-1 focus-within:ring-primary-container transition-all">
       <span className="material-symbols-outlined text-on-surface-variant text-[20px] mr-xs">search</span>
-      <input className="bg-transparent border-none text-body-md font-body-md text-on-surface placeholder-on-surface-variant focus:ring-0 p-0 w-48" placeholder="Search operations..." type="text" />
+      <input
+        className="bg-transparent border-none text-body-md font-body-md text-on-surface placeholder-on-surface-variant focus:ring-0 p-0 w-48"
+        placeholder="Search operations..."
+        type="text"
+        value={state?.searchQuery ?? ''}
+        onChange={(e) => {/* search wired via App */}}
+      />
       </div>
       {/* Actions */}
       <button className="bg-error text-on-error px-md py-xs rounded hover:bg-error/90 active:scale-95 duration-100 font-label-md text-label-md flex items-center gap-xs">
       <span className="material-symbols-outlined text-[18px]">warning</span>
                       Emergency Stop
                   </button>
-      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-xs rounded-full flex items-center justify-center">
+      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-xs rounded-full flex items-center justify-center" aria-label="Notifications">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-xs rounded-full flex items-center justify-center">
+      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-xs rounded-full flex items-center justify-center" aria-label="Help">
       <span className="material-symbols-outlined">help</span>
       </button>
       <div className="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant ml-sm">
@@ -60,32 +123,32 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       </div>
       </div>
       <div className="flex-1 flex flex-col gap-xs px-sm">
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-2 border-primary bg-primary-container/10 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-2 border-primary bg-primary-container/10 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md w-full text-left">
       <span className="material-symbols-outlined text-[20px]">dashboard</span>
                           Dashboard
-                      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md" href="#">
+                      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md w-full text-left" onClick={() => onNavigate?.('task-board')}>
       <span className="material-symbols-outlined text-[20px]">assignment</span>
                           Task Board
-                      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md" href="#">
+                      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md w-full text-left" onClick={() => onNavigate?.('equipment')}>
       <span className="material-symbols-outlined text-[20px]">precision_manufacturing</span>
                           Equipment
-                      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md" href="#">
+                      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md w-full text-left" onClick={() => onNavigate?.('logs')}>
       <span className="material-symbols-outlined text-[20px]">database</span>
                           Logs
-                      </a>
+                      </button>
       </div>
       <div className="mt-auto flex flex-col gap-xs px-sm pt-md border-t border-outline-variant">
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md w-full text-left" onClick={() => onNavigate?.('settings')}>
       <span className="material-symbols-outlined text-[20px]">settings</span>
                           Settings
-                      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md" href="#">
+                      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 font-label-md text-label-md w-full text-left" onClick={() => onNavigate?.('profile')}>
       <span className="material-symbols-outlined text-[20px]">account_circle</span>
                           Account
-                      </a>
+                      </button>
       </div>
       </nav>
       {/* Main Content */}
@@ -101,7 +164,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <span className="font-label-md text-label-md text-on-surface-variant">Total Tasks</span>
       <span className="material-symbols-outlined text-primary text-[20px]">task_alt</span>
       </div>
-      <div className="font-headline-lg text-headline-lg text-on-surface font-mono-data mt-auto">142</div>
+      <div className="font-headline-lg text-headline-lg text-on-surface font-mono-data mt-auto">{totalTasks}</div>
       </div>
       {/* Active Equipment */}
       <div className="bg-surface rounded-lg p-md border border-outline-variant flex flex-col gap-sm relative overflow-hidden group">
@@ -110,7 +173,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <span className="font-label-md text-label-md text-on-surface-variant">Active Equipment</span>
       <span className="material-symbols-outlined text-primary text-[20px]">power</span>
       </div>
-      <div className="font-headline-lg text-headline-lg text-on-surface font-mono-data mt-auto">38<span className="text-on-surface-variant text-body-lg">/40</span></div>
+      <div className="font-headline-lg text-headline-lg text-on-surface font-mono-data mt-auto">{activeEquipment}<span className="text-on-surface-variant text-body-lg">/{totalEquipment}</span></div>
       </div>
       {/* System Health */}
       <div className="bg-surface rounded-lg p-md border border-outline-variant flex flex-col gap-sm relative overflow-hidden group">
@@ -120,9 +183,9 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <span className="material-symbols-outlined text-primary text-[20px]">monitor_heart</span>
       </div>
       <div className="flex items-end gap-sm mt-auto">
-      <div className="font-headline-lg text-headline-lg text-primary font-mono-data">98%</div>
+      <div className="font-headline-lg text-headline-lg text-primary font-mono-data">{systemHealth}%</div>
       <div className="h-2 flex-1 bg-surface-container-highest rounded-full mb-2 overflow-hidden">
-      <div className="h-full bg-primary rounded-full w-[98%]"></div>
+      <div className="h-full bg-primary rounded-full" style={{ width: `${systemHealth}%` }}></div>
       </div>
       </div>
       </div>
@@ -133,7 +196,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <span className="font-label-md text-label-md text-on-surface-variant">Pending Maintenance</span>
       <span className="material-symbols-outlined text-tertiary text-[20px]">build</span>
       </div>
-      <div className="font-headline-lg text-headline-lg text-tertiary font-mono-data mt-auto">04</div>
+      <div className="font-headline-lg text-headline-lg text-tertiary font-mono-data mt-auto">{pendingMaintenance.toString().padStart(2, '0')}</div>
       </div>
       </div>
       {/* Main Telemetry & Alerts Area */}
@@ -145,39 +208,41 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <span className="material-symbols-outlined text-error text-[20px]" style={{fontVariationSettings: "'FILL' 1"}}>warning</span>
                                       System Alerts
                                   </h3>
-      <button className="font-label-md text-label-md text-primary hover:text-primary-fixed transition-colors">Acknowledge All</button>
+      {unacknowledgedAlerts.length > 0 && (
+        <button className="font-label-md text-label-md text-primary hover:text-primary-fixed transition-colors" onClick={() => onAction?.('acknowledge-all')}>
+          Acknowledge All
+        </button>
+      )}
       </div>
       <div className="p-md flex flex-col gap-sm">
-      {/* Critical Alert */}
-      <div className="bg-error/10 border border-error/30 rounded-lg p-md flex items-start gap-md">
-      <div className="bg-error/20 p-sm rounded text-error flex items-center justify-center shrink-0">
-      <span className="material-symbols-outlined text-[24px]">water_drop</span>
-      </div>
-      <div className="flex-1">
-      <div className="flex justify-between items-start">
-      <h4 className="font-body-lg font-bold text-error">Pump P-02 Failure</h4>
-      <span className="font-mono-data text-label-sm text-error/80">09:42:15</span>
-      </div>
-      <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Pressure drop detected in Zone 04 main irrigation line. Flow rate at 0 L/m. Immediate inspection required.</p>
-      <div className="mt-sm flex gap-sm">
-      <button className="bg-error text-on-error px-sm py-xs rounded font-label-md text-label-md hover:bg-error/90 transition-colors">Isolate Pump</button>
-      <button className="bg-transparent border border-error/50 text-error px-sm py-xs rounded font-label-md text-label-md hover:bg-error/10 transition-colors">View Diagnostics</button>
-      </div>
-      </div>
-      </div>
-      {/* Warning Alert */}
-      <div className="bg-tertiary/10 border border-tertiary/30 rounded-lg p-md flex items-start gap-md">
-      <div className="bg-tertiary/20 p-sm rounded text-tertiary flex items-center justify-center shrink-0">
-      <span className="material-symbols-outlined text-[24px]">thermostat</span>
-      </div>
-      <div className="flex-1">
-      <div className="flex justify-between items-start">
-      <h4 className="font-body-lg font-bold text-tertiary">Temp Drift Detected</h4>
-      <span className="font-mono-data text-label-sm text-tertiary/80">10:15:00</span>
-      </div>
-      <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Zone 02 temperature is +1.5°C above optimal threshold. Vent systems compensating.</p>
-      </div>
-      </div>
+        {unacknowledgedAlerts.length === 0 ? (
+          <div className="text-center py-lg text-on-surface-variant font-body-md">All alerts acknowledged</div>
+        ) : (
+          unacknowledgedAlerts.map((alert) => (
+            <div key={alert.id} className={`rounded-lg p-md flex items-start gap-md ${severityBgClass[alert.severity]}`}>
+              <div className={`p-sm rounded flex items-center justify-center shrink-0 ${severityIconBgClass[alert.severity]}`}>
+                <span className="material-symbols-outlined text-[24px]">{severityIcon[alert.severity]}</span>
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between items-start">
+                  <h4 className={`font-body-lg font-bold ${severityTitleClass[alert.severity]}`}>{alert.title}</h4>
+                  <span className="font-mono-data text-label-sm text-on-surface-variant">{alert.timestamp}</span>
+                </div>
+                <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">{alert.description}</p>
+                {alert.severity === 'critical' && (
+                  <div className="mt-sm flex gap-sm">
+                    <button className="bg-error text-on-error px-sm py-xs rounded font-label-md text-label-md hover:bg-error/90 transition-colors" onClick={() => onAction?.('isolate-pump')}>
+                      Isolate Pump
+                    </button>
+                    <button className="bg-transparent border border-error/50 text-error px-sm py-xs rounded font-label-md text-label-md hover:bg-error/10 transition-colors">
+                      View Diagnostics
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))
+        )}
       </div>
       </div>
       {/* Recent Activity Table */}
@@ -196,36 +261,23 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       </tr>
       </thead>
       <tbody className="font-body-sm text-body-sm text-on-surface">
-      <tr className="border-b border-surface-container-high hover:bg-surface-container-low transition-colors">
-      <td className="px-md py-sm font-mono-data text-on-surface-variant">10:30:22</td>
-      <td className="px-md py-sm">Nutrient Mix Cycle Complete</td>
-      <td className="px-md py-sm">Tank A</td>
-      <td className="px-md py-sm">
-      <span className="inline-flex items-center gap-xs text-primary bg-primary/10 px-sm py-xs rounded-full font-label-sm">
-      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span> Success
-                                                  </span>
-      </td>
-      </tr>
-      <tr className="border-b border-surface-container-high hover:bg-surface-container-low transition-colors">
-      <td className="px-md py-sm font-mono-data text-on-surface-variant">10:15:00</td>
-      <td className="px-md py-sm">Ventilation Louvers Open</td>
-      <td className="px-md py-sm">Zone 02</td>
-      <td className="px-md py-sm">
-      <span className="inline-flex items-center gap-xs text-tertiary bg-tertiary/10 px-sm py-xs rounded-full font-label-sm">
-      <span className="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Actioned
-                                                  </span>
-      </td>
-      </tr>
-      <tr className="hover:bg-surface-container-low transition-colors">
-      <td className="px-md py-sm font-mono-data text-on-surface-variant">09:00:00</td>
-      <td className="px-md py-sm">Scheduled Maintenance Started</td>
-      <td className="px-md py-sm">LED Array C</td>
-      <td className="px-md py-sm">
-      <span className="inline-flex items-center gap-xs text-secondary-fixed bg-secondary-fixed/10 px-sm py-xs rounded-full font-label-sm">
-      <span className="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span> In Progress
-                                                  </span>
-      </td>
-      </tr>
+        {recentLogs.map((log, i) => (
+          <tr key={log.id} className={`border-b border-surface-container-high hover:bg-surface-container-low transition-colors ${i === recentLogs.length - 1 ? '' : ''}`}>
+            <td className="px-md py-sm font-mono-data text-on-surface-variant">{log.timestamp.split(' ')[1] ?? log.timestamp}</td>
+            <td className="px-md py-sm">{log.action}</td>
+            <td className="px-md py-sm">{log.equipmentId}</td>
+            <td className="px-md py-sm">
+              <span className={`inline-flex items-center gap-xs px-sm py-xs rounded-full font-label-sm ${statusBadgeClass(log.status)}`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${statusDotClass(log.status)}`}></span> {log.status}
+              </span>
+            </td>
+          </tr>
+        ))}
+        {recentLogs.length === 0 && (
+          <tr>
+            <td className="px-md py-sm text-on-surface-variant" colSpan={4}>No recent activity</td>
+          </tr>
+        )}
       </tbody>
       </table>
       </div>
@@ -239,7 +291,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
       <div className="p-md border-b border-surface-container-high flex justify-between items-center z-10 relative">
       <h3 className="font-headline-sm text-headline-sm text-on-surface">Zone 04 Environment</h3>
-      <button className="text-on-surface-variant hover:text-primary transition-colors">
+      <button className="text-on-surface-variant hover:text-primary transition-colors" aria-label="More options">
       <span className="material-symbols-outlined text-[20px]">more_vert</span>
       </button>
       </div>
@@ -266,7 +318,7 @@ export function DashboardOverview(_props: DashboardOverviewProps = {}) {
       <div className="flex items-center gap-sm">
       <span className="material-symbols-outlined text-primary text-[24px]">humidity_percentage</span>
       <div className="flex flex-col">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Humidity</span>
+      <span className="font-label-sm text-label-md text-on-surface-variant">Humidity</span>
       <span className="font-mono-data text-headline-md text-on-surface">68%</span>
       </div>
       </div>

@@ -7,17 +7,26 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
+import type { BaseScreenProps, LogEntry } from '../types/domain';
 
-export interface MaintenanceLogProps {
-  onClose?: () => void;
-  onBack?: () => void;
-  onNavigate?: (...args: unknown[]) => void;
-  onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+export interface MaintenanceLogProps extends BaseScreenProps {
+  onAction?: (action: string) => void;
 }
 
-export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
+export function MaintenanceLog({ onNavigate, onAction, state }: MaintenanceLogProps = {}) {
+  const logs = state?.logs ?? [];
+  const totalLogCount = state?.totalLogCount ?? logs.length;
+
+  const statusBadgeClass = (status: LogEntry['status']) => {
+    switch (status) {
+      case 'Success': return 'text-[#4ade80] bg-[#4ade80]/10';
+      case 'Warning': return 'text-[#facc15] bg-[#facc15]/10';
+      case 'Critical': return 'text-[#f87171] bg-[#f87171]/10 border border-[#f87171]/30';
+      case 'Standby': return 'text-slate-400 bg-slate-400/10';
+      default: return 'text-on-surface-variant bg-surface-variant';
+    }
+  };
+
   return (
     <>
       {/* SideNavBar Component */}
@@ -34,34 +43,34 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       </div>
       {/* Main Tabs */}
       <div className="flex-1 px-sm space-y-xs">
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('dashboard')}>
       <span className="material-symbols-outlined">dashboard</span>
       <span>Dashboard</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('task-board')}>
       <span className="material-symbols-outlined">assignment</span>
       <span>Task Board</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('equipment')}>
       <span className="material-symbols-outlined">precision_manufacturing</span>
       <span>Equipment</span>
-      </a>
+      </button>
       {/* Active Tab */}
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-primary font-bold border-r-2 border-primary bg-primary-container/10 active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-primary font-bold border-r-2 border-primary bg-primary-container/10 active:translate-x-1 duration-150 w-full text-left">
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>database</span>
       <span>Logs</span>
-      </a>
+      </button>
       </div>
       {/* Footer Tabs */}
       <div className="px-sm mt-auto space-y-xs">
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('settings')}>
       <span className="material-symbols-outlined">settings</span>
       <span>Settings</span>
-      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('profile')}>
       <span className="material-symbols-outlined">account_circle</span>
       <span>Account</span>
-      </a>
+      </button>
       </div>
       </nav>
       {/* Main Content Area */}
@@ -73,15 +82,21 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <span className="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">Greenhouse Ops</span>
       <div className="relative w-64">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
-      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT pl-xl pr-sm py-xs text-on-surface font-body-sm focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]/50 transition-colors placeholder:text-outline" placeholder="Search logs..." type="text" />
+      <input
+        className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT pl-xl pr-sm py-xs text-on-surface font-body-sm focus:outline-none focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB]/50 transition-colors placeholder:text-outline"
+        placeholder="Search logs..."
+        type="text"
+        value={state?.searchQuery ?? ''}
+        onChange={(e) => {/* search wired via App */}}
+      />
       </div>
       </div>
       {/* Right Area: Actions */}
       <div className="flex items-center gap-md">
-      <button className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100">
+      <button className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100" aria-label="Notifications">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100">
+      <button className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100" aria-label="Help">
       <span className="material-symbols-outlined">help</span>
       </button>
       <div className="w-px h-6 bg-outline-variant mx-xs"></div>
@@ -103,7 +118,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <h2 className="font-headline-lg text-headline-lg text-on-surface">Chronological Maintenance Log</h2>
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">System-wide operational tracking and equipment maintenance history.</p>
       </div>
-      <button className="bg-transparent border border-[#1f2937] hover:border-outline text-on-surface px-md py-sm rounded-DEFAULT font-label-md transition-colors flex items-center gap-xs">
+      <button className="bg-transparent border border-[#1f2937] hover:border-outline text-on-surface px-md py-sm rounded-DEFAULT font-label-md transition-colors flex items-center gap-xs" onClick={() => onAction?.('export-csv')}>
       <span className="material-symbols-outlined text-sm">download</span>
                               Export CSV
                           </button>
@@ -127,7 +142,7 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       <option value="sensors">Sensor Nodes</option>
       </select>
       </div>
-      <button className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-md py-xs h-[34px] rounded-DEFAULT font-label-md transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-container-lowest focus:ring-[#2563EB]">
+      <button className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white px-md py-xs h-[34px] rounded-DEFAULT font-label-md transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-container-lowest focus:ring-[#2563EB]" onClick={() => onAction?.('apply-filters')}>
                               Apply Filters
                           </button>
       </div>
@@ -146,84 +161,30 @@ export function MaintenanceLog(_props: MaintenanceLogProps = {}) {
       </tr>
       </thead>
       <tbody className="divide-y divide-[#1f2937]">
-      {/* Row 1: Success */}
-      <tr className="hover:bg-surface-container-highest transition-colors">
-      <td className="py-sm px-md font-mono-data text-mono-data text-on-surface-variant">2023-10-27 08:15:22</td>
-      <td className="py-sm px-md font-mono-data text-mono-data text-primary">PMP-A1-04</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface">Routine filter replacement and flow rate recalibration.</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface-variant">System Automaton</td>
-      <td className="py-sm px-md">
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-[#4ade80] bg-[#4ade80]/10 font-label-sm">
-                                              Success
-                                          </span>
-      </td>
-      </tr>
-      {/* Row 2: Warning */}
-      <tr className="hover:bg-surface-container-highest transition-colors">
-      <td className="py-sm px-md font-mono-data text-mono-data text-on-surface-variant">2023-10-27 07:42:10</td>
-      <td className="py-sm px-md font-mono-data text-mono-data text-primary">HVAC-B2-01</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface">Thermal sensor drift detected; compensation offset applied.</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface-variant">J. Kovic (Ops)</td>
-      <td className="py-sm px-md">
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-[#facc15] bg-[#facc15]/10 font-label-sm">
-                                              Warning
-                                          </span>
-      </td>
-      </tr>
-      {/* Row 3: Success */}
-      <tr className="hover:bg-surface-container-highest transition-colors">
-      <td className="py-sm px-md font-mono-data text-mono-data text-on-surface-variant">2023-10-27 06:00:05</td>
-      <td className="py-sm px-md font-mono-data text-mono-data text-primary">NODE-Z9-11</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface">Firmware OTA update v2.4.1 deployed successfully.</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface-variant">Network Admin</td>
-      <td className="py-sm px-md">
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-[#4ade80] bg-[#4ade80]/10 font-label-sm">
-                                              Success
-                                          </span>
-      </td>
-      </tr>
-      {/* Row 4: Critical */}
-      <tr className="hover:bg-surface-container-highest transition-colors bg-error-container/5 border-l-2 border-l-error">
-      <td className="py-sm px-md font-mono-data text-mono-data text-on-surface-variant">2023-10-26 23:14:55</td>
-      <td className="py-sm px-md font-mono-data text-mono-data text-error font-bold">VLV-MAIN-00</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface">Main irrigation valve failed to actuate closed. Emergency isolation triggered.</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface-variant">Watchdog Protocol</td>
-      <td className="py-sm px-md">
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-[#f87171] bg-[#f87171]/10 font-label-sm border border-[#f87171]/30">
-                                              Critical
-                                          </span>
-      </td>
-      </tr>
-      {/* Row 5: Success */}
-      <tr className="hover:bg-surface-container-highest transition-colors">
-      <td className="py-sm px-md font-mono-data text-mono-data text-on-surface-variant">2023-10-26 18:30:00</td>
-      <td className="py-sm px-md font-mono-data text-mono-data text-primary">LGT-ARRAY-C</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface">Scheduled deep-cleaning of LED array optics completed.</td>
-      <td className="py-sm px-md font-body-sm text-body-sm text-on-surface-variant">Maintenance Team Alpha</td>
-      <td className="py-sm px-md">
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-[#4ade80] bg-[#4ade80]/10 font-label-sm">
-                                              Success
-                                          </span>
-      </td>
-      </tr>
-      {/* Row 6: Standby */}
-      <tr className="hover:bg-surface-container-highest transition-colors text-on-surface-variant">
-      <td className="py-sm px-md font-mono-data text-mono-data">2023-10-26 14:22:11</td>
-      <td className="py-sm px-md font-mono-data text-mono-data">GEN-BKUP-01</td>
-      <td className="py-sm px-md font-body-sm text-body-sm">Weekly diagnostic run initiated. Awaiting load transfer sequence.</td>
-      <td className="py-sm px-md font-body-sm text-body-sm">System Automaton</td>
-      <td className="py-sm px-md">
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-slate-400 bg-slate-400/10 font-label-sm">
-                                              Standby
-                                          </span>
-      </td>
-      </tr>
+        {logs.map((log) => (
+          <tr key={log.id} className={`hover:bg-surface-container-highest transition-colors ${log.status === 'Critical' ? 'bg-error-container/5 border-l-2 border-l-error' : ''}`}>
+            <td className="py-sm px-md font-mono-data text-mono-data text-on-surface-variant">{log.timestamp}</td>
+            <td className={`py-sm px-md font-mono-data text-mono-data ${log.status === 'Critical' ? 'text-error font-bold' : 'text-primary'}`}>{log.equipmentId}</td>
+            <td className="py-sm px-md font-body-sm text-body-sm text-on-surface">{log.action}</td>
+            <td className="py-sm px-md font-body-sm text-body-sm text-on-surface-variant">{log.performedBy}</td>
+            <td className="py-sm px-md">
+              <span className={`inline-flex items-center px-2 py-1 rounded-full font-label-sm ${statusBadgeClass(log.status)}`}>
+                {log.status}
+              </span>
+            </td>
+          </tr>
+        ))}
+        {logs.length === 0 && (
+          <tr>
+            <td className="py-sm px-md text-on-surface-variant text-center" colSpan={5}>No log entries found</td>
+          </tr>
+        )}
       </tbody>
       </table>
       </div>
       {/* Pagination Footer */}
       <div className="border-t border-[#1f2937] bg-surface-container-low px-md py-sm flex justify-between items-center">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 6 of 1,204 entries</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to {logs.length} of {totalLogCount.toLocaleString()} entries</span>
       <div className="flex gap-xs">
       <button className="w-8 h-8 rounded-DEFAULT flex items-center justify-center text-on-surface-variant hover:bg-surface border border-[#1f2937] transition-colors disabled:opacity-50" disabled={true}>
       <span className="material-symbols-outlined text-sm">chevron_left</span>

@@ -7,17 +7,58 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
+import type { BaseScreenProps, Equipment } from '../types/domain';
 
-export interface EquipmentStatusProps {
-  onClose?: () => void;
-  onBack?: () => void;
-  onNavigate?: (...args: unknown[]) => void;
-  onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+export interface EquipmentStatusProps extends BaseScreenProps {
+  onAction?: (action: string, id?: string) => void;
 }
 
-export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
+export function EquipmentStatus({ onNavigate, onAction, state }: EquipmentStatusProps = {}) {
+  const equipment = state?.equipment ?? [];
+
+  const statusBadge = (status: Equipment['status']) => {
+    switch (status) {
+      case 'online':
+        return 'bg-primary/10 text-primary border border-primary/20';
+      case 'maintenance':
+        return 'bg-[#eab308]/10 text-[#eab308] border border-[#eab308]/20';
+      case 'offline':
+        return 'bg-error/10 text-error border border-error/20';
+      default:
+        return 'bg-surface-variant text-on-surface-variant border border-outline-variant/50';
+    }
+  };
+
+  const statusDot = (status: Equipment['status']) => {
+    switch (status) {
+      case 'online': return 'bg-primary animate-pulse';
+      case 'maintenance': return 'bg-[#eab308]';
+      case 'offline': return 'bg-error';
+      default: return 'bg-on-surface-variant';
+    }
+  };
+
+  const statusLabel = (status: Equipment['status']) => {
+    switch (status) {
+      case 'online': return 'Online';
+      case 'maintenance': return 'Maintenance';
+      case 'offline': return 'Offline';
+      default: return status;
+    }
+  };
+
+  const healthBarClass = (health: number) => {
+    if (health >= 80) return 'bg-primary';
+    if (health >= 50) return 'bg-[#eab308]';
+    return 'bg-error';
+  };
+
+  const healthTextClass = (health: number) => {
+    if (health >= 80) return 'text-primary';
+    if (health >= 50) return 'text-[#eab308]';
+    return 'text-error';
+  };
+
   return (
     <>
       {/* TopNavBar */}
@@ -28,14 +69,20 @@ export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
       <div className="flex-1 max-w-md mx-lg hidden md:block">
       <div className="relative w-full">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded text-on-surface placeholder:text-on-surface-variant pl-xl pr-sm py-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none transition-colors font-body-sm text-body-sm" placeholder="Search operations..." type="text" />
+      <input
+        className="w-full bg-surface-container-lowest border border-outline-variant rounded text-on-surface placeholder:text-on-surface-variant pl-xl pr-sm py-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none transition-colors font-body-sm text-body-sm"
+        placeholder="Search operations..."
+        type="text"
+        value={state?.searchQuery ?? ''}
+        onChange={(e) => {/* search wired via App */}}
+      />
       </div>
       </div>
       <div className="flex items-center gap-md">
-      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded active:scale-95 duration-100 flex items-center justify-center">
+      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded active:scale-95 duration-100 flex items-center justify-center" aria-label="Notifications">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded active:scale-95 duration-100 flex items-center justify-center">
+      <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors p-sm rounded active:scale-95 duration-100 flex items-center justify-center" aria-label="Help">
       <span className="material-symbols-outlined">help</span>
       </button>
       <button className="bg-error text-white font-label-md text-label-md px-md py-sm rounded hover:bg-error-container hover:text-on-error-container transition-colors active:scale-95 duration-100 ml-sm flex items-center gap-xs">
@@ -60,32 +107,32 @@ export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
       </div>
       </div>
       <nav className="flex-1 overflow-y-auto px-sm flex flex-col gap-unit">
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('dashboard')}>
       <span className="material-symbols-outlined">dashboard</span>
                           Dashboard
-                      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+                      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('task-board')}>
       <span className="material-symbols-outlined">assignment</span>
                           Task Board
-                      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-primary font-bold border-r-2 border-primary bg-primary-container/10 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+                      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded text-primary font-bold border-r-2 border-primary bg-primary-container/10 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left">
       <span className="material-symbols-outlined fill">precision_manufacturing</span>
                           Equipment
-                      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+                      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('logs')}>
       <span className="material-symbols-outlined">database</span>
                           Logs
-                      </a>
+                      </button>
       </nav>
       <div className="px-sm mt-auto flex flex-col gap-unit pt-md border-t border-outline-variant/50">
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('settings')}>
       <span className="material-symbols-outlined">settings</span>
                           Settings
-                      </a>
-      <a className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+                      </button>
+      <button className="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('profile')}>
       <span className="material-symbols-outlined">account_circle</span>
                           Account
-                      </a>
+                      </button>
       </div>
       </aside>
       {/* Main Content */}
@@ -107,220 +154,85 @@ export function EquipmentStatus(_props: EquipmentStatusProps = {}) {
       </div>
       </header>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-gutter">
-      {/* HVAC Unit 01 */}
-      <article className="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-md relative overflow-hidden group">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-8 -mt-8 pointer-events-none transition-transform group-hover:scale-110 duration-500"></div>
-      <div className="flex justify-between items-start z-10">
-      <div className="flex items-center gap-sm">
-      <div className="w-10 h-10 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center text-primary">
-      <span className="material-symbols-outlined">mode_fan</span>
-      </div>
-      <div>
-      <h3 className="font-headline-sm text-headline-sm text-on-surface m-0">HVAC Unit 01</h3>
-      <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Climate Control</span>
-      </div>
-      </div>
-      <div className="bg-primary/10 text-primary border border-primary/20 px-sm py-unit rounded flex items-center gap-xs font-label-sm text-label-sm">
-      <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-                                  Online
-                              </div>
-      </div>
-      <div className="grid grid-cols-2 gap-sm z-10">
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Output Temp</span>
-      <span className="font-mono-data text-mono-data text-on-surface">22.4 °C</span>
-      </div>
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Fan Speed</span>
-      <span className="font-mono-data text-mono-data text-on-surface">1850 RPM</span>
-      </div>
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit col-span-2">
-      <div className="flex justify-between items-end mb-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Power Draw</span>
-      <span className="font-mono-data text-mono-data text-on-surface">4.2 kW</span>
-      </div>
-      {/* Mini trendline placeholder */}
-      <div className="h-8 w-full border-b border-primary/30 relative flex items-end">
-      <div className="w-1/6 h-full border-t border-primary/50 relative top-[2px]"></div>
-      <div className="w-1/6 h-[80%] border-t border-primary/50 relative top-[2px]"></div>
-      <div className="w-1/6 h-[90%] border-t border-primary/50 relative top-[2px]"></div>
-      <div className="w-1/6 h-[70%] border-t border-primary/50 relative top-[2px]"></div>
-      <div className="w-1/6 h-[85%] border-t border-primary/50 relative top-[2px]"></div>
-      <div className="w-1/6 h-[60%] border-t border-primary relative top-[2px]"></div>
-      </div>
-      </div>
-      </div>
-      <div className="mt-auto flex flex-col gap-sm z-10">
-      <div>
-      <div className="flex justify-between items-center mb-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Diagnostic Health</span>
-      <span className="font-mono-data text-mono-data text-primary">98%</span>
-      </div>
-      <div className="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
-      <div className="h-full bg-primary w-[98%]"></div>
-      </div>
-      </div>
-      <div className="flex gap-sm mt-sm">
-      <button className="flex-1 bg-surface-container-highest border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-bright transition-colors">Quick Fix</button>
-      <button className="flex-1 bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-container-highest transition-colors">View Logs</button>
-      </div>
-      </div>
-      </article>
-      {/* Irrigation Pump B */}
-      <article className="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-md relative overflow-hidden group">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#eab308]/5 rounded-bl-full -mr-8 -mt-8 pointer-events-none transition-transform group-hover:scale-110 duration-500"></div>
-      <div className="flex justify-between items-start z-10">
-      <div className="flex items-center gap-sm">
-      <div className="w-10 h-10 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center text-[#eab308]">
-      <span className="material-symbols-outlined">water_pump</span>
-      </div>
-      <div>
-      <h3 className="font-headline-sm text-headline-sm text-on-surface m-0">Irrigation Pump B</h3>
-      <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Hydration System</span>
-      </div>
-      </div>
-      <div className="bg-[#eab308]/10 text-[#eab308] border border-[#eab308]/20 px-sm py-unit rounded flex items-center gap-xs font-label-sm text-label-sm">
-      <span className="material-symbols-outlined text-[14px]">build</span>
-                                  Maintenance
-                              </div>
-      </div>
-      <div className="grid grid-cols-2 gap-sm z-10">
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Flow Rate</span>
-      <span className="font-mono-data text-mono-data text-on-surface">0 L/m</span>
-      </div>
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Line Pressure</span>
-      <span className="font-mono-data text-mono-data text-on-surface">12 PSI</span>
-      </div>
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit col-span-2">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Maintenance Note</span>
-      <span className="font-body-sm text-body-sm text-on-surface">Scheduled impeller replacement. ETA completion: 14:00.</span>
-      </div>
-      </div>
-      <div className="mt-auto flex flex-col gap-sm z-10">
-      <div>
-      <div className="flex justify-between items-center mb-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Diagnostic Health</span>
-      <span className="font-mono-data text-mono-data text-[#eab308]">45%</span>
-      </div>
-      <div className="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
-      <div className="h-full bg-[#eab308] w-[45%]"></div>
-      </div>
-      </div>
-      <div className="flex gap-sm mt-sm">
-      <button className="flex-1 bg-surface-container-highest border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-bright transition-colors disabled:opacity-50" disabled={true}>Quick Fix</button>
-      <button className="flex-1 bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-container-highest transition-colors">View Logs</button>
-      </div>
-      </div>
-      </article>
-      {/* CO2 Injector */}
-      <article className="bg-surface border border-error/50 rounded-lg p-md flex flex-col gap-md relative overflow-hidden group shadow-[0_0_15px_rgba(220,38,38,0.05)]">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-error/5 rounded-bl-full -mr-8 -mt-8 pointer-events-none transition-transform group-hover:scale-110 duration-500"></div>
-      <div className="flex justify-between items-start z-10">
-      <div className="flex items-center gap-sm">
-      <div className="w-10 h-10 rounded bg-error-container border border-error/30 flex items-center justify-center text-error">
-      <span className="material-symbols-outlined">co2</span>
-      </div>
-      <div>
-      <h3 className="font-headline-sm text-headline-sm text-on-surface m-0">CO2 Injector</h3>
-      <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Atmosphere</span>
-      </div>
-      </div>
-      <div className="bg-error/10 text-error border border-error/20 px-sm py-unit rounded flex items-center gap-xs font-label-sm text-label-sm">
-      <span className="material-symbols-outlined text-[14px]">error</span>
-                                  Offline
-                              </div>
-      </div>
-      <div className="grid grid-cols-2 gap-sm z-10">
-      <div className="bg-surface-container-lowest border border-error/30 rounded p-sm flex flex-col gap-unit relative overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
-      <span className="font-label-sm text-label-sm text-error ml-xs">Tank Level</span>
-      <span className="font-mono-data text-mono-data text-on-surface ml-xs">Empty</span>
-      </div>
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Valve Status</span>
-      <span className="font-mono-data text-mono-data text-on-surface">Closed</span>
-      </div>
-      <div className="bg-surface-container-lowest border border-error/30 rounded p-sm flex flex-col gap-unit col-span-2 text-error">
-      <div className="flex items-center gap-xs mb-unit">
-      <span className="material-symbols-outlined text-[16px]">warning</span>
-      <span className="font-label-sm text-label-sm">Error Code: E-404-TNK</span>
-      </div>
-      <span className="font-body-sm text-body-sm text-on-surface">Primary supply tank depleted. Secondary valve failed to open.</span>
-      </div>
-      </div>
-      <div className="mt-auto flex flex-col gap-sm z-10">
-      <div>
-      <div className="flex justify-between items-center mb-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Diagnostic Health</span>
-      <span className="font-mono-data text-mono-data text-error">12%</span>
-      </div>
-      <div className="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
-      <div className="h-full bg-error w-[12%]"></div>
-      </div>
-      </div>
-      <div className="flex gap-sm mt-sm">
-      <button className="flex-1 bg-error text-white font-label-md text-label-md py-sm rounded hover:bg-error-container hover:text-on-error-container transition-colors shadow-[0_0_10px_rgba(220,38,38,0.2)]">Quick Fix</button>
-      <button className="flex-1 bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-container-highest transition-colors">View Logs</button>
-      </div>
-      </div>
-      </article>
-      {/* Lighting Array 03 */}
-      <article className="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-md relative overflow-hidden group">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-8 -mt-8 pointer-events-none transition-transform group-hover:scale-110 duration-500"></div>
-      <div className="flex justify-between items-start z-10">
-      <div className="flex items-center gap-sm">
-      <div className="w-10 h-10 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center text-primary">
-      <span className="material-symbols-outlined">lightbulb</span>
-      </div>
-      <div>
-      <h3 className="font-headline-sm text-headline-sm text-on-surface m-0">Lighting Array 03</h3>
-      <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Supplemental</span>
-      </div>
-      </div>
-      <div className="bg-primary/10 text-primary border border-primary/20 px-sm py-unit rounded flex items-center gap-xs font-label-sm text-label-sm">
-      <div className="w-2 h-2 rounded-full bg-primary"></div>
-                                  Online
-                              </div>
-      </div>
-      <div className="grid grid-cols-2 gap-sm z-10">
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Intensity</span>
-      <span className="font-mono-data text-mono-data text-on-surface">85%</span>
-      </div>
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Spectrum</span>
-      <span className="font-mono-data text-mono-data text-on-surface">Full Bloom</span>
-      </div>
-      <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit col-span-2">
-      <div className="flex justify-between items-center mb-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Schedule</span>
-      <span className="font-label-sm text-label-sm text-primary">06:00 - 22:00</span>
-      </div>
-      <div className="w-full h-1 flex rounded overflow-hidden">
-      <div className="w-[25%] bg-surface-bright"></div>
-      <div className="w-[66%] bg-primary"></div>
-      <div className="w-[9%] bg-surface-bright"></div>
-      </div>
-      </div>
-      </div>
-      <div className="mt-auto flex flex-col gap-sm z-10">
-      <div>
-      <div className="flex justify-between items-center mb-unit">
-      <span className="font-label-sm text-label-sm text-on-surface-variant">Diagnostic Health</span>
-      <span className="font-mono-data text-mono-data text-primary">100%</span>
-      </div>
-      <div className="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
-      <div className="h-full bg-primary w-[100%]"></div>
-      </div>
-      </div>
-      <div className="flex gap-sm mt-sm">
-      <button className="flex-1 bg-surface-container-highest border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-bright transition-colors">Quick Fix</button>
-      <button className="flex-1 bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-container-highest transition-colors">View Logs</button>
-      </div>
-      </div>
-      </article>
+        {equipment.map((eq) => (
+          <article key={eq.id} className={`bg-surface border rounded-lg p-md flex flex-col gap-md relative overflow-hidden group ${eq.status === 'offline' ? 'border-error/50 shadow-[0_0_15px_rgba(220,38,38,0.05)]' : 'border-outline-variant'}`}>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-8 -mt-8 pointer-events-none transition-transform group-hover:scale-110 duration-500"></div>
+            <div className="flex justify-between items-start z-10">
+              <div className="flex items-center gap-sm">
+                <div className={`w-10 h-10 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center ${eq.status === 'offline' ? 'text-error' : 'text-primary'}`}>
+                  <span className="material-symbols-outlined">{eq.status === 'offline' ? 'co2' : eq.type === 'Climate Control' ? 'mode_fan' : eq.type === 'Hydration System' ? 'water_pump' : eq.type === 'Atmosphere' ? 'co2' : 'lightbulb'}</span>
+                </div>
+                <div>
+                  <h3 className="font-headline-sm text-headline-sm text-on-surface m-0">{eq.name}</h3>
+                  <span className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">{eq.type}</span>
+                </div>
+              </div>
+              <div className={`px-sm py-unit rounded flex items-center gap-xs font-label-sm text-label-sm ${statusBadge(eq.status)}`}>
+                <div className={`w-2 h-2 rounded-full ${statusDot(eq.status)}`}></div>
+                {statusLabel(eq.status)}
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-sm z-10">
+              {Object.entries(eq.metrics).map(([key, value]) => (
+                <div key={key} className={`bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit ${Object.keys(eq.metrics).length === 1 || (Object.keys(eq.metrics).length === 3 && key === Object.keys(eq.metrics)[2]) ? 'col-span-2' : ''}`}>
+                  <span className="font-label-sm text-label-sm text-on-surface-variant">{key}</span>
+                  <span className="font-mono-data text-mono-data text-on-surface">{value}</span>
+                </div>
+              ))}
+              {eq.maintenanceNote && (
+                <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit col-span-2">
+                  <span className="font-label-sm text-label-sm text-on-surface-variant">Maintenance Note</span>
+                  <span className="font-body-sm text-body-sm text-on-surface">{eq.maintenanceNote}</span>
+                </div>
+              )}
+              {eq.errorCode && (
+                <div className="bg-surface-container-lowest border border-error/30 rounded p-sm flex flex-col gap-unit col-span-2 text-error">
+                  <div className="flex items-center gap-xs mb-unit">
+                    <span className="material-symbols-outlined text-[16px]">warning</span>
+                    <span className="font-label-sm text-label-sm">Error Code: {eq.errorCode}</span>
+                  </div>
+                  <span className="font-body-sm text-body-sm text-on-surface">Primary supply tank depleted. Secondary valve failed to open.</span>
+                </div>
+              )}
+              {eq.schedule && (
+                <div className="bg-surface-container-lowest border border-outline-variant/50 rounded p-sm flex flex-col gap-unit col-span-2">
+                  <div className="flex justify-between items-center mb-unit">
+                    <span className="font-label-sm text-label-sm text-on-surface-variant">Schedule</span>
+                    <span className="font-label-sm text-label-sm text-primary">{eq.schedule}</span>
+                  </div>
+                  <div className="w-full h-1 flex rounded overflow-hidden">
+                    <div className="w-[25%] bg-surface-bright"></div>
+                    <div className="w-[66%] bg-primary"></div>
+                    <div className="w-[9%] bg-surface-bright"></div>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="mt-auto flex flex-col gap-sm z-10">
+              <div>
+                <div className="flex justify-between items-center mb-unit">
+                  <span className="font-label-sm text-label-sm text-on-surface-variant">Diagnostic Health</span>
+                  <span className={`font-mono-data text-mono-data ${healthTextClass(eq.health)}`}>{eq.health}%</span>
+                </div>
+                <div className="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+                  <div className={`h-full ${healthBarClass(eq.health)}`} style={{ width: `${eq.health}%` }}></div>
+                </div>
+              </div>
+              <div className="flex gap-sm mt-sm">
+                <button
+                  className="flex-1 bg-surface-container-highest border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-bright transition-colors disabled:opacity-50"
+                  disabled={eq.status !== 'offline'}
+                  onClick={() => onAction?.('quick-fix', eq.id)}
+                >
+                  Quick Fix
+                </button>
+                <button className="flex-1 bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded hover:bg-surface-container-highest transition-colors">
+                  View Logs
+                </button>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
       </main>
       </div>

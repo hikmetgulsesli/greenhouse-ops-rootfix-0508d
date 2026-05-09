@@ -7,17 +7,13 @@
 // 3. Refactor className/layout when required to make local Vite/Tailwind/CSS render the design correctly.
 // 4. Add useState/onClick/onChange handlers and replace placeholder data with props/state.
 
-import { useState } from "react";
+import type { BaseScreenProps } from '../types/domain';
 
-export interface StorageErrorStateProps {
-  onClose?: () => void;
-  onBack?: () => void;
-  onNavigate?: (...args: unknown[]) => void;
-  onAction?: (...args: unknown[]) => void;
-  state?: unknown;
+export interface StorageErrorStateProps extends BaseScreenProps {
+  onAction?: (action: string) => void;
 }
 
-export function StorageErrorState(_props: StorageErrorStateProps = {}) {
+export function StorageErrorState({ onNavigate, onAction, state }: StorageErrorStateProps = {}) {
   return (
     <>
       {/* TopNavBar */}
@@ -28,13 +24,19 @@ export function StorageErrorState(_props: StorageErrorStateProps = {}) {
       {/* Search Bar (on_left configuration visually centered/left-aligned in remaining space) */}
       <div className="flex-1 max-w-md mx-lg relative hidden md:block">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-      <input className="w-full bg-surface-container-low border border-outline-variant rounded pl-10 pr-sm py-sm text-body-md text-on-surface placeholder-on-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search operations..." type="text" />
+      <input
+        className="w-full bg-surface-container-low border border-outline-variant rounded pl-10 pr-sm py-sm text-body-md text-on-surface placeholder-on-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+        placeholder="Search operations..."
+        type="text"
+        value={state?.searchQuery ?? ''}
+        onChange={(e) => {/* search wired via App */}}
+      />
       </div>
       <div className="flex items-center gap-sm">
-      <button className="hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-sm rounded-full text-on-surface-variant">
+      <button className="hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-sm rounded-full text-on-surface-variant" aria-label="Notifications">
       <span className="material-symbols-outlined" data-weight="fill" style={{fontVariationSettings: "'FILL' 1"}}>notifications</span>
       </button>
-      <button className="hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-sm rounded-full text-on-surface-variant">
+      <button className="hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-sm rounded-full text-on-surface-variant" aria-label="Help">
       <span className="material-symbols-outlined">help</span>
       </button>
       <button className="bg-error text-on-error hover:bg-error/90 transition-colors active:scale-95 duration-100 px-md py-sm rounded font-label-md text-label-md ml-sm flex items-center gap-xs">
@@ -59,32 +61,32 @@ export function StorageErrorState(_props: StorageErrorStateProps = {}) {
       </div>
       </div>
       <div className="flex-1 flex flex-col gap-xs px-sm">
-      <a className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('dashboard')}>
       <span className="material-symbols-outlined">dashboard</span>
                           Dashboard
-                      </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+                      </button>
+      <button className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('task-board')}>
       <span className="material-symbols-outlined">assignment</span>
                           Task Board
-                      </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+                      </button>
+      <button className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('equipment')}>
       <span className="material-symbols-outlined">precision_manufacturing</span>
                           Equipment
-                      </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded text-primary font-bold border-r-2 border-primary bg-primary-container/10 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
-      <span className="material-symbols-outlined" data-weight="fill" style={{fontVariationSettings: "'FILL' 1"}}>database</span>
+                      </button>
+      <button className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('logs')}>
+      <span className="material-symbols-outlined">database</span>
                           Logs
-                      </a>
+                      </button>
       </div>
       <div className="mt-auto flex flex-col gap-xs px-sm pt-md border-t border-outline-variant">
-      <a className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+      <button className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('settings')}>
       <span className="material-symbols-outlined">settings</span>
                           Settings
-                      </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150" href="#">
+                      </button>
+      <button className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all active:translate-x-1 duration-150 w-full text-left" onClick={() => onNavigate?.('profile')}>
       <span className="material-symbols-outlined">account_circle</span>
                           Account
-                      </a>
+                      </button>
       </div>
       </nav>
       {/* Main Content Area with Dimmed Overlay */}
@@ -143,10 +145,10 @@ export function StorageErrorState(_props: StorageErrorStateProps = {}) {
       </div>
       {/* Actions */}
       <div className="flex items-center justify-end gap-md pt-md border-t border-outline-variant mt-sm">
-      <button className="font-label-md text-label-md px-lg py-sm rounded border border-outline-variant text-error hover:bg-error-container/10 hover:border-error transition-colors focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-2 focus:ring-offset-surface">
+      <button className="font-label-md text-label-md px-lg py-sm rounded border border-outline-variant text-error hover:bg-error-container/10 hover:border-error transition-colors focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-2 focus:ring-offset-surface" onClick={() => onAction?.('reset-local-storage')}>
                                       Reset Local Storage
                                   </button>
-      <button className="font-label-md text-label-md px-lg py-sm rounded bg-primary-container text-white hover:bg-primary-container/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface shadow-[0_0_15px_rgba(37,99,235,0.15)] flex items-center gap-sm">
+      <button className="font-label-md text-label-md px-lg py-sm rounded bg-primary-container text-white hover:bg-primary-container/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface shadow-[0_0_15px_rgba(37,99,235,0.15)] flex items-center gap-sm" onClick={() => onAction?.('retry-connection')}>
       <span className="material-symbols-outlined text-[18px]">refresh</span>
                                       Retry Connection
                                   </button>
